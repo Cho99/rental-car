@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
             $table->string('gplx')->nullable();
-            $table->timestamp('date_of_birth');
+            $table->timestamp('date_of_birth')->nullable();
             $table->tinyInteger('sex')->nullable();
             $table->tinyInteger('role_id')->default(1);
             $table->timestamp('email_verified_at')->nullable();
