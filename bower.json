@@ -15,5 +15,7 @@
     "test",
     "tests"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "admin-lte": "https://github.com/ngthanh219/admin-lte.git"
+  }
 }
