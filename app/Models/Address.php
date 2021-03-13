@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
+    protected $fillable = [
+        'name',
+        'parent_id',
+    ];
+
     public function cars()
     {
         return $this->hasMany(Car::class);
