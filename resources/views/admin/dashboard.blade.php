@@ -1,6 +1,5 @@
 @extends('admin.layout')
-@section('index')
-    <div class="content-wrapper" id="formContent">
+@section('content')
         <section class="content-header">
             <h1>{{ trans('dashboard.dashboard') }}</h1>
         </section>
@@ -27,5 +26,4 @@
                 </div>
             </div>
         </section>
-    </div>
 @endsection
