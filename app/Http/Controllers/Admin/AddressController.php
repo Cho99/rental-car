@@ -64,10 +64,10 @@ class AddressController extends Controller
             'parent_id' => $parent_id,
         ]);
         if ($result) {
-            return redirect()->route('admin.addresses.index')->with('success', 'Thành công');
+            return redirect()->route('admin.addresses.index')->with('infoMessage', 'Thành công');
         }
 
-        return redirect()->route('admin.addresses.index')->with('success', 'Thất bại');
+        return redirect()->route('admin.addresses.index')->with('infoMessage', 'Thất bại');
     }
 
     /**
@@ -97,7 +97,7 @@ class AddressController extends Controller
             $districts = $this->addressRepo->getDistrict();
         }
 
-        return view('admin.address.edit', compact('address', 'districts'));
+        return view('admin.address.edit', compact('infoMessage', 'districts'));
     }
 
     /**
@@ -118,10 +118,10 @@ class AddressController extends Controller
             'parent_id' => $parent_id,
         ]);
         if ($result) {
-            return redirect()->route('admin.addresses.index')->with('success', 'Thành công');
+            return redirect()->route('admin.addresses.index')->with('infoMessage', 'Thành công');
         }
 
-        return redirect()->back()->with('success', 'Thất bại');
+        return redirect()->back()->with('infoMessage', 'Thất bại');
     }
 
     /**
@@ -133,11 +133,10 @@ class AddressController extends Controller
     public function destroy($id)
     {
         $result = $this->addressRepo->destroy($id);
-
         if ($result) {
-            return redirect()->route('admin.addresses.index')->with('success', 'Thành công');
+            return redirect()->route('admin.addresses.index')->with('infoMessage', 'Thành công');
         }
 
-        return redirect()->route('admin.addresses.index')->with('success', 'Thất bại');
+        return redirect()->route('admin.addresses.index')->with('infoMessage', 'Thất bại');
     }
 }

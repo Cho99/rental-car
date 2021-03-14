@@ -82,7 +82,7 @@
                                 <li class="user-footer">
                                     <div class="pull-left">
                                         <a href=""
-                                            class="btn btn-default btn-flat">{{ trans('user.change_password') }}</a>
+                                            class="btn btn-default btn-flat">{{ trans('user.profile') }}</a>
                                     </div>
                                     <div class="pull-right">
                                         <form action="{{ route('logout') }}" method="POST">
@@ -126,6 +126,18 @@
                             <span>{{ trans('address.address_manager') }}</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{route('admin.features.index')}}">
+                            <i class="fa fa-cogs"></i>
+                            <span>{{ trans('feature.feature_manager') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.categories.index')}}">
+                            <i class="fa fa-bookmark"></i>
+                            <span>{{ trans('category.category_manager') }}</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
         </aside>
@@ -144,6 +156,7 @@
     </div>
     <script src="{{ asset('bower_components/admin-lte/bower_components/jquery/dist/jquery.min.js') }}"></script>
     @yield('script')
+    <script src="{{ asset('js/menu.js') }}"></script>
     <script src="{{ asset('bower_components/admin-lte/dist/js/component/general.js') }}">
     </script>
     <script src="{{ asset('bower_components/admin-lte/bower_components/ckeditor/ckeditor.js') }}"></script>

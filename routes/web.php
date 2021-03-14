@@ -23,5 +23,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin','namespace' => 'Admin'
     Route::get('/addresses/create-district',  'AddressController@createDistrict')->name('create-district');
     Route::get('/addresses/create-ward',  'AddressController@createWard')->name('create-ward');
     Route::resource('/addresses', 'AddressController');
+    Route::resource('/features', 'FeatureController');
+    Route::resource('/categories', 'CategoryController');
 });
 Route::get('/home', 'HomeController@index')->name('home');
