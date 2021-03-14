@@ -26,10 +26,12 @@
         href="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
     <link rel="stylesheet"
         href="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+    <script src="{{ asset('bower_components/admin-lte/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower_components/bootstrap-sweetalert/dist/sweetalert.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bower_components/admin-lte/dist/css/skins/_all-skins.min.css') }}">
-
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('bower_components/bootstrap-sweetalert/dist/sweetalert.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dataTable.css') }}">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini" style="font-size: 16px;">
@@ -115,23 +117,16 @@
                 </div>
                 <ul class="sidebar-menu" data-widget="tree">
                     <li>
-                        <a href="{{route('admin.dashboard')}}">
+                        <a href="">
                             <i class="fa fa-dashboard"></i>
-                            <span>{{ trans('dashboard.dashboard') }}</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('admin.addresses.index')}}">
-                            <i class="fa fa-map"></i>
-                            <span>{{ trans('address.address_manager') }}</span>
+                            <span></span>
                         </a>
                     </li>
                 </ul>
             </section>
         </aside>
-        <div class="content-wrapper" id="formContent">
-            @yield('content')
-        </div>
+
+        @yield('index')
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>
@@ -142,23 +137,24 @@
         </footer>
         <div class="control-sidebar-bg"></div>
     </div>
-    <script src="{{ asset('bower_components/admin-lte/bower_components/jquery/dist/jquery.min.js') }}"></script>
+
     @yield('script')
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/realtime.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('/js/user_menu.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/sweet-alert.js') }}"></script>
     <script src="{{ asset('bower_components/admin-lte/dist/js/component/general.js') }}">
     </script>
     <script src="{{ asset('bower_components/admin-lte/bower_components/ckeditor/ckeditor.js') }}"></script>
-    <script
-        src="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}">
+    <script src="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}">
     </script>
-    <script src="{{ asset('bower_components/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"
-        defer>
+    <script src="{{ asset('bower_components/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}" defer>
     </script>
     <script src="{{ asset('bower_components/admin-lte/bower_components/select2/dist/js/select2.full.min.js') }}">
     </script>
     <script src="{{ asset('bower_components/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}">
     </script>
-    <script
-        src="{{ asset('bower_components/admin-lte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}">
+    <script src="{{ asset('bower_components/admin-lte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}">
     </script>
     <script src="{{ asset('bower_components/admin-lte/bower_components/fastclick/lib/fastclick.js') }}"></script>
     <script src="{{ asset('bower_components/admin-lte/dist/js/adminlte.min.js') }}"></script>
