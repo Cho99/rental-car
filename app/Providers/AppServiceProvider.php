@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Repositories\Address\AddressRepository;
 use App\Repositories\Address\AddressRepositoryInterface;
+use App\Repositories\Feature\FeatureRepository;
+use App\Repositories\Feature\FeatureRepositoryInterface;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             AddressRepositoryInterface::class,
             AddressRepository::class,
+        );
+
+        $this->app->singleton(
+            FeatureRepositoryInterface::class,
+            FeatureRepository::class,
         );
     }
 
