@@ -126,6 +126,12 @@
                             <span>{{ trans('address.address_manager') }}</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{route('admin.features.index')}}">
+                            <i class="fa fa-cogs"></i>
+                            <span>{{ trans('feature.feature_manager') }}</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
         </aside>
