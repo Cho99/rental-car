@@ -37,11 +37,21 @@
                                         <label>Trademark</label>
                                         <select class="form-control select2 select2-hidden-accessible" style="width: 100%;"
                                             aria-hidden="true" name="parent_id">
-                                            <option value="0">--- Trademark ---</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
+                                        @if ($errors->has('parent_id'))
+                                        <div class="error">{{ $errors->first('parent_id') }}</div>
+                                    @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Name</label>
+                                        <input type="number" name="price" class="form-control" id="price"
+                                            placeholder="Price" required>
+                                        @if ($errors->has('price'))
+                                            <div class="error">{{ $errors->first('name') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="box-footer">

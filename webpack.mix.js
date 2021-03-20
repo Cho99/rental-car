@@ -17,6 +17,7 @@ mix.js('resources/js/app.js', 'public/js')
 mix.js('resources/js/dataTable.js', 'public/js')
     .js('resources/js/dataTablesPage.js', 'public/js')
     .js('resources/js/previewImage.js', 'public/js')
-    .js('resources/js/menu.js', 'public/js');
+    .js('resources/js/menu.js', 'public/js')
+    .js('resources/js/createTrademark.js', 'public/js');
 mix.postCss('resources/css/dataTable.css', 'public/css');
 mix.postCss('resources/css/all.css', 'public/css');

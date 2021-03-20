@@ -38,7 +38,7 @@ class CategoryController extends Controller
     {
         $price = 0;
         $parent_id = 0;
-        if (!$price && !$parent_id) {
+        if (!$request->price && !$request->parent_id) {
             $result = $this->categoryRepo->create([
                 'name' => $request->name,
                 'parent_id' => $parent_id,
@@ -49,21 +49,20 @@ class CategoryController extends Controller
 
                 return response()->view('admin.category.table', compact('categories'));
             }
-
-            return  Response::json('fail', 200);
+            return response()->json('fail');
         }
-        // $result = $this->categoryRepo->create([
-        //     'name' => $request->name,
-        //     'parent_id' => $request->parent_id,
-        //     'price' => $price,
-        // ]);
-        // if ($result) {
-        //     return redirect()->route('admin.categories.index')->with('infoMessage',
-        //         trans('message.category_create_success'));
-        // }
+        $result = $this->categoryRepo->create([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+            'price' => $price,
+        ]);
+        if ($result) {
+            return redirect()->route('admin.categories.show', $result->parent_id)->with('infoMessage',
+                trans('message.category_create_success'));
+        }
 
-        // return redirect()->route('admin.categories.index')->with('infoMessage',
-        //     trans('message.category_create_fail'));
+        return redirect()->back()->with('infoMessage',
+            trans('message.category_create_fail'));
     }
 
     /**
