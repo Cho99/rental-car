@@ -6,6 +6,8 @@ use App\Repositories\Address\AddressRepository;
 use App\Repositories\Address\AddressRepositoryInterface;
 use App\Repositories\Feature\FeatureRepository;
 use App\Repositories\Feature\FeatureRepositoryInterface;
+use App\Repositories\Category\CategoryRepository;
+use App\Repositories\Category\CategoryRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             FeatureRepositoryInterface::class,
             FeatureRepository::class,
+        );
+
+        $this->app->singleton(
+            CategoryRepositoryInterface::class,
+            CategoryRepository::class,
         );
     }
 

@@ -132,6 +132,12 @@
                             <span>{{ trans('feature.feature_manager') }}</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{route('admin.categories.index')}}">
+                            <i class="fa fa-bookmark"></i>
+                            <span>{{ trans('category.category_manager') }}</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
         </aside>
@@ -161,8 +167,6 @@
         defer>
     </script>
     <script src="{{ asset('bower_components/admin-lte/bower_components/select2/dist/js/select2.full.min.js') }}">
-    </script>
-    <script src="{{ asset('bower_components/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}">
     </script>
     <script
         src="{{ asset('bower_components/admin-lte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}">
