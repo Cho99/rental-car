@@ -25,5 +25,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin','namespace' => 'Admin'
     Route::resource('/addresses', 'AddressController');
     Route::resource('/features', 'FeatureController');
     Route::resource('/categories', 'CategoryController');
+    Route::resource('/rules', 'RuleController');
 });
 Route::get('/home', 'HomeController@index')->name('home');

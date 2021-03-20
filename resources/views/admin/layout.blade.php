@@ -138,6 +138,12 @@
                             <span>{{ trans('category.category_manager') }}</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{route('admin.rules.index')}}">
+                            <i class="fa fa-balance-scale"></i>
+                            <span>{{ trans('rule.rule_manager') }}</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
         </aside>
