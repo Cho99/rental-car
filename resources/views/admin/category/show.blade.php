@@ -76,7 +76,7 @@
                                                     <tr role="row" class="odd">
                                                         <td class="sorting_1">{{ $index++ }}</td>
                                                         <td>{{ $category->name }}</td>
-                                                        <td></td>
+                                                        <td>{{ $category->price }}</td>
                                                         <td class="td general">
                                                             <a href="{{ route('admin.categories.edit', $category->id) }}"><i
                                                                     class="fa fa-pencil"></i></a>
