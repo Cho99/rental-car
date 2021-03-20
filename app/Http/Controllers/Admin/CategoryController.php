@@ -23,21 +23,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->categoryRepo->getTrademark();
+        $categories = $this->categoryRepo->getTrademark('id');
 
         return view('admin.category.index', compact('categories'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $categories = $this->categoryRepo->getTrademark();
-
-        return view('admin.category.create', compact('categories'));
     }
 
     /**
@@ -49,18 +37,33 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $price = 0;
-        $result = $this->categoryRepo->create([
-            'name' => $request->name,
-            'parent_id' => $request->parent_id,
-            'price' => $price,
-        ]);
-        if ($result) {
-            return redirect()->route('admin.categories.index')->with('infoMessage',
-                trans('message.category_create_success'));
-        }
+        $parent_id = 0;
+        if (!$price && !$parent_id) {
+            $result = $this->categoryRepo->create([
+                'name' => $request->name,
+                'parent_id' => $parent_id,
+                'price' => $price,
+            ]);
+            if ($result) {
+                $categories = $this->categoryRepo->getTrademark('id');
 
-        return redirect()->route('admin.categories.index')->with('infoMessage',
-            trans('message.category_create_fail'));
+                return response()->view('admin.category.table', compact('categories'));
+            }
+
+            return  Response::json('fail', 200);
+        }
+        // $result = $this->categoryRepo->create([
+        //     'name' => $request->name,
+        //     'parent_id' => $request->parent_id,
+        //     'price' => $price,
+        // ]);
+        // if ($result) {
+        //     return redirect()->route('admin.categories.index')->with('infoMessage',
+        //         trans('message.category_create_success'));
+        // }
+
+        // return redirect()->route('admin.categories.index')->with('infoMessage',
+        //     trans('message.category_create_fail'));
     }
 
     /**
@@ -73,7 +76,7 @@ class CategoryController extends Controller
     {
         $model = $this->categoryRepo->findOrFail($id);
         $categories = $this->categoryRepo->load($model, 'children');
-        
+
         return view('admin.category.show', compact('categories'));
     }
 
@@ -86,7 +89,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = $this->categoryRepo->findOrFail($id);
-        $categories = $this->categoryRepo->getTrademark();
+        $categories = $this->categoryRepo->getTrademark('name');
 
         return view('admin.category.edit', compact('category', 'categories'));
     }
@@ -135,5 +138,12 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories.index')->with('infoMessage',
             trans('message.category_delete__fail'));
+    }
+
+    public function create()
+    {
+        $categories = $this->categoryRepo->getTrademark('name');
+
+        return view('admin.category.create_vehicle', compact('categories'));
     }
 }

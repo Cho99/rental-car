@@ -39,8 +39,14 @@
                                         <select class="form-control select2 select2-hidden-accessible" style="width: 100%;"
                                             aria-hidden="true" name="parent_id">
                                             <option value="0">--- Trademark ---</option>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @foreach ($categories as $item)
+                                                @if ($item->id == $category->parent_id)
+                                                    <option value="{{ $item->id }}" selected>{{ $item->name }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $item->id }}">{{ $item->name }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -62,5 +68,6 @@
     <script src="https://adminlte.io/themes/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
     <script>
         $('.select2').select2()
+
     </script>
 @endsection

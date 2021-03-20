@@ -12,8 +12,8 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         return Category::class;
     }
 
-    public function getTrademark()
+    public function getTrademark($key)
     {
-        return $this->model->where('parent_id', config('category.trademark'))->get();
+        return $this->model->where('parent_id', config('category.trademark'))->orderBy($key, 'desc')->get();
     }
 }

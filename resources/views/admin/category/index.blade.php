@@ -3,9 +3,39 @@
     <section class="content-header">
         <h1>{{ trans('category.category_manager') }}</h1>
         <div class="timeline-footer general">
-            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary btn general">
+            <a href="" class="btn btn-primary btn general" data-toggle="modal" data-target="#modal-default">
                 <i class="fa fa-plus-square general"></i> {{ trans('category.add_category') }}
             </a>
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">{{ trans('category.category_create') }}</h4>
+                        </div>
+                        <form role="form" id="form">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="namecategory">Name</label>
+                                        <input type="text" name="name" class="form-control" id="namecategory"
+                                            placeholder="Name Trademark" required>
+                                            <div class="error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
         </div>
         <ol class="breadcrumb">
             <li>{{ trans('category.category') }}</li>
@@ -19,8 +49,7 @@
                             {{ trans('category.notifi') }}
                         </h3>
                         <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-minus"></i>
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
                         </div>
                     </div>
@@ -67,7 +96,7 @@
                                                     {{ trans('admin.actions') }}</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="table">
                                             @php($index = 1)
                                                 @foreach ($categories as $category)
                                                     <tr role="row" class="odd">
@@ -75,7 +104,7 @@
                                                         <td>{{ $category->name }}</td>
                                                         <td class="td general">
                                                             <a href="{{ route('admin.categories.show', $category->id) }}"><i
-                                                                class="fa fa-eye"></i></a>
+                                                                    class="fa fa-eye"></i></a>
                                                             <a href="{{ route('admin.categories.edit', $category->id) }}"><i
                                                                     class="fa fa-pencil"></i></a>
                                                             <form
@@ -101,6 +130,7 @@
                     </div>
                 </div>
         </section>
+
     @endsection
 @section('script')
     <script src="https://adminlte.io/themes/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -117,6 +147,6 @@
                 'autoWidth': false
             })
         })
-
     </script>
+    <script src="{{ asset('js/createTrademark.js') }}"> </script>
 @endsection

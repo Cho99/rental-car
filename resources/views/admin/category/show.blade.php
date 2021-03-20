@@ -4,7 +4,7 @@
         <h1>{{ trans('category.category_manager') }}</h1>
         <div class="timeline-footer general">
             <a href="{{ route('admin.categories.create') }}" class="btn btn-primary btn general">
-                <i class="fa fa-plus-square general"></i> {{ trans('category.add_category') }}
+                <i class="fa fa-plus-square general"></i> {{ trans('category.add_vehicle') }}
             </a>
         </div>
         <ol class="breadcrumb">
@@ -76,7 +76,7 @@
                                                     <tr role="row" class="odd">
                                                         <td class="sorting_1">{{ $index++ }}</td>
                                                         <td>{{ $category->name }}</td>
-                                                        <td><img src="{{ asset('upload/category/'. $category->image) }}" alt="{{ $category->name }}" width="50px"></td>
+                                                        <td></td>
                                                         <td class="td general">
                                                             <a href="{{ route('admin.categories.edit', $category->id) }}"><i
                                                                     class="fa fa-pencil"></i></a>
