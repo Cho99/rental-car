@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "admin-lte": "https://github.com/ngthanh219/admin-lte.git"
+    "admin-lte": "https://github.com/ngthanh219/admin-lte.git",
+    "car-client-lte": "https://github.com/Cho99/car-client-lte.git"
   }
 }

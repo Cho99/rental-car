@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Feature;
 use App\Models\Image;
 use App\Models\Report;
+use App\Models\Rule;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -49,5 +50,10 @@ class Car extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function rules()
+    {
+        return $this->belongsToMany(Rule::class, 'car_rules', 'car_id', 'rule_id')
     }
 }

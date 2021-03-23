@@ -97,7 +97,7 @@ class AddressController extends Controller
             $districts = $this->addressRepo->getDistrict();
         }
 
-        return view('admin.address.edit', compact('infoMessage', 'districts'));
+        return view('admin.address.edit', compact('address', 'districts'));
     }
 
     /**
