@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use App\Models\Comment;
+use App\Models\Order;
+use App\Models\Car;
 use App\Models\Permission;
 use App\Models\Report;
 use App\Models\Role;
-use App\Models\Order;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -59,6 +60,11 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
     }
 
     public function hasPermission(Permission $permission)

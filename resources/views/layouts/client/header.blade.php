@@ -59,7 +59,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-3">
                 <div id="logo_home">
-                    <h1><a href="index.html" title="City tours travel template">City Tours travel template</a></h1>
+                    <h1><a href="{{ route('home') }}" title="City tours travel template">City Tours travel template</a></h1>
                 </div>
             </div>
             <nav class="col-md-9 col-sm-9 col-xs-9">
