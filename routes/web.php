@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
 });
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('/cars', 'CarController');
+    Route::get('/cars/create/step-one', 'CarController@stepOne')->name('create-step-one');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

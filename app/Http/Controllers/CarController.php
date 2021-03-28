@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -13,17 +14,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $cars = Auth::user()->load('cars');
+        return view('client.car.index', compact('cars'));
     }
 
     /**
@@ -80,5 +72,10 @@ class CarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function stepOne()
+    {
+        return view('client.car.create_step_1');
     }
 }

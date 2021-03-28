@@ -54,6 +54,6 @@ class Car extends Model
 
     public function rules()
     {
-        return $this->belongsToMany(Rule::class, 'car_rules', 'car_id', 'rule_id')
+        return $this->belongsToMany(Rule::class, 'car_rules', 'car_id', 'rule_id');
     }
 }
