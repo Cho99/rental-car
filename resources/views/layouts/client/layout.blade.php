@@ -33,13 +33,16 @@
 
     <!-- CSS -->
     <link href="{{ asset('bower_components/car-client-lte') }}/css/base.css" rel="stylesheet">
+  
 
     <!-- SPECIFIC CSS -->
     <link href="{{ asset('bower_components/car-client-lte') }}/css/skins/square/grey.css" rel="stylesheet">
     <link href="{{ asset('bower_components/car-client-lte') }}/css/date_time_picker.css" rel="stylesheet">
 
-    <link href="{{ asset('bower_components/car-client-lte') }}/css/ion.rangeSlider.css" rel="stylesheet">
-    <link href="{{ asset('bower_components/car-client-lte') }}/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+    {{-- <link href="{{ asset('bower_components/car-client-lte') }}/css/ion.rangeSlider.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/car-client-lte') }}/css/ion.rangeSlider.skinFlat.css" rel="stylesheet"> --}}
+
+    <link href="{{ asset('bower_components/car-client-lte') }}/css/jquery.switch.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
@@ -92,14 +95,7 @@
     <script src="{{ asset('bower_components/car-client-lte') }}/js/jquery-2.2.4.min.js"></script>
     <script src="{{ asset('bower_components/car-client-lte') }}/js/common_scripts_min.js"></script>
     <script src="{{ asset('bower_components/car-client-lte') }}/js/functions.js"></script>
-    <script src="{{ asset('bower_components/car-client-lte') }}/js/icheck.js"></script>
-    <script>
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-grey',
-            radioClass: 'iradio_square-grey'
-        });
-
-    </script>
+   
     <script src="{{ asset('bower_components/car-client-lte') }}/js/bootstrap-datepicker.js"></script>
     <script src="{{ asset('bower_components/car-client-lte') }}/js/bootstrap-timepicker.js"></script>
     <script>
@@ -119,7 +115,7 @@
         });
 
     </script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         // <![CDATA[  <-- For SVG support
         if ('WebSocket' in window) {
             (function () {
@@ -155,7 +151,7 @@
             console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
         }
         // ]]>
-    </script>
+    </script> --}}
     @yield('script')
 
 </body>

@@ -8,8 +8,7 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "bower": "npm install -g bower",
-        "bower install": "bower install"
+        "postinstall": "./node_modules/bower/bin/bower install"
     },
     "devDependencies": {
         "axios": "^0.19",
@@ -31,7 +30,9 @@
     "directories": {
         "test": "tests"
     },
-    "dependencies": {},
+    "dependencies": {
+        "bower": "1.8.0"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Cho99/rental-car.git"

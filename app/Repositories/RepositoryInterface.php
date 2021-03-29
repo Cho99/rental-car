@@ -17,4 +17,8 @@ interface RepositoryInterface
     public function with($relation);
 
     public function load($model, $relation);
+
+    public function sync($collection, $relation, $items = []);
+
+    public function attach($collection, $relation, $param = []);
 }

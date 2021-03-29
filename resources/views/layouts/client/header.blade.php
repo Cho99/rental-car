@@ -6,29 +6,34 @@
 
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <ul id="top_links">
-                        <li>
-                            <div class="dropdown dropdown-mini">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link" aria-expanded="true">{{ Auth::user()->name }}</a>
-                                <div class="dropdown-menu">
-                                    <ul id="lang_menu">
-                                        <li><a href="">My Account</a>
-                                        </li>
-                                        <li><a href="{{ route('cars.index') }}">My Car</a>
-                                        </li>
-                                        <li><a href="#0">German</a>
-                                        </li>
-                                        <li><a href="#0">Italian</a>
-                                        </li>
-                                        <li><a href="#0">Japanese</a>
-                                        </li>
-                                    </ul>
+
+                        @auth
+                            <li>
+                                <div class="dropdown dropdown-mini">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link"
+                                        aria-expanded="true">{{ Auth::user()->name }}</a>
+                                    <div class="dropdown-menu">
+                                        <ul id="lang_menu">
+                                            <li><a href="">My Account</a>
+                                            </li>
+                                            <li><a href="{{ route('cars.index') }}">My Car</a>
+                                            </li>
+                                            <li><a href="#0">German</a>
+                                            </li>
+                                            <li><a href="#0">Italian</a>
+                                            </li>
+                                            <li><a href="#0">Japanese</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        @endauth
                         <li><a href="wishlist.html" id="wishlist_link">Wishlist</a></li>
                         <li>
                             <div class="dropdown dropdown-mini">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="lang_link" aria-expanded="true">English</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="lang_link"
+                                    aria-expanded="true">English</a>
                                 <div class="dropdown-menu">
                                     <ul id="lang_menu">
                                         <li><a href="#0">Spanish</a>
@@ -58,27 +63,32 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-3">
-                <div id="logo_home">
-                    <h1><a href="{{ route('home') }}" title="City tours travel template">City Tours travel template</a></h1>
-                </div>
+                <a href="{{ route('home') }}" title="City tours travel template">
+                    <img src="{{ asset('images/logo.png') }}" alt="" style="width: 50px">
+                    Car Travel
+                </a>
             </div>
             <nav class="col-md-9 col-sm-9 col-xs-9">
                 <!-- End main-menu -->
                 <ul id="top_tools">
                     <li>
                         <div class="dropdown dropdown-search">
-                            <a href="#" class="search-overlay-menu-btn" data-toggle="dropdown"><i class="icon-search"></i></a>
+                            <a href="#" class="search-overlay-menu-btn" data-toggle="dropdown"><i
+                                    class="icon-search"></i></a>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown dropdown-cart">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link"></i>Thong Bao</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-bell"></i>Thong
+                                Bao</a>
                             <ul class="dropdown-menu" id="cart_items">
                                 <li>
-                                    <div class="image"><img src="{{ asset('bower_components/car-client-lte') }}/img/thumb_cart_1.jpg" alt="image"></div>
+                                    <div class="image"><img
+                                            src="{{ asset('bower_components/car-client-lte') }}/img/thumb_cart_1.jpg"
+                                            alt="image"></div>
                                     <strong>
-                                    <a href="#">Louvre museum</a>1x $36.00 </strong>
-                                </li>         
+                                        <a href="#">Louvre museum</a>1x $36.00 </strong>
+                                </li>
                             </ul>
                         </div>
                         <!-- End dropdown-cart-->
