@@ -14,7 +14,7 @@ interface RepositoryInterface
 
     public function destroy($id);
 
-    public function with($relation);
+    public function with(array $relation);
 
     public function load($model, $relation);
 

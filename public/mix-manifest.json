@@ -7,5 +7,6 @@
     "/js/dataTable.js": "/js/dataTable.js",
     "/js/dataTablesPage.js": "/js/dataTablesPage.js",
     "/js/menu.js": "/js/menu.js",
-    "/js/previewImage.js": "/js/previewImage.js"
+    "/js/previewImage.js": "/js/previewImage.js",
+    "/js/sweetalert.min.js": "/js/sweetalert.min.js"
 }

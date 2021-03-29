@@ -60,7 +60,7 @@ abstract class BaseRepository implements RepositoryInterface
         return false;
     }
 
-    public function with($relation)
+    public function with(array $relation)
     {
         return $this->model->with($relation)->get();
     }

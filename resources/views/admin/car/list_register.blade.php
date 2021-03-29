@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>{{ trans('car.car_manager') }}</h1>
+        <h1>{{ trans('car.car_register') }}</h1>
         <ol class="breadcrumb">
             <li>{{ trans('car.car') }}</li>
         </ol>
@@ -64,12 +64,9 @@
                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                     colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                                     {{ trans('car.image') }}</th>
-                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                                    {{ trans('car.price') }}</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                     colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                                    {{ trans('car.discount') }}</th>
+                                                    {{ trans('car.price') }}</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                     colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                                     {{ trans('car.status') }}</th>
@@ -97,24 +94,15 @@
                                                         @endphp
                                                         <td><img src="{{ asset('upload/car/'. $image[0]) }}" alt="{{ $car->category->name }}" width="150px"></td>
                                                         <td>
-                                                            <strong>{{ $car->price }} K</strong>
+                                                            <strong>{{ $car->price }} K</strong> 
                                                         </td>
                                                         <td>
-                                                            <strong>{{ $car->discount }} %</strong>
-                                                        </td>
-                                                        <td>
-                                                            @if ($car->status === 2) 
-                                                                <span class="label label-info">
-                                                                    Được phép lưu hành
-                                                                </span>
-                                                            @elseif ($car->status === 3) 
-                                                                <span class="label label-danger">
-                                                                    Được được thuê
-                                                                </span>
-                                                            @endif
-                                                        </td>
+                                                            <span class="label label-warning">
+                                                                {{ $car->status == 0 ? 'Đang chờ' : 'Từ Chối'}}
+                                                            </span>
+                                                        </td>                                                       
                                                         <td class="td general">
-                                                            <a href="{{ route('admin.cars.show', $car->id) }}"><i 
+                                                            <a href="{{ route('admin.cars.register', $car->id) }}"><i 
                                                                 class="fa fa-eye"></i></a>
                                                         </td>
                                                     </tr>
