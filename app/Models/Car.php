@@ -17,6 +17,8 @@ class Car extends Model
 {
     use SoftDeletes;
 
+    protected $guarded = [''];
+
     public function address()
     {
         return $this->belongsTo(Address::class);
@@ -34,7 +36,7 @@ class Car extends Model
 
     public function features()
     {
-        return $this->belongsToMany(Feature::class, 'car_feature', 'user_id', 'feature_id');
+        return $this->belongsToMany(Feature::class);
     }
 
     public function comments()

@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('parent_id');
-            $table->decimal('price', 9, 3);
+            $table->float('price');
             $table->timestamps();
              $table->softDeletes();
         });

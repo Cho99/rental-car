@@ -69,4 +69,14 @@ abstract class BaseRepository implements RepositoryInterface
     {
         return $model->load($relation);
     }
+
+    public function attach($collection, $relation, $param = [])
+    {
+        return $collection->$relation()->attach($param);
+    }
+
+    public function sync($collection, $relation, $items = [])
+    {
+        return $collection->$relation()->sync($items);
+    }
 }

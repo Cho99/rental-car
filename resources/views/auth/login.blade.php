@@ -7,7 +7,8 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
                         <div id="login">
-                            <div class="text-center"><img src="{{ asset('bower_components/car-client-lte') }}/img/logo_sticky.png" alt="Image" data-retina="true"></div>
+                            <div class="text-center"> <img src="{{ asset('images/logo.png') }}" alt="" style="width: 50px">
+                                Car Travel</div>
                             <hr>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf

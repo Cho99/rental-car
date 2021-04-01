@@ -115,9 +115,15 @@
                 </div>
                 <ul class="sidebar-menu" data-widget="tree">
                     <li>
-                        <a href="{{route('admin.dashboard')}}">
+                        <a href="{{ route('admin.dashboard') }}">
                             <i class="fa fa-dashboard"></i>
                             <span>{{ trans('dashboard.dashboard') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.cars.index') }}">
+                            <i class="fa fa-car"></i>
+                            <span>{{ trans('car.car_manager') }}</span>
                         </a>
                     </li>
                     <li>
