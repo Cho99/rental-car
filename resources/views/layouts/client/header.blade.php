@@ -65,7 +65,7 @@
             <div class="col-md-3 col-sm-3 col-xs-3">
                 <a href="{{ route('home') }}" title="City tours travel template">
                     <img src="{{ asset('images/logo.png') }}" alt="" style="width: 50px">
-                    Car Travel
+                    Rental Car
                 </a>
             </div>
             <nav class="col-md-9 col-sm-9 col-xs-9">

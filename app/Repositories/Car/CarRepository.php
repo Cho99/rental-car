@@ -11,4 +11,9 @@ class CarRepository extends BaseRepository implements CarRepositoryInterface
     {
         return Car::class;
     }
+
+    public function getCarRegister()
+    {
+        $this->model->where('status', 0)->get();
+    }
 }

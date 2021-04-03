@@ -36,7 +36,7 @@
     <div class="wrapper">
         <header class="main-header">
             <a href="" class="logo">
-                <span class="logo-mini"><img src="{{ asset('bower_components/admin-lte/dist/img/logo1.png') }}"
+                <span class="logo-mini"><img src="{{ asset('/images/logo.png') }}"
                         alt=""></span>
                 <span class="logo-lg"><img src="{{ asset('bower_components/admin-lte/dist/img/logo.png') }}"
                         alt=""></span>
@@ -121,6 +121,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('admin.cars.list_register') }}">
+                            <i class="fa fa-desktop"></i>
+                            <span>{{ trans('car.car_register') }}</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('admin.cars.index') }}">
                             <i class="fa fa-car"></i>
                             <span>{{ trans('car.car_manager') }}</span>
@@ -167,6 +173,7 @@
         <div class="control-sidebar-bg"></div>
     </div>
     <script src="{{ asset('bower_components/admin-lte/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     @yield('script')
     <script src="{{ asset('js/menu.js') }}"></script>
     <script src="{{ asset('bower_components/admin-lte/dist/js/component/general.js') }}">

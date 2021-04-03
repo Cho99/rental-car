@@ -1,8 +1,9 @@
 @extends('admin.layout')
 
 @section('content')
+
     <section class="content-header">
-        <h1>{{ trans('car.car_manager') }}</h1>
+        <h1>{{ trans('car.car_register') }}</h1>
         <ol class="breadcrumb">
             <li>{{ trans('car.car') }}</li>
         </ol>
@@ -47,16 +48,12 @@
                             </li>
                         </ul>
                         <div class="form-group text-center">
-                            @if ($car->status !== 4)
-                                <button type="button" class="btn btn-danger" id="btn-block">
-                                    {{ trans('car.block') }}
-                                </button>
-                            @elseif ($car->status === 4)
-                                <button type="button" class="btn btn-info" id="btn-unblock">
-                                    {{ trans('car.unblock') }}
-                                </button>
-                            @endif
-                           
+                            <button type="button" class="btn btn-success" id="btn-accept">
+                                {{ trans('car.accept') }}
+                              </button>
+                            <button type="button" class="btn btn-danger" id="btn-reject">
+                                {{ trans('car.reject') }}
+                              </button>
                         </div>
                     </div>
                 </div>
@@ -76,14 +73,26 @@
                                         <h4>
                                             {{ trans('car.status') }}: <b>
                                             @switch ($car->status)
-                                                @case (2)
-                                                    <span class="label label-warning">Được phép lưu hành</span>
+                                                @case (config('car.pending'))
+                                                    <span class="label label-warning">{{ trans('car.pending') }}</span>
                                                 @break
-                                                @case (3)
-                                                    <span class="label label-danger">Đang được thuê</span>
+                                                @case (config('car.accept'))
+                                                    <span class="label label-primary">{{ trans('car.accept') }}</span>
                                                 @break
-                                                @case (4)
-                                                    <span class="label label-danger">Block</span>
+                                                @case (config('car.reject'))
+                                                    <span class="label label-danger">{{ trans('car.reject') }}</span>
+                                                @break
+                                                @case (config('car.borrow'))
+                                                    <span class="label label-info">{{ trans('car.borrowing') }}</span>
+                                                @break
+                                                @case (config('car.return'))
+                                                    <span class="label label-success">{{ trans('car.return') }}</span>
+                                                @break
+                                                @case (config('car.late'))
+                                                    <span class="label label-danger">{{ trans('car.too_late') }}</span>
+                                                @break
+                                                @case (config('car.forget'))
+                                                    <span class="label label-danger">{{ trans('car.take_car_late') }}</span>
                                                 @break
                                                 @default
                                             @endswitch
@@ -182,58 +191,14 @@
 @endsection
 
 @section('script')
-    <script> 
-     var url = window.location.origin;
-        $('#btn-block').click(function (e) {
+    <script>
+        var url = window.location.origin;
+        $('#btn-accept').click(function (e) {
             e.preventDefault();
             var id = $('#id').val();
             swal({
                 title:"Bạn có chắc chắn",
-                text: "Block xe này",
-                icon: "danger",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willSave) => {
-                if (willSave) {
-                    $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: "POST",
-                    url: url + '/admin/cars/register/block/' + id,
-                    data: {
-                        'id' : id,
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        if(response.message === 'success') {
-                            swal("Block xe thành coong", {
-                                icon: "success",
-                            })
-                            .then(() => {
-                                location.href = '/admin/cars/' + id;
-                            });
-                        } else {
-                            swal("Hệ thống lỗi", {
-                                icon: "error",
-                            })
-                            .then(() => {
-                                location.reload;
-                            });
-                        }
-                    }
-                });
-            }
-            });
-        });
-
-        $('#btn-unblock').click(function (e) {
-            e.preventDefault();
-            var id = $('#id').val();
-            swal({
-                title:"Bạn có chắc chắn",
-                text: "Mở khóa cho xe này",
+                text: "Một khi đã chập thuận thì xe này sẽ được xuất hiện trên trang web",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -245,14 +210,58 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: "POST",
-                    url: url + '/admin/cars/register/unblock/' + id,
+                    url: url + '/admin/cars/register/accept/' + id,
                     data: {
                         'id' : id,
                     },
                     dataType: "json",
                     success: function (response) {
                         if(response.message === 'success') {
-                            swal("Bỏ chặn xe thành công", {
+                            swal("Đăng ký xe thành công", {
+                                icon: "success",
+                            })
+                            .then(() => {
+                                location.href = '/admin/cars/' + id;
+                            });
+                        } else {
+                            swal("Đăng ký xe thất bại", {
+                                icon: "error",
+                            })
+                            .then(() => {
+                                location.reload;
+                            });
+                        }
+                    }
+                });
+            }
+            });
+        })
+
+        $('#btn-reject').click(function (e) {
+            e.preventDefault();
+            var id = $('#id').val();
+            swal({
+                title:"Bạn có chắc chắn",
+                text: "Xe này sẽ bị từ chối và sẽ không xuất hiện trên trang web của bạn",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willSave) => {
+                if (willSave) {
+                    $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: url + '/admin/cars/register/reject/' + id,
+                    data: {
+                        'id' : id,
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if(response.message === 'success') {
+                            swal("Xác nhận thành công", {
                                 icon: "success",
                             })
                             .then(() => {
@@ -270,6 +279,6 @@
                 });
             }
             });
-        });
-</script>
+        })
+    </script>
 @endsection
