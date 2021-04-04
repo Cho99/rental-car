@@ -18,9 +18,9 @@
                                             </li>
                                             <li><a href="{{ route('cars.index') }}">My Car</a>
                                             </li>
-                                            <li><a href="#0">German</a>
+                                            <li><a href="{{ route('my_orders.index') }}">My Request</a>
                                             </li>
-                                            <li><a href="#0">Italian</a>
+                                            <li><a href="{{ route('orders.index') }}">Order Request</a>
                                             </li>
                                             <li><a href="#0">Japanese</a>
                                             </li>

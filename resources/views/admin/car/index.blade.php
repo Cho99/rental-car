@@ -93,9 +93,16 @@
                                                             <p>Biển số xe: {{ $car->license_plates }}</p>
                                                         </td>
                                                         @php
-                                                            $image = json_decode($car->image->image_list);
+                                                            $image = null;
+                                                            if (!empty($car->image)) {
+                                                                $image = json_decode($car->image->image_list);
+                                                            }
                                                         @endphp
-                                                        <td><img src="{{ asset('upload/car/'. $image[0]) }}" alt="{{ $car->category->name }}" width="150px"></td>
+                                                        @if (isset($image))
+                                                            <td><img src="{{ asset('upload/car/'. $image[0]) }}" alt="{{ $car->category->name }}" width="150px"></td>
+                                                        @else
+                                                            <td><img src="{{ asset('images/car.jpg') }}" alt="{{ $car->category->name }}" width="150px"></td>  
+                                                        @endif
                                                         <td>
                                                             <strong>{{ $car->price }} K</strong>
                                                         </td>
@@ -110,6 +117,10 @@
                                                             @elseif ($car->status === 3) 
                                                                 <span class="label label-danger">
                                                                     Được được thuê
+                                                                </span>
+                                                            @elseif ($car->status === 4) 
+                                                                <span class="label label-danger">
+                                                                    Bị khóa
                                                                 </span>
                                                             @endif
                                                         </td>

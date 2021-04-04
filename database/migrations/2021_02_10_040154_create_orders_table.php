@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration
             $table->time('borrowed_time');
             $table->date('return_date');
             $table->time('return_time');
-            $table->string('address');
+            $table->integer('status');
             $table->timestamps();
         });
     }

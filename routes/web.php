@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
-    Route::get('/', 'HomeController@index')->name('dashboard');
+    Route::get('/admin', 'HomeController@index')->name('dashboard');
     Route::get('/addresses/create-district', 'AddressController@createDistrict')->name('create-district');
     Route::get('/addresses/create-ward', 'AddressController@createWard')->name('create-ward');
     Route::get('/cars/list_register', 'CarController@listRegister')->name('cars.list_register');
@@ -30,19 +31,27 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     Route::post('/cars/register/block/{id}', 'CarController@block');
     Route::post('/cars/register/unblock/{id}', 'CarController@unblock');
     Route::resource('/cars', 'CarController');
-    Route::resource('/addresses', 'AddressController');
-    Route::resource('/features', 'FeatureController');
-    Route::resource('/categories', 'CategoryController');
-    Route::resource('/rules', 'RuleController');
+    Route::resource('addresses', 'AddressController');
+    Route::resource('features', 'FeatureController');
+    Route::resource('categories', 'CategoryController');
+    Route::resource('rules', 'RuleController');
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('/cars', 'CarController');
     Route::get('/cars/create/step-one', 'CarController@stepOne')->name('create-step-one');
     Route::get('/vehicles/{did}', 'CarController@getVehicle');
     Route::post('/cars/create/step-two', 'CarController@createStepOne')->name('create-step-two');
     Route::post('/cars/create/step-three', 'CarController@createStepTwo')->name('create-step-three');
     Route::post('/cars/create/step-final', 'CarController@createFinal')->name('create-final');
+    Route::get('/orders/{order}/accept','OrderController@accept')->name('orders.accept');
+    Route::get('/orders/{order}/reject','OrderController@reject')->name('orders.reject');
+    Route::get('/orders/{order}/borrowed','OrderController@borrowed')->name('orders.borrowed');
+    Route::get('/orders/{order}/close','OrderController@close')->name('orders.close');
+    Route::get('/orders/{order}/cancel','OrderController@cancel')->name('orders.cancel');
+    Route::get('/my_orders/{order}/cancel', 'ClientController@cancel')->name('my_orders.cancel');
+    Route::get('/my_orders', 'ClientController@getOrderRequest')->name('my_orders.index');
+    Route::get('/my_orders/{order}', 'ClientController@show')->name('my_orders.show');
+    Route::resource('orders', 'OrderController');
 });
-
+Route::resource('/cars', 'CarController');
 Route::get('/home', 'HomeController@index')->name('home');

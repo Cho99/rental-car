@@ -130,7 +130,7 @@
                                         <label>Loại nhiên liệu</label>
                                         <select class="form-control" name="type_of_fuel" id="type_of_fuel">
                                             <option value="1">Xăng</option>
-                                            <option value="2">Xăng</option>
+                                            <option value="2">Dầu</option>
                                         </select>
                                     </div>
                                 </div>

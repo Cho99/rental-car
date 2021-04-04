@@ -11,11 +11,14 @@ interface AddressRepositoryInterface extends RepositoryInterface
      * @return void
      */
     public function getDistrict();
+
     /**
      * Get Ward function
      *
-     * @param int $id
+     * @param  int  $id
      * @return void
      */
     public function getWard($id);
+
+    public function getHotDistrict();
 }
