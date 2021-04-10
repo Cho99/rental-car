@@ -1,5 +1,7 @@
 @extends('layouts.client.layout')
+@section('css')
 
+@endsection
 @section('content')
 <section class="parallax-window" data-parallax="scroll" data-image-src="{{ asset('bower_components/car-client-lte/') }}/img/transfer_1.jpg" data-natural-width="1400"
         data-natural-height="470">
@@ -243,7 +245,67 @@
                     </div>
                 </div>
             </div>
+            @if ($order->status === config('define.order.status.close'))
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong>Bình luận</strong></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-12 comment">
+                                @if (!$order->car->comments->isEmpty())
+                                    @foreach ($order->car->comments as $comment)
+                                        <div class="review_strip_single">
+                                            <small> - {{ \Carbon\Carbon::parse($comment->created_at)->format('m/d/Y') }} -</small>
+                                            <label>Jhon Doe</label>
+                                            <div class="rating">
+                                                <i class="icon-smile"></i>
+                                                <i class="icon-smile"></i>
+                                                <i class="icon-smile"></i>
+                                                <i class="icon-smile"></i>
+                                                <i class="icon-smile"></i>
+                                            </div>
+                                            <p>
+                                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+                                            </p>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <label>Chưa có bình luận nào</label>
+                                    <br>
+                                    <br>
+                                @endif
+                            </div>
+                            <form class="review">
+                                <input type="hidden" name="car_id" value="{{ $order->car_id }}">
+                                <label>Đánh giá</label>
+                                <div class="rating-box">
+                                     <input type="radio" name="star" id="statr5" value="1" checked>
+                                     <label for="statr1"></label>
+                                     <input type="radio" name="star" id="statr2" value="2">
+                                     <label for="statr2"></label>
+                                     <input type="radio" name="star" id="statr3" value="3">
+                                     <label for="statr3"></label>
+                                     <input type="radio" name="star" id="statr4" value="4">
+                                     <label for="statr4"></label>
+                                    <input type="radio" name="star" id="start5" value="5">
+                                    <label for="statr5"></label>
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="comment">Bình luận</label>
+                                    <textarea name="comment" id="review_text" class="form-control" style="height:100px" placeholder="Write your review"></textarea>
+                                </div>
+                                <button class="btn_full">Comment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </main>
+@endsection
+
+@section('script')
+    
 @endsection

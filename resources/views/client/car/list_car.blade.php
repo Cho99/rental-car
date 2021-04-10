@@ -5,8 +5,7 @@
         data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
-                <h1>My Car</h1>
-                <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+                <h1>Danh sách xe</h1>
             </div>
         </div>
     </section>
@@ -17,8 +16,6 @@
             <div class="container">
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a>
-                    </li>
-                    <li><a href="{{ route('create-step-one') }}">Car</a>
                     </li>
                     <li>Page active</li>
                 </ul>
@@ -36,13 +33,6 @@
 
             <div class="row">
                 <aside class="col-lg-3 col-md-3">
-                    <div class="box_style_cat">
-                        <ul id="cat_nav">
-                            <li><a href="{{ route('create-step-one') }}" id="active"><i class="icon-plus-circled-1"></i>Đăng ký xe</a>
-                            </li>
-                        </ul>
-                    </div>
-
                     <!--End filters col-->
                     <div class="box_style_2">
                         <i class="icon_set_1_icon-57"></i>
@@ -60,19 +50,16 @@
                             <div class="col-md-3 col-sm-3 col-xs-6">
                                 <div class="styled-select-filters">
                                     <select name="sort_price" id="sort_price">
-                                        <option value="" selected>Trạng thái</option>
-                                        <option value="">Đang chờ xác thực</option>
-                                        <option value="lower">Đang chờ</option>
-                                        <option value="higher">Đang thuê</option>
-                                        <option value="higher">Từ chối</option>
+                                        <option value="" selected>Số tiền tăng dần</option>
+                                        <option value="">Số tiền giảm dần</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!--/tools -->
-                    
-                    @foreach ($user->cars as $car)
+
+                    @foreach ($cars as $car)
                     <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4">
@@ -104,7 +91,6 @@
                                     @default
                                         
                                 @endswitch
-                               
                                
                                 <div class="img_list">
                                     @php
@@ -153,14 +139,14 @@
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2">
-                                <div class="price_list">
-                                    <div>{{ $car->price }}<sup>K</sup>
+                                <div>
+                                    <h5>{{ currency_format($car->price) }} VNĐ</h5>
+                                    @if ($car->discount)
                                         <span class="normal_price_list">{{ $car->discount }} %</span>
-                                        <br>
-                                        <p>
-                                            <a href="{{ route('cars.show', $car->id) }}" class="btn_1">Details</a>
-                                        </p>
-                                    </div>
+                                    @endif
+                                    <p>
+                                        <a href="{{ route('cars.show', $car->id) }}" class="btn_1">Details</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -171,8 +157,8 @@
 
 
                     <hr>
-
-                    {{-- @if ($cars->lastPage() > 1)
+         
+                    @if ($cars->lastPage() > 1)
                         <div class="text-center">
                             <ul class="pagination">
                                 <li class="{{ ($cars->currentPage() == 1) ? ' disabled' : '' }}">
@@ -188,8 +174,8 @@
                                 </li>
                             </ul>
                         </div>
-                    @endif --}}
-
+                    @endif
+                    
                 </div>
                 <!-- End col lg-9 -->
             </div>

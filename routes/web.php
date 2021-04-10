@@ -21,7 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
-    Route::get('/admin', 'HomeController@index')->name('dashboard');
+    Route::get('/', 'HomeController@index')->name('dashboard');
     Route::get('/addresses/create-district', 'AddressController@createDistrict')->name('create-district');
     Route::get('/addresses/create-ward', 'AddressController@createWard')->name('create-ward');
     Route::get('/cars/list_register', 'CarController@listRegister')->name('cars.list_register');
@@ -55,3 +55,5 @@ Route::group(['middleware' => 'auth'], function () {
 });
 Route::resource('/cars', 'CarController');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/list-car', 'HomeController@getCars')->name('list-car');
+Route::post('/review', 'HomeController@review');

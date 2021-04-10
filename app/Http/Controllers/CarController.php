@@ -8,12 +8,15 @@ use Session;
 use Exception;
 use App\Jobs\OrderJob;
 use Illuminate\Http\Request;
+use App\Http\Requests\CarRequest;
+use App\Http\Requests\CarStepTwoRequest;
 use App\Repositories\Car\CarRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\Image\ImageRepositoryInterface;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\Feature\FeatureRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Address\AddressRepository;
 
 class CarController extends Controller
 {
@@ -23,6 +26,7 @@ class CarController extends Controller
     protected $imageRepo;
     protected $orderRepo;
     protected $userRepo;
+    protected $addressRepo;
 
     public function __construct(
         FeatureRepositoryInterface $featureRepo,
@@ -30,7 +34,8 @@ class CarController extends Controller
         CarRepositoryInterface $carRepo,
         ImageRepositoryInterface $imageRepo,
         OrderRepositoryInterface $orderRepo,
-        UserRepositoryInterface $userRepo
+        UserRepositoryInterface $userRepo,
+        AddressRepository $addressRepo
     ) {
         $this->middleware('auth')->except('index', 'show', 'getVehicle');
         $this->featureRepo = $featureRepo;
@@ -39,6 +44,7 @@ class CarController extends Controller
         $this->imageRepo = $imageRepo;
         $this->orderRepo = $orderRepo;
         $this->userRepo = $userRepo;
+        $this->addressRepo = $addressRepo;
     }
     /**
      * Display a listing of the resource.
@@ -147,18 +153,19 @@ class CarController extends Controller
     {
         $features = $this->featureRepo->get();
         $categories = $this->categoryRepo->getTrademark('id');
+        $addresses = $this->addressRepo->getListAddress();
 
-        return view('client.car.create_step_1', compact('features', 'categories'));
+        return view('client.car.create_step_1', compact('features', 'categories', 'addresses'));
     }
 
-    public function createStepOne(Request $request)
+    public function createStepOne(CarRequest $request)
     {
         $sessionCar = Session::get('car');
 
-        if (empty($sessionCar) || $sessionCar['step1']['car_number'] == $request->car_number) {
+        if (empty($sessionCar) || $sessionCar['step1']['license_plates'] == $request->license_plates) {
             $step1 = [
                 'step1' => [
-                    'car_number' => $request->car_number,
+                    'license_plates' => $request->license_plates,
                     'trademark' => $request->trademark,
                     'vehicle' => $request->vehicle,
                     'seats' => $request->seats,
@@ -174,7 +181,7 @@ class CarController extends Controller
             Session::forget('car');
             $step1 = [
                 'step1' => [
-                    'car_number' => $request->car_number,
+                    'license_plates' => $request->license_plates,
                     'trademark' => $request->trademark,
                     'vehicle' => $request->vehicle,
                     'seats' => $request->seats,
@@ -187,12 +194,12 @@ class CarController extends Controller
             ];
             Session::put('car', $step1);
         }
-        $carNumber = $request->car_number;
+        $carNumber = $request->license_plates;
 
         return view('client.car.create_step_2', compact('carNumber'));
     }
 
-    public function createStepTwo(Request $request)
+    public function createStepTwo(CarStepTwoRequest $request)
     {
         $sessionCar = Session::get('car');
 
@@ -206,7 +213,7 @@ class CarController extends Controller
             ];
             Session::put('car', $sessionCar);
         }
-        $carNumber = $sessionCar['step1']['car_number'];
+        $carNumber = $sessionCar['step1']['license_plates'];
 
         return view('client.car.create_step_3', compact('carNumber'));
     }
@@ -218,7 +225,7 @@ class CarController extends Controller
         if ($sessionCar) {
             $car = $this->carRepo->create([
                 'user_id' => Auth::id(),
-                'license_plates' => $sessionCar['step1']['car_number'],
+                'license_plates' => $sessionCar['step1']['license_plates'],
                 'seats' => $sessionCar['step1']['seats'],
                 'type_of_fuel' => $sessionCar['step1']['type_of_fuel'],
                 'actions' => $sessionCar['step1']['actions'],

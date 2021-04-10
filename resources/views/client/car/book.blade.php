@@ -56,9 +56,9 @@ if (!empty($car->image)) {
                             @php    
                                 $totalPrice = $car->price*(100-$car->discount)/100;
                             @endphp
-                            <sup style="text-decoration: line-through;">{{ $car->price }} K</sup><span>{{ $totalPrice }} K</span> / Ngày
+                            <sup style="text-decoration: line-through;">{{ currency_format($car->price) }} VNĐ</sup><span>{{ currency_format($totalPrice) }}VNĐ</span> / Ngày
                         @else
-                            <span>{{ $car->price }} K</span> / Ngày
+                            <span>{{ currency_format($car->price) }}VNĐ</span> / Ngày
                         @endif
                       
                     </div>
@@ -287,12 +287,14 @@ if (!empty($car->image)) {
                     </div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div>
-                                    <img src="" alt="">
-                                </div>
+                            <div class="col-md-2 col-sm-2">
+                                @if ($car->user->avatar)
+                                    <img src="" alt="" class="img-circle">
+                                @else 
+                                    <img src="{{ asset('bower_components/car-client-lte/' . '/img/avatar3.jpg') }}" alt="" class="img-circle">
+                                @endif 
                             </div>
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-10 col-sm-10">
                                 {{ $car->user->name }}
                                 <p>
                                     <strong>Lưu ý:</strong> Người thuê xe gọi cho bạn nếu họ đồng ý đơn đặt xe của bạn
@@ -302,6 +304,8 @@ if (!empty($car->image)) {
                         <!-- End row  -->
                     </div>
                 </div>
+                <br>
+                <br>
                 <div class="row">
                     <div class="col-md-3">
                         <h3>Đánh giá </h3>
@@ -348,23 +352,33 @@ if (!empty($car->image)) {
                             </div>
                         <!-- End row -->
                         <hr>
-                        <div class="review_strip_single">
+                        <div class="comments">
                             @if (!$car->comments->isEmpty())
-                                <img src="{{ asset('bower_components/car-client-lte') }}/{{ asset('bower_components/car-client-lte') }}/img/avatar1.jpg" alt="Image" class="img-circle">
-                                <small> - 10 March 2015 -</small>
-                                <h4>Jhon Doe</h4>
-                                <p>
-                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-                                </p>
+                            @foreach ($car->comments as $comment)
                                 <div class="rating">
-                                    <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i == $comment->rate)
+                                            <input type="radio" checked>
+                                        @else
+                                            <input type="radio" >
+                                        @endif
+                                    @endfor
                                 </div>
-                            @endif
+                                <div class="review_strip_single">
+                                    <small> - {{ \Carbon\Carbon::parse($comment->created_at)->format('m/d/Y') }} -</small>
+                                    <label>{{ $comment->user->name }}</label>
+                                    <p>
+                                        {{ $comment->comment }}
+                                    </p>
+                                </div>
+                                @endforeach
+                             @endif
                         </div>
                         <!-- End review strip -->
                     </div>
+                    @else
+                        <label>Chưa có đánh giá nào</label>
                     @endif
-                    <span>Chưa có đánh giá nào</span>
                 </div>
             </div>
             <!--End  single_tour_desc-->
@@ -382,31 +396,19 @@ if (!empty($car->image)) {
                         <input type="hidden" value="{{ $car->id }}" name="car_id">
                         <div class="row">
                             <h4>Ngày bắt đầu</h4>
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label><i class="icon-calendar-7"></i> Ngày </label>
                                     <input class="form-control" type="date" name="borrowed_date" id="date_start" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" max="{{ \Carbon\Carbon::now()->addDays(10)->format('Y-m-d') }}">
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label><i class=" icon-clock"></i> Giờ </label>
-                                    <input class="time-pick form-control" value="12:00 AM" type="text" name="time_start">
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <h4>Ngày kết thúc</h4>
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label><i class="icon-calendar-7"></i> Ngày </label>
                                     <input class="form-control" type="date" name="return_date" id="date_return" value="{{ \Carbon\Carbon::now()->addDays(1)->format('Y-m-d') }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" min="{{ \Carbon\Carbon::now()->addDays(1)->format('Y-m-d') }}" max="{{ \Carbon\Carbon::now()->addDays(11)->format('Y-m-d') }}" >
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label><i class=" icon-clock"></i> Giờ </label>
-                                    <input class="time-pick form-control" value="12:00 AM" type="text" name="time_return">
                                 </div>
                             </div>
                         </div>
@@ -470,9 +472,9 @@ if (!empty($car->image)) {
     
                                         <td class="text-right">
                                             @if (isset($totalPrice))
-                                                {{ $totalPrice }}K / ngày
+                                                {{ currency_format($totalPrice) }}VNĐ / ngày
                                             @else
-                                                {{ $car->price }}K / ngày
+                                                {{ currency_format($car->price) }}VNĐ / ngày
                                             @endif
                                         </td>
                                     </tr>
@@ -482,9 +484,9 @@ if (!empty($car->image)) {
                                         </td>
                                         <td class="text-right">
                                             @if (isset($totalPrice))
-                                                {{ $totalPrice }}K 
+                                                {{ currency_format($totalPrice) }}VNĐ 
                                             @else
-                                                {{ $car->price }}K 
+                                                {{ currency_format($car->price) }}VNĐ
                                             @endif
                                             x 
                                             <strong id="days">1</strong><strong>Ngày</strong>
@@ -497,9 +499,9 @@ if (!empty($car->image)) {
                                         <td class="text-right">
                                             <span id="total-money">  
                                                 @if (isset($totalPrice))
-                                                    {{ $totalPrice }}
+                                                    {{ currency_format($totalPrice) }}
                                                 @else
-                                                    {{ $car->price }}K
+                                                    {{ currency_format($car->price) }}
                                                 @endif
                                             </span> 
                                             <span>VNĐ</span> 
@@ -511,6 +513,8 @@ if (!empty($car->image)) {
                         @auth
                             @if ($car->user->id !== Auth::id())
                                 <button class="btn_full" type="submit">Book now</button>
+                            @else
+                                <span class="error">Bạn không thể thuê xe của mình.</span>
                             @endif
                         @endauth
                             
@@ -577,6 +581,7 @@ if (!empty($car->image)) {
 		$('input.date-pick').datepicker('setDate', 'today');
 	</script>
     <script>
+
          $('#date_start, #date_return').change(function (e) { 
             var dateStart = $('#date_start').val();
             var dateReturn =$('#date_return').val();
@@ -588,7 +593,7 @@ if (!empty($car->image)) {
             var yyyy = today.getFullYear();
 
             today =  yyyy + '-' + mm + '-' + dd;
-            if (totalDate > 12 || today > dateStart || today > dateReturn) {
+            if (totalDate > 12 || today > dateStart || today > dateReturn || dateReturn < dateStart) {
                 swal("Hệ thống lỗi", {
                     icon: "error",
                 })
@@ -603,15 +608,36 @@ if (!empty($car->image)) {
                return $('#total-money').text(money);
             }
 
-            if (today <= dateStart && today < dateReturn)
+            if (today <= dateStart && today < dateReturn || dateStart === dateReturn)
             {
                 var days = parseInt(totalDate);
-                $('#days').text(totalDate)
-                $('#total-money').text(money * days);
+                if (days === 0 || days < 0) {
+                    days = 1;
+                }
+                $('#days').text(days)
+                let price = money * days;
+                if (price < 0) {
+                    swal("Hãy chọn ngày về lớn hơn ngày bắt đầu thuê", {
+                    icon: "error",
+                    })
+                    .then(() => {
+                        console.log($('#date_start').prevAll("input[type=date]").val());
+                    }); 
+                    return false;
+                } 
+                let resultPrice = formatCash(price.toString());
+                
+                $('#total-money').text(resultPrice);
             } else {
                 $('#days').text(1);
             }
         });
+
+        function formatCash(str) {
+            return str.split('').reverse().reduce((prev, next, index) => {
+                return ((index % 3) ? next : (next + '.')) + prev
+            });
+        }
         function parseDate(str) {
             var mdy = str.split('-');
             return new Date(mdy[1], mdy[0]-1, mdy[2]);

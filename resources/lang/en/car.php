@@ -3,6 +3,8 @@
 return [
     'car_register' => 'Car Register',
     'car_manager' => 'Car Manager',
+    'car_list' => 'Car List',
+    'car_search' => 'Car Search',
     'car' => 'Car',
     'created' => 'Register Date',
     'info_car' => 'Info Car',
