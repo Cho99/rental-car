@@ -17,6 +17,11 @@ class AddressRepository extends BaseRepository implements AddressRepositoryInter
         return $this->model->where('parent_id', config('address.code_hanoi'))->get();
     }
 
+    public function getHotDistrict()
+    {
+        return $this->model->where('parent_id', config('address.code_hanoi'))->limit(12)->get();
+    }
+
     public function getWard($id) 
     {
         return $this->model->where('parent_id', $id)->get();

@@ -6,3 +6,18 @@
 .table th {
     text-align: center;
 }
+
+.ribbon_3 span {
+    font-size: 9px;
+}
+
+.bar-line {
+    width: 70px;
+    height: 1px;
+    margin: 0 10px;
+}
+
+input#date_start,
+input#date_return {
+    padding: 3px;
+}

@@ -14,6 +14,25 @@ class CarRepository extends BaseRepository implements CarRepositoryInterface
 
     public function getCarRegister()
     {
-        $this->model->where('status', 0)->get();
+        return $this->model->where('status', 0)->get();
+    }
+
+    public function getCarDiscount()
+    {
+       $model = $this->model->where('discount', '<>' ,null)->orderBy('discount', 'DESC')->limit(6)->get();
+
+       return $model->load('image');
+    }
+
+    public function getNumberCar()
+    {
+        return $this->model->whereIn('status', [2, 3])->count();
+    }
+
+    public function getUserByCarId($carId) 
+    {
+        $car = $this->model->findOrFail($carId);
+
+        return $car->load('user'); 
     }
 }

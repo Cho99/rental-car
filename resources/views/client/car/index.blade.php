@@ -82,13 +82,52 @@
                     <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4">
+                                @switch($car->status)
+                                    @case(0)
+                                        <div class="ribbon_3 info">
+                                            <span>Đang chờ</span>
+                                        </div>
+                                        @break
+                                    @case(1)
+                                        <div class="ribbon_3">
+                                            <span>Từ chối</span>
+                                        </div>
+                                        @break
+                                    @case(2)
+                                        <div class="ribbon_3 success">
+                                            <span>Được lưu hành</span>
+                                        </div>
+                                        @break
+                                    @case(3)
+                                        <div class="ribbon_3 warning">
+                                            <span>Đang thuê</span>
+                                        </div>
+                                    @case(4)
+                                        <div class="ribbon_3 danger">
+                                            <span>Bị khóa</span>
+                                        </div>
+                                        @break
+                                    @default
+                                        
+                                @endswitch
+                               
+                               
                                 <div class="img_list">
                                     @php
-                                        $image = json_decode($car->image->image_list);
+                                        $image = null;
+                                        if (!empty($carDiscount->image)) {
+                                            $image = json_decode($carDiscount->image->image_list);
+                                        }
                                     @endphp
-                                    <a href="single_tour.html"><img src="{{ asset('upload/car') . '/' . $image[0] }}" alt="Image">
-                                        <div class="short_info"><i class="icon_set_1_icon-29"></i> <span>{{ $car->seats }}</span> Seats</div>
-                                    </a>
+                                    @if (isset($image))
+                                        <a href="single_tour.html"><img src="{{ asset('upload/car') . '/' . $image[0] }}" alt="Image">
+                                            <div class="short_info"><i class="icon_set_1_icon-29"></i> <span>{{ $car->seats }}</span> Seats</div>
+                                        </a>
+                                    @else
+                                        <a href="single_tour.html"><img src="{{ asset('images/car.jpg') }}" alt="Image">
+                                            <div class="short_info"><i class="icon_set_1_icon-29"></i> <span>{{ $car->seats }}</span> Seats</div>
+                                        </a>  
+                                    @endif
                                 </div>
                             </div>
                             <div class="clearfix visible-xs-block"></div>

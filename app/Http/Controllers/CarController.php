@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Car\CarRepositoryInterface;
-use App\Repositories\Category\CategoryRepositoryInterface;
-use App\Repositories\Feature\FeatureRepositoryInterface;
-use App\Repositories\Image\ImageRepositoryInterface;
+use DB;
 use Auth;
-use Illuminate\Http\Request;
-use Illuminate\Session\Store;
 use Session;
+use Exception;
+use App\Jobs\OrderJob;
+use Illuminate\Http\Request;
+use App\Repositories\Car\CarRepositoryInterface;
+use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\Image\ImageRepositoryInterface;
+use App\Repositories\Order\OrderRepositoryInterface;
+use App\Repositories\Feature\FeatureRepositoryInterface;
+use App\Repositories\Category\CategoryRepositoryInterface;
 
 class CarController extends Controller
 {
@@ -17,17 +21,24 @@ class CarController extends Controller
     protected $categoryRepo;
     protected $carRepo;
     protected $imageRepo;
+    protected $orderRepo;
+    protected $userRepo;
 
     public function __construct(
         FeatureRepositoryInterface $featureRepo,
         CategoryRepositoryInterface $categoryRepo,
         CarRepositoryInterface $carRepo,
-        ImageRepositoryInterface $imageRepo
+        ImageRepositoryInterface $imageRepo,
+        OrderRepositoryInterface $orderRepo,
+        UserRepositoryInterface $userRepo
     ) {
+        $this->middleware('auth')->except('index', 'show', 'getVehicle');
         $this->featureRepo = $featureRepo;
         $this->categoryRepo = $categoryRepo;
         $this->carRepo = $carRepo;
         $this->imageRepo = $imageRepo;
+        $this->orderRepo = $orderRepo;
+        $this->userRepo = $userRepo;
     }
     /**
      * Display a listing of the resource.
@@ -49,7 +60,40 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $input = $request->only(['price', 'car_id' ,'discount', 'borrowed_date', 'return_date']);
+            $input['user_id'] = Auth::id();
+            $carOfUser = $this->carRepo->getUserByCarId($input['car_id']);
+            $email = $carOfUser->user->email;
+            $input['name'] = Auth::user()->name; 
+            $input['name_car'] = $carOfUser->category->name;
+            $input['year_of_product'] = $carOfUser->year_of_product;
+            $input['user'] = $carOfUser->user;
+            $input['phone'] = Auth::user()->phone;
+
+            $user = $this->userRepo->getOrderByUserId(Auth::id(), $input['car_id']);
+
+            if (!$user->orders->isEmpty()) {
+                Session::flash('error', 'Bạn chỉ được yêu câu thuê xe một lần');
+
+                return redirect()->back();
+            }
+
+            $this->orderRepo->create($input) ? 
+                Session::flash('success', 'Bạn đã yêu cầu đặt xe thành công, vui lòng đợi chủ xe liên lạc với bạn'):
+                Session::flash('error', 'Hệ thống lỗi');
+ 
+            OrderJob::dispatch($email, $input);
+            DB::commit();
+            return redirect()->back();
+        } catch (Exception $ex) {
+            report($ex);
+            DB::rollBack();
+
+            return redirect()->back();
+        }
+       
     }
 
     /**
@@ -60,7 +104,9 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        //
+        $car = $this->carRepo->findOrFail($id);
+
+        return view('client.car.book', compact('car'));
     }
 
     /**

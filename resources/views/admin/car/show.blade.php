@@ -56,7 +56,6 @@
                                     {{ trans('car.unblock') }}
                                 </button>
                             @endif
-                           
                         </div>
                     </div>
                 </div>
@@ -105,9 +104,16 @@
                                                 </thead>
                                                 <tbody>
                                                     @php
-                                                        $image = json_decode($car->image->image_list);
+                                                        $image = null;
+                                                        if (!empty($car->image)) {
+                                                            $image = json_decode($car->image->image_list);
+                                                        }
                                                     @endphp
-                                                    <td><img src="{{ asset('upload/car/'. $image[0]) }}" alt="{{ $car->category->name }}" width="150px"></td>
+                                                    @if (isset($image))
+                                                        <td><img src="{{ asset('upload/car/'. $image[0]) }}" alt="{{ $car->category->name }}" width="150px"></td>
+                                                    @else
+                                                        <td><img src="{{ asset('images/car.jpg') }}" alt="{{ $car->category->name }}" width="150px"></td>  
+                                                    @endif
                                                     <td>
                                                         <p>{{ $car->category->name }} - Đời: {{ date('Y', strtotime($car->year_of_product)) }}</p>
                                                         <strong>
@@ -151,27 +157,36 @@
                                     </span>
                                     <br>
                                     @php
-                                        $images = json_decode($car->image->image_list);
+                                        $images = null;
+                                        if (!empty($car->image)) {
+                                            $images = json_decode($car->image->image_list);
+                                        }
                                     @endphp
+                                    @if (isset($images))
                                     <div class="row margin-bottom">
-                                      <div class="col-sm-6">
-                                        <img class="img-responsive" src="{{ asset('upload/car/'. $images[0]) }}" alt="Photo">
-                                      </div>
-                                      <!-- /.col -->
-                                      <div class="col-sm-6">
-                                        <div class="row">
-                                          @foreach ($images as $image)
-                                            <div class="col-sm-6">
-                                                <img class="img-responsive" src="{{ asset('upload/car/'. $image) }}" alt="Photo">
-                                            </div>
-                                          @endforeach
-                                          <!-- /.col -->
+                                        <div class="col-sm-6">
+                                          <img class="img-responsive" src="{{ asset('upload/car/'. $images[0]) }}" alt="Photo">
                                         </div>
-                                        <!-- /.row -->
+                                        <!-- /.col -->
+                                        <div class="col-sm-6">
+                                          <div class="row">
+                                            @foreach ($images as $image)
+                                              <div class="col-sm-6">
+                                                  <img class="img-responsive" src="{{ asset('upload/car/'. $image) }}" alt="Photo">
+                                              </div>
+                                            @endforeach
+                                            <!-- /.col -->
+                                          </div>
+                                          <!-- /.row -->
+                                        </div>
+                                        <!-- /.col -->
                                       </div>
-                                      <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
+                                      <!-- /.row -->
+                                    @else
+                                        <td>
+                                            Chưa thêm ảnh    
+                                        </td>  
+                                    @endif
                                 </div>
                             </div>
                         </div>
