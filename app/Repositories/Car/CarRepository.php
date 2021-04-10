@@ -19,9 +19,14 @@ class CarRepository extends BaseRepository implements CarRepositoryInterface
 
     public function getCarDiscount()
     {
-       $model = $this->model->where('discount', '<>' ,null)->orderBy('discount', 'DESC')->limit(6)->get();
+       $model = $this->model->where('discount', '<>' ,null)->where('status', config('define.car.status.accept'))->orderBy('discount', 'DESC')->limit(6)->get();
 
        return $model->load('image');
+    }
+
+    public function getAllCar()
+    {
+        return $model = $this->model->with('image')->where('discount', '<>' ,null)->where('status', config('define.car.status.accept'))->orderBy('discount', 'DESC')->limit(6)->get();
     }
 
     public function getNumberCar()
@@ -34,5 +39,10 @@ class CarRepository extends BaseRepository implements CarRepositoryInterface
         $car = $this->model->findOrFail($carId);
 
         return $car->load('user'); 
+    }
+    
+    public function getCars()
+    {
+        return $this->model->with('image', 'comments')->where('status', config('define.car.status.accept'))->orderBy('discount', 'DESC')->paginate(6);
     }
 }

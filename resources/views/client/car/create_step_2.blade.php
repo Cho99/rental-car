@@ -57,6 +57,9 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($errors->has('price'))
+                            <div class="error">{{ $errors->first('price') }}</div>
+                        @endif
                     </div>
                     <!--End step -->
                     <div class="form_title">
@@ -69,9 +72,12 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="number" class="form-control" id="discount" name="discount" required>
+                                    <input type="number" class="form-control" id="discount" name="discount">
                                 </div>
                             </div>
+                            @if ($errors->has('discount'))
+                                <div class="error">{{ $errors->first('discount') }}</div>
+                            @endif
                         </div>
                     </div>
                     <!--End step -->
@@ -88,6 +94,9 @@
                                     <label for="limited_km">Số km giới hạn trong một ngày</label>
                                     <input type="number" class="form-control" id="limited_km" name="limited_km" required>
                                 </div>
+                                @if ($errors->has('limited_km'))
+                                    <div class="error">{{ $errors->first('limited_km') }}</div>
+                                @endif
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
@@ -95,6 +104,9 @@
                                     <input type="number" class="form-control" id="limit_pass_fee" name="limit_pass_fee"
                                         required>
                                 </div>
+                                @if ($errors->has('limit_pass_fee'))
+                                    <div class="error">{{ $errors->first('limit_pass_fee') }}</div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -110,6 +122,9 @@
                                     <textarea name="description" class="form-control" id="description" cols="30"
                                         rows="10"></textarea>
                                 </div>
+                                @if ($errors->has('description'))
+                                    <div class="error">{{ $errors->first('description') }}</div>
+                                @endif
                             </div>
                         </div>
                     </div>

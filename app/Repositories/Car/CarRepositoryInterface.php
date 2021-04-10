@@ -9,7 +9,11 @@ interface CarRepositoryInterface extends RepositoryInterface
 
    public function getCarDiscount();
 
+   public function getAllCar();
+
    public function getNumberCar();
 
    public function getUserByCarId($carId);
+
+   public function getCars();
 }

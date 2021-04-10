@@ -26,4 +26,9 @@ class AddressRepository extends BaseRepository implements AddressRepositoryInter
     {
         return $this->model->where('parent_id', $id)->get();
     }
+    
+    public function getListAddress()
+    {
+        return $this->model->where('parent_id', '<>', 0)->get();
+    }
 }

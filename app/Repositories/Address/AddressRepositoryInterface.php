@@ -21,4 +21,6 @@ interface AddressRepositoryInterface extends RepositoryInterface
     public function getWard($id);
 
     public function getHotDistrict();
+
+    public function getListAddress();
 }
