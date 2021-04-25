@@ -21,3 +21,18 @@ input#date_start,
 input#date_return {
     padding: 3px;
 }
+
+.error {
+    color: red;
+}
+
+.comment {
+    max-height: 450px;
+    overflow: auto;
+    margin-bottom: 20px;
+}
+
+.comments {
+    overflow: auto;
+    height: 400px;
+}

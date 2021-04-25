@@ -22,8 +22,6 @@
                                             </li>
                                             <li><a href="{{ route('orders.index') }}">Order Request</a>
                                             </li>
-                                            <li><a href="#0">Japanese</a>
-                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -39,12 +37,6 @@
                                         <li><a href="#0">Spanish</a>
                                         </li>
                                         <li><a href="#0">French</a>
-                                        </li>
-                                        <li><a href="#0">German</a>
-                                        </li>
-                                        <li><a href="#0">Italian</a>
-                                        </li>
-                                        <li><a href="#0">Japanese</a>
                                         </li>
                                     </ul>
                                 </div>

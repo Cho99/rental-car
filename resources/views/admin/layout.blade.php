@@ -165,10 +165,10 @@
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>
-                    <span id="year"></span> © 2020
+                    <span id="year"></span> © 2021
                 </b>
             </div>
-            <strong><a href="">SUN *</a></strong>
+            <strong>Sinh Viên:<a href="">Bùi Quang Anh</a> - Mã Sinh viên: <a href="">68DCHT20004</a></strong>
         </footer>
         <div class="control-sidebar-bg"></div>
     </div>
