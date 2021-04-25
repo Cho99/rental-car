@@ -14,16 +14,20 @@
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                     <i class="fa fa-minus"></i>
                                 </button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove">
-                                    <i class="fa fa-times"></i>
-                                </button>
                             </div>
                         </div>
                         <div class="box-body">
-                            <div class="dashboard-general" id="bar-chart"></div>
+                            <div class="chart">
+                              <canvas id="barChart" style="height: 230px; width: 510px;" height="230" width="510"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+@endsection
+
+@section('script')
+    <script src="https://adminlte.io/themes/v3/plugins/chart.js/Chart.min.js"></script>
+    <script src="{{ asset('js/chart.js') }}"></script>
 @endsection

@@ -89,10 +89,15 @@
                                                             <p>{{ $car->category->name }} -  Đời: {{ date('Y', strtotime($car->year_of_product)) }}</p>
                                                             <p>Biển số xe: {{ $car->license_plates }}</p>
                                                         </td>
-                                                        @php
-                                                            $image = json_decode($car->image->image_list);
-                                                        @endphp
-                                                        <td><img src="{{ asset('upload/car/'. $image[0]) }}" alt="{{ $car->category->name }}" width="150px"></td>
+                                                        @if ($car->image)
+                                                            @php
+                                                                $image = json_decode($car->image->image_list);
+                                                            @endphp
+                                                            <td><img src="{{ asset('upload/car/'. $image[0]) }}" alt="{{ $car->category->name }}" width="150px"></td>
+                                                        @else
+                                                            <td><img src="{{ asset('images/car.jpg') }}" alt="{{ $car->category->name }}" width="150px"></td>
+                                                        @endif
+                                                       
                                                         <td>
                                                             <strong>{{ $car->price }} K</strong> 
                                                         </td>
