@@ -39,4 +39,21 @@ $(document).ready(function() {
             }
         });
     });
+
+
+    $('.logout').click(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: url + '/logout',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: "json",
+            success: function() {
+                location.reload();
+            }
+        });
+    });
 });
