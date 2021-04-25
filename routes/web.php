@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Route::get('/', 'HomeController@index')->name('dashboard');
+    Route::get('/chart', 'HomeController@chart')->name('chart');
     Route::get('/addresses/create-district', 'AddressController@createDistrict')->name('create-district');
     Route::get('/addresses/create-ward', 'AddressController@createWard')->name('create-ward');
     Route::get('/cars/list_register', 'CarController@listRegister')->name('cars.list_register');

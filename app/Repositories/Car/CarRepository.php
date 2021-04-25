@@ -3,6 +3,7 @@
 namespace App\Repositories\Car;
 
 use App\Models\Car;
+use DB;
 use App\Repositories\BaseRepository;
 
 class CarRepository extends BaseRepository implements CarRepositoryInterface
@@ -44,5 +45,14 @@ class CarRepository extends BaseRepository implements CarRepositoryInterface
     public function getCars()
     {
         return $this->model->with('image', 'comments')->where('status', config('define.car.status.accept'))->orderBy('discount', 'DESC')->paginate(6);
+    }
+
+    public function getCarRegisterChart()
+    {
+        return DB::table('cars')
+            ->select(DB::raw('month(created_at) as month'), DB::raw('count(cars.id) as car'))
+            ->where('cars.status', config('define.car.status.reject'))
+            ->groupBy(DB::raw('month(cars.created_at)'))
+            ->get();
     }
 }
