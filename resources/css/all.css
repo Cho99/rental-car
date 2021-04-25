@@ -36,3 +36,7 @@ input#date_return {
     overflow: auto;
     height: 400px;
 }
+
+.logout {
+    cursor: pointer;
+}

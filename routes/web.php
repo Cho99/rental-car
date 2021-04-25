@@ -14,13 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::get('/chart', 'HomeController@chart')->name('chart');
     Route::get('/addresses/create-district', 'AddressController@createDistrict')->name('create-district');
@@ -55,6 +51,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('orders', 'OrderController');
 });
 Route::resource('/cars', 'CarController');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/list-car', 'HomeController@getCars')->name('list-car');
 Route::post('/review', 'HomeController@review');

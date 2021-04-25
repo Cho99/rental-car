@@ -169,11 +169,8 @@
                 <!-- End row -->
 
                 <div class="banner colored add_bottom_30">
-                    <h4>Discover our Top tours <span>from $34</span></h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in.
-                    </p>
-                    <a href="single_tour.html" class="btn_1 white">Read more</a>
+                    <br>
+                    <br>
                 </div>
                 <div class="row">
                     <div class="main_title">
@@ -229,91 +226,13 @@
         <section class="promo_full">
             <div class="promo_full_wp magnific">
                 <div>
-                    <h3>BELONG ANYWHERE</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor
-                        imperdiet deterruisset, doctus volumus explicari qui ex.
-                    </p>
+                    <h3>Thuê xe ở mọi chỗ trên Hà Nội</h3>
+                    <p></p>
                     <a href="https://www.youtube.com/watch?v=Zz5cu72Gv5Y" class="video"><i
-                            class="icon-play-circled2-1"></i></a>
+                        class="icon-play-circled2-1"></i></a>
                 </div>
             </div>
         </section>
         <!-- End section -->
-
-        <div class="container margin_60">
-
-            <div class="main_title">
-                <h2>Some <span>good</span> reasons</h2>
-                <p>
-                    Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.
-                </p>
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4 wow zoomIn" data-wow-delay="0.2s">
-                    <div class="feature_home">
-                        <i class="icon_set_1_icon-41"></i>
-                        <h3><span>+120</span> Premium tours</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor
-                            imperdiet deterruisset.
-                        </p>
-                        <a href="about.html" class="btn_1 outline">Read more</a>
-                    </div>
-                </div>
-
-                <div class="col-md-4 wow zoomIn" data-wow-delay="0.4s">
-                    <div class="feature_home">
-                        <i class="icon_set_1_icon-30"></i>
-                        <h3><span>+1000</span> Customers</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor
-                            imperdiet deterruisset.
-                        </p>
-                        <a href="about.html" class="btn_1 outline">Read more</a>
-                    </div>
-                </div>
-
-                <div class="col-md-4 wow zoomIn" data-wow-delay="0.6s">
-                    <div class="feature_home">
-                        <i class="icon_set_1_icon-57"></i>
-                        <h3><span>H24 </span> Support</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor
-                            imperdiet deterruisset.
-                        </p>
-                        <a href="about.html" class="btn_1 outline">Read more</a>
-                    </div>
-                </div>
-
-            </div>
-            <!--End row -->
-
-            <hr>
-
-            <div class="row">
-                <div class="col-md-8 col-sm-6 hidden-xs">
-                    <img src="{{ asset('bower_components/car-client-lte') }}/img/laptop.png" alt="Laptop" class="img-responsive laptop">
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <h3><span>Get started</span> with CityTours</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor
-                        imperdiet deterruisset.
-                    </p>
-                    <ul class="list_order">
-                        <li><span>1</span>Select your preferred tours</li>
-                        <li><span>2</span>Purchase tickets and options</li>
-                        <li><span>3</span>Pick them directly from your office</li>
-                    </ul>
-                    <a href="all_tour_list.html" class="btn_1">Start now</a>
-                </div>
-            </div>
-            <!-- End row -->
-
-        </div>
-        <!-- End container -->
     </main>
 @endsection

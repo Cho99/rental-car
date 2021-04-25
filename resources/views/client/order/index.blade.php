@@ -12,7 +12,7 @@
 </section>
 
 
-<main style="margin-bottom: 353px;">
+<main>
     <div id="position">
         <div class="container">
             <ul>
