@@ -12,7 +12,7 @@
         </div>
     </div>
 </section>
-<main style="margin-bottom: 353px;">
+<main>
     <div class="container margin_60">
         <div class="row">
             <aside class="col-md-4">

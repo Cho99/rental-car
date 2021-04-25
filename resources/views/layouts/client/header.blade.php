@@ -14,7 +14,7 @@
                                         aria-expanded="true">{{ Auth::user()->name }}</a>
                                     <div class="dropdown-menu">
                                         <ul id="lang_menu">
-                                            <li><a href="">My Account</a>
+                                            <li><a href="{{ route('users.index') }}">My Account</a>
                                             </li>
                                             <li><a href="{{ route('cars.index') }}">My Car</a>
                                             </li>
@@ -27,16 +27,24 @@
                                 </div>
                             </li>
                         @endauth
-                        <li><a href="wishlist.html" id="wishlist_link">Wishlist</a></li>
+                        @guest
+                            <li><a href="{{ route('login') }}" id="">Đăng nhập</a></li>
+                            <li><a href="" id="">Đăng ký</a></li>
+                        @endguest
+                        @auth
+                            <li>
+                                <a class="logout" id="logout">Logout</a>
+                            </li>
+                        @endauth
                         <li>
                             <div class="dropdown dropdown-mini">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="lang_link"
-                                    aria-expanded="true">English</a>
+                                    aria-expanded="true">Tiếng việt</a>
                                 <div class="dropdown-menu">
                                     <ul id="lang_menu">
-                                        <li><a href="#0">Spanish</a>
+                                        <li><a href="#0">Tiếng Anh</a>
                                         </li>
-                                        <li><a href="#0">French</a>
+                                        <li><a href="#0">Tiếng Việt</a>
                                         </li>
                                     </ul>
                                 </div>

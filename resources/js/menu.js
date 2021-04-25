@@ -1,7 +1,6 @@
 $(document).ready(function() {
     $("#user-menu").click(function(e) {
-        console.log($('#user-menu').addClass('open'));
-        $('#user-menu').addClass('open');
+        console.log($(this).addClass('open'));
     });
 });
 
