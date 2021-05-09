@@ -15,9 +15,9 @@
         <div id="position">
             <div class="container">
                 <ul>
-                    <li><a href="{{ route('home') }}">Home</a>
+                    <li><a href="{{ route('home') }}">Trang chủ</a>
                     </li>
-                    <li>Page active</li>
+                    <li>Danh sách xe</li>
                 </ul>
             </div>
         </div>

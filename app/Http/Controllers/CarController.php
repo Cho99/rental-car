@@ -17,6 +17,7 @@ use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\Feature\FeatureRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Address\AddressRepository;
+use App\Http\Requests\CreateFinalRequest;
 
 class CarController extends Controller
 {
@@ -115,40 +116,6 @@ class CarController extends Controller
         return view('client.car.book', compact('car'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function stepOne()
     {
         $features = $this->featureRepo->get();
@@ -198,10 +165,31 @@ class CarController extends Controller
 
         return view('client.car.create_step_2', compact('carNumber'));
     }
+    
+    public function createStepTwoView() 
+    {
+        $car = Session::get('car');
+        $carNumber = $car['step1']['license_plates'];
+
+        return view('client.car.create_step_2', compact('carNumber'));
+    }
+
+    public function createStepThreeView() 
+    {
+        $car = Session::get('car');
+        $carNumber = $car['step1']['license_plates'];
+
+        return view('client.car.create_step_3', compact('carNumber'));
+    }
 
     public function createStepTwo(CarStepTwoRequest $request)
     {
         $sessionCar = Session::get('car');
+
+        if (!$sessionCar['step1']) {
+            return redirect()->route('create-step-one');
+        }
+
 
         if ($sessionCar) {
             $sessionCar['step2'] = [
@@ -218,10 +206,15 @@ class CarController extends Controller
         return view('client.car.create_step_3', compact('carNumber'));
     }
 
-    public function createFinal(Request $request)
+    public function createFinal(CreateFinalRequest $request)
     {
         $sessionCar = Session::get('car');
         $dataImage = [];
+
+        if (!$sessionCar['step2']) {
+            return redirect()->route('create-step-two');
+        }
+
         if ($sessionCar) {
             $car = $this->carRepo->create([
                 'user_id' => Auth::id(),

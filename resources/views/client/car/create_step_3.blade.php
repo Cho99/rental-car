@@ -65,23 +65,23 @@
     </style>
     <section id="hero_2">
         <div class="intro_title animated fadeInDown">
-            <h1>Place your order</h1>
+            <h1>Ảnh xe</h1>
             <div class="bs-wizard">
 
-                <div class="col-xs-4 bs-wizard-step disabled">
+                <div class="col-xs-4 bs-wizard-step complete">
                     <div class="text-center bs-wizard-stepnum">Đăng ký thông tin cơ bản</div>
                     <div class="progress">
                         <div class="progress-bar"></div>
                     </div>
-                    <a href="cart.html" class="bs-wizard-dot"></a>
+                    <a href="{{ route('create-step-one') }}" class="bs-wizard-dot"></a>
                 </div>
 
-                <div class="col-xs-4 bs-wizard-step disabled">
+                <div class="col-xs-4 bs-wizard-step complete">
                     <div class="text-center bs-wizard-stepnum">Thông tin về giá cả</div>
                     <div class="progress">
                         <div class="progress-bar"></div>
                     </div>
-                    <a href="payment.html" class="bs-wizard-dot"></a>
+                    <a href="{{ route('create-step-two') }}" class="bs-wizard-dot"></a>
                 </div>
 
                 <div class="col-xs-4 bs-wizard-step active">
@@ -89,7 +89,7 @@
                     <div class="progress">
                         <div class="progress-bar"></div>
                     </div>
-                    <a href="confirmation.html" class="bs-wizard-dot"></a>
+                    <a href="{{ route('create-step-three') }}" class="bs-wizard-dot"></a>
                 </div>
 
             </div>
@@ -116,6 +116,9 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($errors->has('images'))
+                            <div class="error">{{ $errors->first('images') }}</div>
+                        @endif
                     </div>
                     <div class="add_bottom_15">
                         <button type="submit" class="btn_1 green medium">Đăng ký</button>

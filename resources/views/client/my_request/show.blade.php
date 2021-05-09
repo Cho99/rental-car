@@ -117,11 +117,11 @@
                                 <td>Số tiền thuê xe</td>
                                 @if ($order->discount)
                                     <td>
-                                        <span>{{ number_format($totalPrice, 0, '', ',') }} K</span> 
+                                        <span>{{ currency_format($totalPrice) }}VNĐ</span> 
                                     </td>
                                 @else 
                                     <td>
-                                        {{ $order->price }} K
+                                        {{ currency_format($order->price) }} VNĐ
                                     </td>
                                 @endif 
                             </tr>
@@ -136,7 +136,7 @@
                                     Tổng tiền
                                 </td>
                                 <td class="text-right">
-                                    {{  $totalPrice *  $totalDate}}K
+                                    {{  currency_format($totalPrice *  $totalDate) }}VNĐ
                                 </td>
                             </tr>
                         </tbody>
@@ -196,10 +196,10 @@
                                         </td>
                                         <td class="text-center">
                                             @if ($order->discount)
-                                                <div style="text-decoration: line-through;">{{ $order->price }}K</div> 
-                                                <span>{{ $totalPrice }}</span>K
+                                                <div style="text-decoration: line-through;">{{ currency_format($order->price) }}VNĐ</div> 
+                                                <span>{{    ($totalPrice) }}</span>VNĐ
                                             @else 
-                                                <span>{{ $order->price }}</span>K
+                                                <span>{{ currency_format($order->price) }}</span>VNĐ
                                             @endif
                                         </td>
                                         <td class="text-right">
@@ -235,7 +235,6 @@
                                                     <span>Xe đã bị ngưng hoạt động</span>
                                                     @break
                                                 @default
-                                                    
                                             @endswitch
                                         </td>
                                     </tr>
@@ -257,7 +256,7 @@
                                     @foreach ($order->car->comments as $comment)
                                         <div class="review_strip_single">
                                             <small> - {{ \Carbon\Carbon::parse($comment->created_at)->format('m/d/Y') }} -</small>
-                                            <label>Jhon Doe</label>
+                                            <label>{{ $comment->user->name }}</label>
                                             <div class="rating">
                                                 <i class="icon-smile"></i>
                                                 <i class="icon-smile"></i>
@@ -266,7 +265,7 @@
                                                 <i class="icon-smile"></i>
                                             </div>
                                             <p>
-                                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+                                               {{ $comment->comment }}
                                             </p>
                                         </div>
                                     @endforeach

@@ -25,23 +25,24 @@ class CarStepTwoRequest extends FormRequest
     {
         return [
             'price' => [
+                'bail',
                 'required',
                 'regex:/^([0-9]+)$/',
             ],
             'discount' => [
-                'required',
+                'nullable',
                 'regex:/^([0-9]+)$/',
             ],
             'limited_km' => [
-                'required',
+                'nullable',
                 'regex:/^([0-9]+)$/',
             ],
             'limit_pass_fee' => [
-                'required',
+                'nullable',
                 'regex:/^([0-9]+)$/',
             ],
             'description' => [
-                'required',
+                'nullable',
                 'max:255',
             ],
         ];

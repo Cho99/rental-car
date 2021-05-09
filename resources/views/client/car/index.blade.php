@@ -5,8 +5,7 @@
         data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
-                <h1>My Car</h1>
-                <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+                <h1>Xe của tôi</h1>
             </div>
         </div>
     </section>
@@ -16,11 +15,11 @@
         <div id="position">
             <div class="container">
                 <ul>
-                    <li><a href="{{ route('home') }}">Home</a>
+                    <li><a href="{{ route('home') }}">Trang chủ</a>
                     </li>
-                    <li><a href="{{ route('create-step-one') }}">Car</a>
+                    <li><a href="{{ route('create-step-one') }}">Xe</a>
                     </li>
-                    <li>Page active</li>
+                    <li>Danh sách xe</li>
                 </ul>
             </div>
         </div>
@@ -46,8 +45,8 @@
                     <!--End filters col-->
                     <div class="box_style_2">
                         <i class="icon_set_1_icon-57"></i>
-                        <h4>Need <span>Help?</span></h4>
-                        <a href="tel://004542344599" class="phone">+45 423 445 99</a>
+                        <h4>Liên hệ</h4>
+                        <a href="tel://004542344599" class="phone">+84 423 445 99</a>
                         <small>Monday to Friday 9.00am - 7.30pm</small>
                     </div>
                 </aside>
@@ -144,7 +143,6 @@
                                                     <div class="tooltip-content">
                                                         <h4>{{ $feature->name }}</h4>
                                                         <br>
-                                                        <strong>Saturday</strong>
                                                     </div>
                                                 </div>
                                             </li>
@@ -153,13 +151,18 @@
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2">
-                                <div class="price_list">
-                                    <div>{{ $car->price }}<sup>K</sup>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="price">
+                                    <h4>{{ currency_format($car->price) }}VNĐ</h4>
+                                    @if ($car->discount)
                                         <span class="normal_price_list">{{ $car->discount }} %</span>
-                                        <br>
-                                        <p>
-                                            <a href="{{ route('cars.show', $car->id) }}" class="btn_1">Details</a>
-                                        </p>
+                                    @endif
+                                    <br>
+                                    <div>
+                                        <a href="{{ route('cars.show', $car->id) }}" class="btn_1">Details</a>
                                     </div>
                                 </div>
                             </div>

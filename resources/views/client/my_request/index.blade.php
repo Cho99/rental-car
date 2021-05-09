@@ -5,8 +5,7 @@
         data-natural-height="470">
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
-            <h1>Order Request</h1>
-            <p>Danh sách yêu cầu thuê xe</p>
+            <h1>Danh sách yêu cầu thuê xe</h1>
         </div>
     </div>
 </section>
@@ -16,11 +15,11 @@
     <div id="position">
         <div class="container">
             <ul>
-                <li><a href="#">Home</a>
+                <li><a href="#">Trang chủ</a>
                 </li>
-                <li><a href="#">Orders</a>
+                <li><a href="#">Yêu cầu</a>
                 </li>
-                <li>Manager My Order Request</li>
+                <li>Danh sách thuê xe</li>
             </ul>
         </div>
     </div>
@@ -31,7 +30,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>My Order Request</strong></h3>
+                        <h3 class="panel-title"><strong>Danh sách thuê xe</strong></h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -39,8 +38,8 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Car</th>
-                                        <th>Price</th>
+                                        <th>Xe</th>
+                                        <th>Giá</th>
                                         <th>Số ngày đi</th>
                                         <th>Ngày đi</th>
                                         <th>Ngày kết thúc</th>
@@ -85,7 +84,7 @@
                                         </td>
                                         <td>
                                             @if ($order->status === config('define.order.status.pending') || $order->status === config('define.order.status.reject') || $order->status === config('define.order.status.cancel'))
-                                                <h6><span class="label label-danger">Khi nào chủ xe xác nhận sẽ xuất hiện số điện thoại</span></h6>
+                                                <span class="label label-danger">Khi nào chủ xe xác nhận sẽ xuất hiện số điện thoại</span>
                                             @else 
                                                 <span>{{ $order->car->user->phone }}</span>
                                             @endif
@@ -111,10 +110,12 @@
                                             @endswitch
                                         </td>
                                         <td>
-                                            <a href="{{ route('my_orders.show', $order->id) }}" class="btn btn-info">Chi tiết</a>
-                                            @if ($order->status === config('define.order.status.pending') || $order->status === config('define.order.status.accept'))
-                                                <a href="{{ route('my_orders.cancel', $order->id) }}" class="btn btn-danger">Hủy đơn</a>
-                                            @endif
+                                            <div class="d-flex">
+                                                <a href="{{ route('my_orders.show', $order->id) }}" class="btn btn-info" style="margin-right: 5px">Chi tiết</a>
+                                                @if ($order->status === config('define.order.status.pending') || $order->status === config('define.order.status.accept'))
+                                                    <a href="{{ route('my_orders.cancel', $order->id) }}" class="btn btn-danger">Hủy đơn</a>
+                                                @endif
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
