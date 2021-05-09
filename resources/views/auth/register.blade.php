@@ -1,7 +1,59 @@
-@extends('layouts.app')
+@extends('layouts.client.layout')
 
 @section('content')
-<div class="container">
+<main>
+    <section id="hero" class="login">
+    	<div class="container">
+        	<div class="row">
+            	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                	<div id="login">
+                        <div class="text-center"> <img src="{{ asset('images/logo.png') }}" alt="" style="width: 50px">
+                            Rental Car
+                        </div>
+                        <hr>
+                        <form method="POST" action="{{ route('register') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label>Họ và tên</label>
+                                <input type="text" class=" form-control" name="name"  placeholder="Họ và tên" value="{{ old('name') }}">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong class="error">{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class=" form-control" name="email" placeholder="Email" value="{{ old('email') }}">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong class="error">{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Mật khẩu</label>
+                                <input type="password" class=" form-control" id="password1" name="password" placeholder="Mật khẩu">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong class="error">{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Xác nhận mật khẩu</label>
+                                <input type="password" class=" form-control" id="password2" name="password_confirmation"  placeholder="Xác nhận mật khẩu">
+                            </div>
+                            <div id="pass-info" class="clearfix"></div>
+                            <button class="btn_full" type="submit">Đăng ký</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main><!-- End main -->
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -73,5 +125,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection

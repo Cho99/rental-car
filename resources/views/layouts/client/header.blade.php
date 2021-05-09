@@ -14,13 +14,13 @@
                                         aria-expanded="true">{{ Auth::user()->name }}</a>
                                     <div class="dropdown-menu">
                                         <ul id="lang_menu">
-                                            <li><a href="{{ route('users.index') }}">My Account</a>
+                                            <li><a href="{{ route('users.index') }}">Tài khoản</a>
                                             </li>
-                                            <li><a href="{{ route('cars.index') }}">My Car</a>
+                                            <li><a href="{{ route('cars.index') }}">Quản lý xe</a>
                                             </li>
-                                            <li><a href="{{ route('my_orders.index') }}">My Request</a>
+                                            <li><a href="{{ route('my_orders.index') }}">Quản lý yêu cầu đăng ký xe</a>
                                             </li>
-                                            <li><a href="{{ route('orders.index') }}">Order Request</a>
+                                            <li><a href="{{ route('orders.index') }}">Quản lý yêu cầu thuê xe</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -33,7 +33,7 @@
                         @endguest
                         @auth
                             <li>
-                                <a class="logout" id="logout">Logout</a>
+                                <a class="logout" id="logout">Đăng xuất</a>
                             </li>
                         @endauth
                         <li>
@@ -63,7 +63,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-3">
-                <a href="{{ route('home') }}" title="City tours travel template">
+                <a href="{{ route('home') }}" title="Thuê xe ô tô tự lái">
                     <img src="{{ asset('images/logo.png') }}" alt="" style="width: 50px">
                     Rental Car
                 </a>
@@ -87,7 +87,7 @@
                                             src="{{ asset('bower_components/car-client-lte') }}/img/thumb_cart_1.jpg"
                                             alt="image"></div>
                                     <strong>
-                                        <a href="#">Louvre museum</a>1x $36.00 </strong>
+                                    <a href="#">Louvre museum</a>1x $36.00 </strong>
                                 </li>
                             </ul>
                         </div>

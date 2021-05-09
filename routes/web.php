@@ -38,7 +38,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cars/create/step-one', 'CarController@stepOne')->name('create-step-one');
     Route::get('/vehicles/{did}', 'CarController@getVehicle');
     Route::post('/cars/create/step-two', 'CarController@createStepOne')->name('create-step-two');
+    Route::get('/cars/create/step-two', 'CarController@createStepTwoView')->name('create-step-two');
     Route::post('/cars/create/step-three', 'CarController@createStepTwo')->name('create-step-three');
+    Route::get('/cars/create/step-three', 'CarController@createStepThreeView')->name('create-step-three');
     Route::post('/cars/create/step-final', 'CarController@createFinal')->name('create-final');
     Route::get('/orders/{order}/accept','OrderController@accept')->name('orders.accept');
     Route::get('/orders/{order}/reject','OrderController@reject')->name('orders.reject');

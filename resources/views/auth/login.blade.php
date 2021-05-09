@@ -14,21 +14,20 @@
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6 login_social">
-                                        <a href="#" class="btn btn-primary btn-block"><i class="icon-facebook"></i>
-                                            Facebook</a>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 login_social">
-                                        <a href="#" class="btn btn-info btn-block "><i class="icon-twitter"></i>Twitter</a>
+                                    <div class="col-md-12 col-sm-12 login_social">
+                                        <a href="#" class="btn btn-info btn-block">
+                                            <i class="icon-google"></i>
+                                            Google
+                                        </a>
                                     </div>
                                 </div>
                                 <!-- end row -->
                                 <div class="login-or">
-                                    <hr class="hr-or"><span class="span-or">or</span>
+                                    <hr class="hr-or"><span class="span-or">Hoặc</span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email">Địa chỉ Email</label>
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                         name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     @error('email')
@@ -38,7 +37,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password</label>
+                                    <label for="password">Mật khẩu</label>
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="current-password">
@@ -61,10 +60,10 @@
                                     </div>
                                 </div>
                                 <p class="small">
-                                    <a href="{{ route('password.request') }}">Forgot Password?</a>
+                                    <a href="{{ route('password.request') }}">Quên mật khẩu?</a>
                                 </p>
-                                <button type="submit" class="btn_full">Signin</button>
-                                <a href="register.html" class="btn_full_outline">Register</a>
+                                <button type="submit" class="btn_full">Đăng nhập</button>
+                                <a href="{{ route('register') }}" class="btn_full_outline">Đăng ký</a>
                             </form>
                         </div>
                     </div>

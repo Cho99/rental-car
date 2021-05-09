@@ -21,8 +21,8 @@
 <p>Bắt đầu từ ngày: <strong>{{ date('d-m-Y', strtotime($borrowDate)) }}</strong></p> 
 <p>Đến Ngày: <strong>{{ date('d-m-Y', strtotime($returnDate))  }}</strong></p> 
 <p>Mức giảm giá là: <strong>{{ $data['discount'] }}%</strong></p>
-<p>Giá ban đầu: <strong>{{ $data['price'] }} K</strong></p>
-<p>Tổng tiền thuê: <strong>{{ $totalPrice }} K</strong></p>
+<p>Giá ban đầu: <strong>{{ currency_format($data['price']) }} VNĐ</strong></p>
+<p>Tổng tiền thuê: <strong>{{ currency_format($totalPrice) }} VNĐ</strong></p>
 <strong>Note:</strong> Nếu đồng ý cho thuê xe hãy vào trang web để xác nhận yêu cầu, khi xác nhận yêu cầu xong thì sẽ hiện số điện thoại của người thuê để liên lạc. 
 
 [RentalCar](http://127.0.0.1:8000) 
