@@ -166,6 +166,8 @@ return [
          * Package Service Providers...
          */
 
+        App\Providers\BroadcastServiceProvider::class,
+        
         /*
          * Application Service Providers...
          */

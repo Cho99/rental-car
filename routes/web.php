@@ -32,6 +32,9 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'namespace
     Route::resource('features', 'FeatureController');
     Route::resource('categories', 'CategoryController');
     Route::resource('rules', 'RuleController');
+    Route::get('notification', 'NotificationController@index')->name('notification');
+    Route::get('detail-notification/{notification}', 'NotificationController@detailNotification')->name('detail-notification');
+    Route::get('notification-for-admin', 'NotificationController@apiGetUser')->name('notification-for-user');
 });
 
 Route::group(['middleware' => 'auth'], function () {

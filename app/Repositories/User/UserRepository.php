@@ -29,4 +29,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             return $query->where('status', config('define.order.status.pending'));
         }])->where('id', Auth::id())->first();
     }
+
+    public function getUserHaveRoleAdmins($roles)
+    {
+        return $this->model->where('role_id', $roles)->get();
+    }
 }

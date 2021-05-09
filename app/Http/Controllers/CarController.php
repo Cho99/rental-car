@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use DB;
 use Auth;
-use Session;
 use Exception;
 use App\Jobs\OrderJob;
 use Illuminate\Http\Request;
 use App\Http\Requests\CarRequest;
 use App\Http\Requests\CarStepTwoRequest;
+use Illuminate\Support\Facades\Session;
 use App\Repositories\Car\CarRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\Image\ImageRepositoryInterface;
@@ -18,6 +18,9 @@ use App\Repositories\Feature\FeatureRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Address\AddressRepository;
 use App\Http\Requests\CreateFinalRequest;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\RegisterCarNotification;
+use App\Events\RegisterCarEvent;
 
 class CarController extends Controller
 {
@@ -246,6 +249,20 @@ class CarController extends Controller
                 'image_list' => json_encode($dataImage),
             ]);
 
+            $users = $this->userRepo->getUserHaveRoleAdmins(2);
+            $userId = $users->pluck('id');
+         
+            $data = [
+                'users' => $userId,
+                'user_name' => Auth::user()->name,
+                'request_id' => $car->id,
+                'content' => 'Đăng ký xe',
+                'license_plates' =>  $car->license_plates,
+            ];
+
+            Auth::user()->notify(new RegisterCarNotification($data));
+            event(new RegisterCarEvent($data));
+        
             return redirect()->route('cars.index');
         }
 
