@@ -47,14 +47,16 @@
                             </li>
                         </ul>
                         <div class="form-group text-center">
-                            @if ($car->status !== 4)
-                                <button type="button" class="btn btn-danger" id="btn-block">
-                                    {{ trans('car.block') }}
-                                </button>
-                            @elseif ($car->status === 4)
-                                <button type="button" class="btn btn-info" id="btn-unblock">
-                                    {{ trans('car.unblock') }}
-                                </button>
+                            @if ($car->status !== config('define.car.status.reject'))
+                                @if ($car->status !== config('define.car.status.block'))
+                                    <button type="button" class="btn btn-danger" id="btn-block">
+                                        {{ trans('car.block') }}
+                                    </button>
+                                @elseif ($car->status === config('define.car.status.block'))
+                                    <button type="button" class="btn btn-info" id="btn-unblock">
+                                        {{ trans('car.unblock') }}
+                                    </button>
+                                @endif
                             @endif
                         </div>
                     </div>
@@ -72,22 +74,31 @@
                                         <h4>Km giới hạn: {{ $car->limited_km }} Km - Tiền phạt: {{ $car->limit_pass_fee }} K/1km</h4>
                                         <h4>Description: {{ $car->description }}</h4>
                                         <input type="hidden" value="{{ $car->id }}" id="id">
+                                        @if ($car->status !== config('define.car.status.reject'))
+                                            <h4>
+                                                {{ trans('car.status') }}: <b>
+                                                @switch ($car->status)
+                                                    @case (config('define.car.status.pending'))
+                                                        <span class="label label-warning">Được phép lưu hành</span>
+                                                    @break
+                                                    @case (config('define.car.status.renting'))
+                                                        <span class="label label-danger">Đang được thuê</span>
+                                                    @break
+                                                    @case (config('define.car.status.block'))
+                                                        <span class="label label-danger">Bị khóa</span>
+                                                    @break
+                                                    @default
+                                                @endswitch
+                                                </b>
+                                            </h4>
+                                        @else 
                                         <h4>
                                             {{ trans('car.status') }}: <b>
-                                            @switch ($car->status)
-                                                @case (2)
-                                                    <span class="label label-warning">Được phép lưu hành</span>
-                                                @break
-                                                @case (3)
-                                                    <span class="label label-danger">Đang được thuê</span>
-                                                @break
-                                                @case (4)
-                                                    <span class="label label-danger">Block</span>
-                                                @break
-                                                @default
-                                            @endswitch
+                                                <span class="label label-danger">Xe bị từ chối đăng ký</span>
                                             </b>
                                         </h4>
+                                        @endif
+                                      
                                         <br />
                                         <div class="box-body table-responsive no-padding">
                                             <table class="table table-hover text-center">

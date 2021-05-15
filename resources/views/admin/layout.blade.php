@@ -173,7 +173,9 @@
         <div class="control-sidebar-bg"></div>
     </div>
     <script src="{{ asset('bower_components/admin-lte/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/notification_admin.js') }}"></script>
     @yield('script')
     <script src="{{ asset('bower_components/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}">
     <script src="{{ asset('js/menu.js') }}"></script>

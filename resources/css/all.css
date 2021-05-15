@@ -40,3 +40,20 @@ input#date_return {
 .logout {
     cursor: pointer;
 }
+
+.btn-group {
+    width: 100%;
+}
+
+.btn-group .dropdown-menu {
+    right: -20px;
+}
+
+.notification-text {
+    font-size: 12px;
+}
+
+ul.dropdown-menu.notification-data.show {
+    overflow-x: auto;
+    height: 250px;
+}

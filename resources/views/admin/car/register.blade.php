@@ -50,7 +50,7 @@
                         <div class="form-group text-center">
                             <button type="button" class="btn btn-success" id="btn-accept">
                                 {{ trans('car.accept') }}
-                              </button>
+                            </button>
                             <button type="button" class="btn btn-danger" id="btn-reject">
                                 {{ trans('car.reject') }}
                               </button>
@@ -72,26 +72,27 @@
                                         <input type="hidden" value="{{ $car->id }}" id="id">
                                         <h4>
                                             {{ trans('car.status') }}: <b>
+                                                {{-- @dd($car->status, config('define.car.status.reject')) --}}
                                             @switch ($car->status)
-                                                @case (config('car.pending'))
+                                                @case (config('define.car.status.pending'))
                                                     <span class="label label-warning">{{ trans('car.pending') }}</span>
                                                 @break
-                                                @case (config('car.accept'))
+                                                @case (config('define.car.status.accept'))
                                                     <span class="label label-primary">{{ trans('car.accept') }}</span>
                                                 @break
-                                                @case (config('car.reject'))
+                                                @case (config('define.car.status.reject'))
                                                     <span class="label label-danger">{{ trans('car.reject') }}</span>
                                                 @break
-                                                @case (config('car.borrow'))
+                                                @case (config('define.car.status.borrow'))
                                                     <span class="label label-info">{{ trans('car.borrowing') }}</span>
                                                 @break
-                                                @case (config('car.return'))
+                                                @case (config('define.car.status.return'))
                                                     <span class="label label-success">{{ trans('car.return') }}</span>
                                                 @break
-                                                @case (config('car.late'))
+                                                @case (config('define.car.status.late'))
                                                     <span class="label label-danger">{{ trans('car.too_late') }}</span>
                                                 @break
-                                                @case (config('car.forget'))
+                                                @case (config('define.car.status.forget'))
                                                     <span class="label label-danger">{{ trans('car.take_car_late') }}</span>
                                                 @break
                                                 @default
@@ -272,14 +273,15 @@
                                 icon: "success",
                             })
                             .then(() => {
-                                location.href = '/admin/cars/' + id;
+                                location.href = url + '/admin/cars/' + id;
                             });
                         } else {
                             swal("Hệ thống lỗi", {
                                 icon: "error",
                             })
                             .then(() => {
-                                location.reload;
+                                // location.reload;
+                                console.log(2);
                             });
                         }
                     }

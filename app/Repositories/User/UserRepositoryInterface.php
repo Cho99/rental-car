@@ -8,4 +8,6 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function getOrderByUserId($userId, $carId);
 
     public function getRequestOrderPending();
+
+    public function getUserHaveRoleAdmins($roles);
 }
