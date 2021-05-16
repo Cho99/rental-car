@@ -39,8 +39,8 @@ class ClientController extends Controller
 
     public function show($id) 
     {
-        $order = $this->orderRepo->findOrFail($id);
-
+        $order = $this->orderRepo->getOrderByIdWithComment($id);
+      
         return view('client.my_request.show', compact('order'));
     }
 

@@ -4,6 +4,7 @@ $(document).ready(function() {
     $('.review').submit(function(e) {
         e.preventDefault();
         let data = $(this).serializeArray();
+        console.log(data);
         let comment = '';
         let vote = '';
         $.ajax({
@@ -16,7 +17,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(response) {
                 for (let i = 1; i <= 5; i++) {
-                    if (i == response.data.vote) {
+                    if (i <= response.data.vote) {
                         vote += `<i class="icon-smile voted" checked></i>`
                     } else {
                         vote += `<i class="icon-smile"></i>`
