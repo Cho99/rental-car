@@ -257,12 +257,23 @@
                                         <div class="review_strip_single">
                                             <small> - {{ \Carbon\Carbon::parse($comment->created_at)->format('m/d/Y') }} -</small>
                                             <label>{{ $comment->user->name }}</label>
+                                            {{-- @for ($i = 1; $i <= 5; $i++)
+                                                @if ($i === $comment->rate)
+                                                    <input type="radio" id="star{{ $i }}" name="rate" value="{{ $i }}" checked />
+                                                    <label for="star{{ $i }}" title="text">{{ $i }} stars</label>
+                                                @else
+                                                    <input type="radio" id="star{{ $i }}" name="rate" value="{{ $i }}" />
+                                                    <label for="star{{ $i }}" title="text">{{ $i }} stars</label>
+                                                @endif
+                                            @endfor --}}
                                             <div class="rating">
-                                                <i class="icon-smile"></i>
-                                                <i class="icon-smile"></i>
-                                                <i class="icon-smile"></i>
-                                                <i class="icon-smile"></i>
-                                                <i class="icon-smile"></i>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i < $comment->rate)
+                                                        <i class="icon-smile voted"></i>
+                                                    @else
+                                                        <i class="icon-smile"></i>
+                                                    @endif
+                                                @endfor
                                             </div>
                                             <p>
                                                {{ $comment->comment }}
@@ -278,18 +289,19 @@
                             <form class="review">
                                 <input type="hidden" name="car_id" value="{{ $order->car_id }}">
                                 <label>Đánh giá</label>
-                                <div class="rating-box">
-                                     <input type="radio" name="star" id="statr5" value="1" checked>
-                                     <label for="statr1"></label>
-                                     <input type="radio" name="star" id="statr2" value="2">
-                                     <label for="statr2"></label>
-                                     <input type="radio" name="star" id="statr3" value="3">
-                                     <label for="statr3"></label>
-                                     <input type="radio" name="star" id="statr4" value="4">
-                                     <label for="statr4"></label>
-                                    <input type="radio" name="star" id="start5" value="5">
-                                    <label for="statr5"></label>
-                                 </div>
+                                <div class="rate">
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="text">5 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="text">4 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="text">3 stars</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="text">2 stars</label>
+                                    <input type="radio" id="star1" name="rate" value="1" checked />
+                                    <label for="star1" title="text">1 star</label>
+                                </div>
+
                                  <div class="form-group">
                                     <label for="comment">Bình luận</label>
                                     <textarea name="comment" id="review_text" class="form-control" style="height:100px" placeholder="Write your review"></textarea>

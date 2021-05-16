@@ -16,4 +16,11 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     {
         return $this->model->where('car_id', $carId)->where('status', 0)->first();
     }
+
+    public function getOrderByIdWithComment($id)
+    {
+        return $this->model->with(['car', 'car.comments' => function($query) {
+            return $query->orderBy('comments.id', 'desc');
+        }])->findOrFail($id);
+    }
 }

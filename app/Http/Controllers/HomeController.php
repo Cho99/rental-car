@@ -55,7 +55,7 @@ class HomeController extends Controller
     public function review(Request $request)
     {
         $request['user_id'] = Auth::id();
-        $request['rate'] = $request->input('star');
+        $request['rate'] = $request->input('rate');
         if ($request->comment === null) {
             $request['comment'] = 'Không bình luận';
         }
