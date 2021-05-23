@@ -113,9 +113,15 @@
                             <div class="clearfix visible-xs-block"></div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="tour_list_desc">
-                                    <div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i
-                                            class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i
-                                            class="icon-smile"></i><small>(75)</small>
+                                    <div class="rating">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i < $car->comments()->avg('rate'))
+                                                <i class="icon-smile voted"></i>
+                                            @else
+                                                <i class="icon-smile"></i>
+                                            @endif
+                                        @endfor
+                                        <small>({{ $car->comments_count }}) Đánh giá</small>
                                     </div>
                                     <h3><strong>{{ $car->category->name }}</strong> Đời: {{ date('Y', strtotime($car->year_of_product)) }}</h3>
                                     <p>Biển số xe: {{ $car->license_plates }}</p>

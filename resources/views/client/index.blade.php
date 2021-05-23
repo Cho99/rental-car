@@ -57,7 +57,7 @@
                                     @else
                                         <img src="{{ asset('images/car.jpg') }}" alt="Car Rental" class="img-responsive" alt="Image">    
                                     @endif
-                                    <div class="badge_save">SEAL<strong>{{ $carDiscount->discount }}%</strong></div>
+                                    <div class="badge_save">Giảm giá<strong>{{ $carDiscount->discount }}%</strong></div>
                                     <div class="short_info">
                                         <i class="icon_set_1_icon-29"></i>{{ $carDiscount->seats }} Seats<span
                                             class="price">{{ currency_format($carDiscount->price) }}<sup>VNĐ</sup></span>
@@ -67,9 +67,14 @@
                             <div class="tour_title">
                                 <h3><strong>{{ $carDiscount->category->name }}</strong> - {{ date('Y', strtotime($carDiscount->year_of_product)) }}</h3>
                                 <div class="rating">
-                                    <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i
-                                        class="icon-smile voted"></i><i class="icon-smile voted"></i><i
-                                        class="icon-smile"></i><small>(75)</small>
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i < $carDiscount->comments()->avg('rate'))
+                                            <i class="icon-smile voted"></i>
+                                        @else
+                                            <i class="icon-smile"></i>
+                                        @endif
+                                    @endfor
+                                    <small>({{ $carDiscount->comments_count }}) Đánh giá</small>
                                 </div>
                                 <!-- end rating -->
                                 <div class="wishlist">
@@ -86,7 +91,7 @@
             </div>
             <!-- End row -->
             <p class="text-center nopadding">
-                <a href="#" class="btn_1 medium"><i class="icon-eye-7"></i>Xem tất cả các xe ({{ $numberCar }}) </a>
+                <a href="{{ route('list-car') }}" class="btn_1 medium"><i class="icon-eye-7"></i>Xem tất cả các xe ({{ $numberCar }}) </a>
             </p>
         </div>
         <!-- End container Xe nổi bật -->
@@ -123,11 +128,16 @@
                                 </a>
                             </div>
                             <div class="tour_title">
-                                <h3><strong>{{ $carDiscount->category->name }}</strong> - {{ date('Y', strtotime($carDiscount->year_of_product)) }}</h3>
+                                <h3><strong>{{ $car->category->name }}</strong> - {{ date('Y', strtotime($carDiscount->year_of_product)) }}</h3>
                                 <div class="rating">
-                                    <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i
-                                        class="icon-smile voted"></i><i class="icon-smile voted"></i><i
-                                        class="icon-smile"></i><small>(75)</small>
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i < $car->comments()->avg('rate'))
+                                            <i class="icon-smile voted"></i>
+                                        @else
+                                            <i class="icon-smile"></i>
+                                        @endif
+                                    @endfor
+                                    <small>({{ $car->comments_count }}) Đánh giá</small>
                                 </div>
                                 <!-- end rating -->
                                 <div class="wishlist">
@@ -145,7 +155,7 @@
             </div>
             <!-- End row -->
             <p class="text-center nopadding">
-                <a href="#" class="btn_1 medium"><i class="icon-eye-7"></i>Xem tất cả các xe ({{ $numberCar }}) </a>
+                <a href="{{ route('list-car') }}" class="btn_1 medium"><i class="icon-eye-7"></i>Xem tất cả các xe ({{ $numberCar }}) </a>
             </p>
         </div>
         <!-- End container Xe nổi bật -->

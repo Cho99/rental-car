@@ -55,7 +55,7 @@
 
                     <div id="tools">
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-3 col-sm-3 col-xs-6">
                                 <div class="styled-select-filters">
                                     <select name="sort_price" id="sort_price">
@@ -67,11 +67,11 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!--/tools -->
                     
-                    @foreach ($user->cars as $car)
+                    @foreach ($cars as $car)
                     <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4">
@@ -126,9 +126,15 @@
                             <div class="clearfix visible-xs-block"></div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="tour_list_desc">
-                                    <div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i
-                                            class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i
-                                            class="icon-smile"></i><small>(75)</small>
+                                    <div class="rating">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i < $car->comments()->avg('rate'))
+                                                <i class="icon-smile voted"></i>
+                                            @else
+                                                <i class="icon-smile"></i>
+                                            @endif
+                                        @endfor
+                                        <small>({{ $car->comments_count }}) Đánh giá</small>
                                     </div>
                                     <h3><strong>{{ $car->category->name }}</strong> Đời: {{ date('Y', strtotime($car->year_of_product)) }}</h3>
                                     <p>Biển số xe: {{ $car->license_plates }}</p>
@@ -156,13 +162,13 @@
                                 <br>
                                 <br>
                                 <div class="price">
-                                    <h4>{{ currency_format($car->price) }}VNĐ</h4>
+                                    <h5>{{ currency_format($car->price) }} VNĐ</h5>
                                     @if ($car->discount)
-                                        <span class="normal_price_list">{{ $car->discount }} %</span>
+                                        <span class="normal_price_list">Giảm giá: {{ $car->discount }} %</span>
                                     @endif
                                     <br>
                                     <div>
-                                        <a href="{{ route('cars.show', $car->id) }}" class="btn_1">Details</a>
+                                        <a href="{{ route('cars.show', $car->id) }}" class="btn_1">Chi Tiết</a>
                                     </div>
                                 </div>
                             </div>
@@ -175,11 +181,11 @@
 
                     <hr>
 
-                    {{-- @if ($cars->lastPage() > 1)
+                    @if ($cars->lastPage() > 1)
                         <div class="text-center">
                             <ul class="pagination">
                                 <li class="{{ ($cars->currentPage() == 1) ? ' disabled' : '' }}">
-                                    <a href="{{ $cars->url(1) }}">Previous</a>
+                                    <a href="{{ $cars->url(1) }}">Trang trước</a>
                                 </li>
                                 @for ($i = 1; $i <= $cars->lastPage(); $i++)
                                     <li class="{{ ($cars->currentPage() == $i) ? ' active' : '' }}">
@@ -187,11 +193,11 @@
                                     </li>
                                 @endfor
                                 <li class="{{ ($cars->currentPage() == $cars->lastPage()) ? ' disabled' : '' }}">
-                                    <a href="{{ $cars->url($cars->currentPage()+1) }}" >Next</a>
+                                    <a href="{{ $cars->url($cars->currentPage()+1) }}" >Trang tiếp</a>
                                 </li>
                             </ul>
                         </div>
-                    @endif --}}
+                    @endif
 
                 </div>
                 <!-- End col lg-9 -->

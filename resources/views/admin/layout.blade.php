@@ -78,10 +78,6 @@
                                     </p>
                                 </li>
                                 <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href=""
-                                            class="btn btn-default btn-flat">{{ trans('user.profile') }}</a>
-                                    </div>
                                     <div class="pull-right">
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf

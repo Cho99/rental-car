@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+    const READ = 1,
+        UNREAD = 0;
+
+    protected $guarded = [''];
+        
     public function user()
     {
         return $this->belongsTo(User::class);
