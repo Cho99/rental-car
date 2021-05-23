@@ -13,19 +13,6 @@
                             <hr>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 login_social">
-                                        <a href="#" class="btn btn-info btn-block">
-                                            <i class="icon-google"></i>
-                                            Google
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- end row -->
-                                <div class="login-or">
-                                    <hr class="hr-or"><span class="span-or">Hoặc</span>
-                                </div>
-
                                 <div class="form-group">
                                     <label for="email">Địa chỉ Email</label>
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -53,9 +40,9 @@
                                             <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                                 {{ old('remember') ? 'checked' : '' }}>
 
-                                            <label class="form-check-label" for="remember">
-                                                {{ __('Remember Me') }}
-                                            </label>
+                                            <span class="form-check-label" for="remember">
+                                                <span>Ghi nhớ đăng nhập</span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

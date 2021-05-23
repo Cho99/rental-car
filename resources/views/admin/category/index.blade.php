@@ -1,11 +1,30 @@
 @extends('admin.layout')
+
+@section('css')
+<style>
+    .example-modal .modal {
+      position: relative;
+      top: auto;
+      bottom: auto;
+      right: auto;
+      left: auto;
+      display: block;
+      z-index: 1;
+    }
+
+    .example-modal .modal {
+      background: transparent !important;
+    }
+</style>
+@endsection
+
 @section('content')
     <section class="content-header">
         <h1>{{ trans('category.category_manager') }}</h1>
         <div class="timeline-footer general">
-            <a href="" class="btn btn-primary btn general" data-toggle="modal" data-target="#modal-default">
+            <button href="" class="btn btn-primary btn general" data-toggle="modal" data-target="#modal-default">
                 <i class="fa fa-plus-square general"></i> {{ trans('category.add_category') }}
-            </a>
+            </button>
             <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -66,13 +85,6 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">{{ trans('category.trademark_list') }}</h3>
-                        <div class="box-tools">
-                            <div class="input-group input-group-sm hidden-xs">
-                                <input type="text" onkeyup="showResult(this.value)" name="search"
-                                    class="form-control pull-right" placeholder="{{ trans('category.category_search') }}"
-                                    autocomplete="off">
-                            </div>
-                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div id="livesearch"></div>
@@ -80,20 +92,17 @@
                         <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+                                    <table id="example2" class="table table-hover dataTable" role="grid"
                                         aria-describedby="example2_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-sort="ascending"
-                                                    aria-label="Rendering engine: activate to sort column descending">
+                                                <th>
                                                     {{ trans('admin.stt') }} </th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Browser: activate to sort column ascending">
+                                                <th>
                                                     {{ trans('category.trademark') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                                    {{ trans('admin.actions') }}</th>
+                                                <th>
+                                                    {{ trans('admin.actions') }}
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody id="table">
@@ -130,8 +139,8 @@
                     </div>
                 </div>
         </section>
+@endsection
 
-    @endsection
 @section('script')
     <script src="https://adminlte.io/themes/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="https://adminlte.io/themes/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
@@ -140,11 +149,14 @@
         $(function() {
             $('#example2').DataTable({
                 'paging': true,
-                'lengthChange': false,
-                'searching': false,
+                'lengthChange': true,
+                'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': false
+                'autoWidth': true,
+                "columnDefs": [
+                    { "orderable": false, "targets": 2 }
+                ]
             })
         })
     </script>

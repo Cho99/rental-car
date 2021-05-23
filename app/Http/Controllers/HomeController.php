@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Repositories\Car\CarRepositoryInterface;
 use App\Repositories\Address\AddressRepositoryInterface;
 use App\Models\Comment;
+use App\Models\Report;
+use App\Http\Requests\ReportRequest;
 
 class HomeController extends Controller
 {
@@ -76,5 +78,19 @@ class HomeController extends Controller
         }
 
         return response()->json(false);
+    }
+
+    public function reports(ReportRequest $request)
+    {
+        $result = Report::create([
+            'user_id' => Auth::id(),
+            'car_id' => $request->input('car_id'),
+            'description' => $request->input('description'),
+            'status' => Report::UNREAD,
+        ]);
+
+        return response()->json([
+            'success' => $result,
+        ]);
     }
 }

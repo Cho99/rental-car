@@ -33,13 +33,6 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">{{ trans('car.car_list') }}</h3>
-                        <div class="box-tools">
-                            <div class="input-group input-group-sm hidden-xs">
-                                <input type="text" onkeyup="showResult(this.value)" name="search"
-                                    class="form-control pull-right" placeholder="{{ trans('car.car_search') }}"
-                                    autocomplete="off">
-                            </div>
-                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div id="livesearch"></div>
@@ -47,34 +40,25 @@
                         <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+                                    <table id="example2" class="table table-hover dataTable" role="grid"
                                         aria-describedby="example2_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-sort="ascending"
-                                                    aria-label="Rendering engine: activate to sort column descending">
+                                                <th>
                                                     {{ trans('admin.stt') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Browser: activate to sort column ascending">
+                                                <th>
                                                     {{ trans('user.email') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Browser: activate to sort column ascending">
+                                                <th>
                                                     {{ trans('car.info') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                <th>
                                                     {{ trans('car.image') }}</th>
-                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                 <th>
                                                     {{ trans('car.price') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                <th>
                                                     {{ trans('car.discount') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                <th>
                                                     {{ trans('car.status') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                <th>
                                                     {{ trans('admin.actions') }}</th>
                                             </tr>
                                         </thead>
@@ -99,15 +83,19 @@
                                                             }
                                                         @endphp
                                                         @if (isset($image))
-                                                            <td><img src="{{ asset('upload/car/'. $image[0]) }}" alt="{{ $car->category->name }}" width="150px"></td>
+                                                            <td>
+                                                                <img src="{{ asset('upload/car/'. $image[0]) }}" alt="{{ $car->category->name }}" width="150px">
+                                                            </td>
                                                         @else
-                                                            <td><img src="{{ asset('images/car.jpg') }}" alt="{{ $car->category->name }}" width="150px"></td>  
+                                                            <td>
+                                                                <img src="{{ asset('images/car.jpg') }}" alt="{{ $car->category->name }}" width="150px">
+                                                            </td>  
                                                         @endif
                                                         <td>
-                                                            <strong>{{ $car->price }} K</strong>
+                                                            <strong>{{ currency_format($car->price) }} VNĐ</strong>
                                                         </td>
                                                         <td>
-                                                            <strong>{{ $car->discount }} %</strong>
+                                                            <strong>{{ $car->discount ? $car->discount : 0 }} %</strong>
                                                         </td>
                                                         <td>
                                                             @if ($car->status === 2) 
@@ -150,13 +138,15 @@
         $(function() {
             $('#example2').DataTable({
                 'paging': true,
-                'lengthChange': false,
-                'searching': false,
+                'lengthChange': true,
+                'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': false
+                'autoWidth': true,
+                "columnDefs": [
+                    { "orderable": false, "targets": [3,7] }
+                ],
             })
         })
-
     </script>
 @endsection

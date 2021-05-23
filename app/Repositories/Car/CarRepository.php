@@ -20,14 +20,28 @@ class CarRepository extends BaseRepository implements CarRepositoryInterface
 
     public function getCarDiscount()
     {
-       $model = $this->model->where('discount', '<>' ,null)->where('status', config('define.car.status.accept'))->orderBy('discount', 'DESC')->limit(6)->get();
+       $model = $this->model
+        ->with('image')
+        ->withCount('comments')
+        ->where('discount', '<>' ,null)
+        ->where('status', config('define.car.status.accept'))
+        ->orderBy('discount', 'DESC')
+        ->limit(6)
+        ->get();
 
        return $model->load('image');
     }
 
     public function getAllCar()
     {
-        return $model = $this->model->with('image')->where('discount', '<>' ,null)->where('status', config('define.car.status.accept'))->orderBy('discount', 'DESC')->limit(6)->get();
+        return $model = $this->model
+            ->with('image')
+            ->withCount('comments')
+            ->where('discount', '<>' ,null)
+            ->where('status', config('define.car.status.accept'))
+            ->orderBy('discount', 'DESC')
+            ->limit(6)
+            ->get();
     }
 
     public function getNumberCar()
@@ -44,7 +58,12 @@ class CarRepository extends BaseRepository implements CarRepositoryInterface
     
     public function getCars()
     {
-        return $this->model->with('image', 'comments')->where('status', config('define.car.status.accept'))->orderBy('discount', 'DESC')->paginate(6);
+        return $this->model
+        ->withCount('comments')
+        ->with('image', 'comments')
+        ->where('status', config('define.car.status.accept'))
+        ->orderBy('discount', 'DESC')
+        ->paginate(6);
     }
 
     public function getCarRegisterChart()
@@ -54,5 +73,22 @@ class CarRepository extends BaseRepository implements CarRepositoryInterface
             ->where('cars.status', config('define.car.status.reject'))
             ->groupBy(DB::raw('month(cars.created_at)'))
             ->get();
+    }
+
+    public function getCarByUserId($userId)
+    {
+        return $this->model
+            ->where('user_id', $userId)
+            ->withCount('comments')
+            ->with('comments', 'features', 'image')
+            ->paginate(6);
+    }
+
+    public function getCarByCarId($carId)
+    {
+        return $this->model
+        ->withCount('comments')
+        ->with('comments', 'features', 'image', 'user')
+        ->findOrFail($carId);
     }
 }

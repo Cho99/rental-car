@@ -57,9 +57,9 @@ class CarController extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->load(['cars.category', 'cars.features', 'cars.address', 'cars.image']);
-
-        return view('client.car.index', compact('user'));
+        $cars = $this->carRepo->getCarByUserId(Auth::id());
+ 
+        return view('client.car.index', compact('cars'));
     }
 
     /**
@@ -114,7 +114,7 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        $car = $this->carRepo->findOrFail($id);
+        $car = $this->carRepo->getCarByCarId($id);
 
         return view('client.car.book', compact('car'));
     }

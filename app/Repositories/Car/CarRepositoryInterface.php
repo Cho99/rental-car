@@ -18,4 +18,8 @@ interface CarRepositoryInterface extends RepositoryInterface
    public function getCars();
 
    public function getCarRegisterChart();
+
+   public function getCarByUserId($userId);
+
+    public function getCarByCarId($carId);
 }

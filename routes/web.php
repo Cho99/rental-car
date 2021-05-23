@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/my_orders/{order}', 'ClientController@show')->name('my_orders.show');
     Route::resource('orders', 'OrderController');
     Route::resource('users', 'UserController');
+    Route::post('reports', 'HomeController@reports')->name('reports');
 });
 Route::resource('/cars', 'CarController');
 Route::get('/', 'HomeController@index')->name('home');

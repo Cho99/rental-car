@@ -26,12 +26,14 @@ if (!empty($car->image)) {
                     <h1>{{ $car->category->name }} - {{ date('Y', strtotime($car->year_of_product)) }}</h1>
                     <span>Đánh giá: </span>
                     <span class="rating">
-                        <i class="icon-smile"></i>
-                        <i class="icon-smile"></i>
-                        <i class="icon-smile"></i>
-                        <i class="icon-smile"></i>
-                        <i class="icon-smile"></i>
-                        <small>(0)</small>
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i < $car->comments()->avg('rate'))
+                                <i class="icon-smile voted"></i>
+                            @else
+                                <i class="icon-smile"></i>
+                            @endif
+                        @endfor
+                        <small>({{ $car->comments_count }}) Đánh giá</small>
                         <span class="bar-line">-------</span>
                         @if ($car->orders->isEmpty())
                             <span>Chưa có chuyến nào</span>
@@ -71,9 +73,9 @@ if (!empty($car->image)) {
     <div id="position">
         <div class="container">
             <ul>
-                <li><a href="#">Home</a>
+                <li><a href="#">Trang chủ</a>
                 </li>
-                <li><a href="#">Car</a>
+                <li><a href="#">Đạt xe</a>
                 </li>
                 <li>{{ $car->category->name }}</li>
             </ul>
@@ -532,6 +534,23 @@ if (!empty($car->image)) {
                     <small>Làm việc 8.00am - 4.30pm - <span>Từ thứ 7 đến chủ nhật</span></small>
                 </div>
 
+                <div class="box_style_1 expose">
+                    <h3 class="inner">- Khiếu nại -</h3>
+                    <form action="{{ route('reports') }}">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="report">Nội dung</label>
+                                    <input type="hidden" name="car_id" value="{{ $car->id }}">
+                                    <textarea rows="5" id="report" name="description" class="form-control" placeholder="Write your message" style="height:200px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="error description"></p>
+                        <button class="btn_full js-btn-send">Gửi</button>
+                    </form>
+                </div>
+
             </aside>
         </div>
         <!--End row -->
@@ -581,7 +600,6 @@ if (!empty($car->image)) {
 		$('input.date-pick').datepicker('setDate', 'today');
 	</script>
     <script>
-
          $('#date_start, #date_return').change(function (e) { 
             var dateStart = $('#date_start').val();
             var dateReturn =$('#date_return').val();
@@ -648,6 +666,43 @@ if (!empty($car->image)) {
             // Round to nearest whole number to deal with DST.
             return Math.round((second-first)/(1000*60*60*24));
         }
+    </script>
+
+    <script>
+        $('.js-btn-send').click(function (e) { 
+            e.preventDefault();
+            let form = $(this).parents('form');
+            let formData = form.serializeArray();
+
+            form.find('.error').text('');
+
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: formData,
+                dataType: "json",
+                success: function () {
+                    swal("Gửi khiếu nại thành công", {
+                    icon: "success",
+                    })
+                    .then(() => {
+                        return location.reload();
+                    });
+                },
+                error: function (error) {
+                    if (error.responseJSON) {
+                        $.each(error.responseJSON.errors, function (indexInArray, valueOfElement) { 
+                            form.find('.' + indexInArray).text(valueOfElement)
+                        });
+                    }
+                    
+                }
+            });
+        });
+  
     </script>
 	{{-- <!--Review modal validation -->
 	<script src="assets/validate.js"></script> --}}
