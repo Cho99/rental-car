@@ -2,10 +2,6 @@
 
 @section('content')
     <section class="content-header">
-        <h1>{{ trans('car.car_register') }}</h1>
-        <ol class="breadcrumb">
-            <li>{{ trans('car.car') }}</li>
-        </ol>
         @if (session()->has('infoMessage'))
             <div class="infoMessage">
                 <div class="box box-warning box-solid">
@@ -32,14 +28,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('car.car_list') }}</h3>
-                        <div class="box-tools">
-                            <div class="input-group input-group-sm hidden-xs">
-                                <input type="text" onkeyup="showResult(this.value)" name="search"
-                                    class="form-control pull-right" placeholder="{{ trans('car.car_search') }}"
-                                    autocomplete="off">
-                            </div>
-                        </div>
+                        <h3 class="box-title">@lang('car.car_register')</h3>
                     </div>
                     <!-- /.box-header -->
                     <div id="livesearch"></div>
@@ -47,32 +36,24 @@
                         <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
-                                        aria-describedby="example2_info">
+                                    <table id="example2" class="table table-hover dataTable" role="grid">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-sort="ascending"
-                                                    aria-label="Rendering engine: activate to sort column descending">
+                                                <th>
                                                     {{ trans('admin.stt') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Browser: activate to sort column ascending">
+                                                <th>
                                                     {{ trans('user.email') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Browser: activate to sort column ascending">
+                                                <th>
                                                     {{ trans('car.info') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                <th>
                                                     {{ trans('car.image') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                <th>
                                                     {{ trans('car.price') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                <th >
                                                     {{ trans('car.status') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                                    {{ trans('admin.actions') }}</th>
+                                                <th>
+                                                    {{ trans('admin.actions') }}
+                                            </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -99,7 +80,7 @@
                                                         @endif
                                                        
                                                         <td>
-                                                            <strong>{{ $car->price }} K</strong> 
+                                                            <strong>{{ currency_format($car->price) }} VNĐ</strong> 
                                                         </td>
                                                         <td>
                                                             <span class="label label-warning">
@@ -132,13 +113,15 @@
         $(function() {
             $('#example2').DataTable({
                 'paging': true,
-                'lengthChange': false,
-                'searching': false,
+                'lengthChange': true,
+                'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': false
+                'autoWidth': true,
+                "columnDefs": [
+                    { "orderable": false, "targets": [3,6] }
+                ],
             })
         })
-
     </script>
 @endsection

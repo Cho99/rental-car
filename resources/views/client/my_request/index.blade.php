@@ -68,7 +68,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            {{ $totalPrice }} K
+                                            {{ currency_format($totalPrice) }} VNĐ
                                         </td>
                                         <td>
                                             <span>{{ $totalDate }} ngày</span>

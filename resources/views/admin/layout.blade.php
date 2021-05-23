@@ -24,8 +24,6 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <link rel="stylesheet"
         href="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('bower_components/admin-lte/dist/css/skins/_all-skins.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
@@ -172,12 +170,12 @@
         </footer>
         <div class="control-sidebar-bg"></div>
     </div>
-    <script src="{{ asset('bower_components/admin-lte/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('bower_components/admin-lte/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('js/notification_admin.js') }}"></script>
     @yield('script')
-    <script src="{{ asset('bower_components/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}">
+    <script src="{{ asset('bower_components/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/menu.js') }}"></script>
     <script src="{{ asset('bower_components/admin-lte/dist/js/component/general.js') }}">
     </script>
@@ -185,7 +183,7 @@
     <script
         src="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}">
     </script>
-    </script>
+  
     <script src="{{ asset('bower_components/admin-lte/bower_components/select2/dist/js/select2.full.min.js') }}">
     </script>
     <script

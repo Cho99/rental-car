@@ -37,13 +37,6 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">{{ trans('rule.rule_list') }}</h3>
-                        <div class="box-tools">
-                            <div class="input-group input-group-sm hidden-xs">
-                                <input type="text" onkeyup="showResult(this.value)" name="search"
-                                    class="form-control pull-right" placeholder="{{ trans('rule.rule_search') }}"
-                                    autocomplete="off">
-                            </div>
-                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div id="livesearch"></div>
@@ -51,22 +44,17 @@
                         <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+                                    <table id="example2" class="table table-hover dataTable" role="grid"
                                         aria-describedby="example2_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-sort="ascending"
-                                                    aria-label="Rendering engine: activate to sort column descending">
+                                                <th>
                                                     {{ trans('admin.stt') }} </th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Browser: activate to sort column ascending">
+                                                <th>
                                                     {{ trans('rule.name') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                <th>
                                                     {{ trans('rule.image') }}</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                <th>
                                                     {{ trans('admin.actions') }}</th>
                                             </tr>
                                         </thead>
@@ -103,7 +91,8 @@
                     </div>
                 </div>
         </section>
-    @endsection
+@endsection
+
 @section('script')
     <script src="https://adminlte.io/themes/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="https://adminlte.io/themes/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
@@ -112,11 +101,11 @@
         $(function() {
             $('#example2').DataTable({
                 'paging': true,
-                'lengthChange': false,
-                'searching': false,
+                'lengthChange': true,
+                'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': false
+                'autoWidth': true
             })
         })
 

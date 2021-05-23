@@ -149,10 +149,10 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        {{ $car->price }} K
+                                                        {{  currency_format($car->price) }} VNĐ
                                                     </td>
                                                     <td>
-                                                        {{ $car->discount }} %
+                                                        {{ $car->discount ? $car->discount : 0 }} %
                                                     </td>
                                                 </tbody>
                                             </table>
