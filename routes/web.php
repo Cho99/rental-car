@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +31,8 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'namespace
     Route::resource('features', 'FeatureController');
     Route::resource('categories', 'CategoryController');
     Route::resource('rules', 'RuleController');
+    Route::resource('reports', 'ReportController');
+    Route::post('reports/{report}/reply', 'ReportController@reply')->name('reports.reply');
     Route::get('notification', 'NotificationController@index')->name('notification');
     Route::get('detail-notification/{notification}', 'NotificationController@detailNotification')->name('detail-notification');
     Route::get('notification-for-admin', 'NotificationController@apiGetUser')->name('notification-for-user');
