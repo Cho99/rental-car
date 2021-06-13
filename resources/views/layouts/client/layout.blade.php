@@ -85,8 +85,9 @@
     <script src="{{ asset('bower_components/car-client-lte') }}/js/common_scripts_min.js"></script>
     <script src="{{ asset('bower_components/car-client-lte') }}/js/functions.js"></script>
     <script src="{{ asset('js/common.js') }}"></script>
-
     @yield('script')
+
+   
 </body>
 
 </html>

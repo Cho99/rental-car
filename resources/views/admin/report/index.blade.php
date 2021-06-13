@@ -147,7 +147,13 @@
                 data: formData,
                 dataType: "json",
                 success: function () {
-                    return location.reload();
+                    $('.modal').hide();
+                    swal("Phản hồi thành côngs", {
+                    icon: "success",
+                    })
+                    .then(() => {
+                        return location.reload();
+                    });
                 },
                 error: function (error) {
                     if (error.responseJSON) {

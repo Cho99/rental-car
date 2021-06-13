@@ -25,7 +25,7 @@ class Report extends Model
 
     public function getStatusNameAttribute()
     {
-        switch ($this->value) {
+        switch ($this->attributes['status']) {
             case Report::UNREAD:
                 return __('report.unread');
                 break;
@@ -37,12 +37,12 @@ class Report extends Model
 
     public function getStatusClassAttribute()
     {
-        switch ($this->value) {
+        switch ($this->attributes['status']) {
             case Report::UNREAD:
                 return 'danger';
                 break;
             default:
-                return 'success';
+                return 'primary';
                 break;
         }
     }

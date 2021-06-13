@@ -104,3 +104,7 @@ ul.dropdown-menu.notification-data.show {
 .rate>label:hover~input:checked~label {
     color: #c59b08;
 }
+
+.dropdown-mini .dropdown-menu {
+    min-width: 150px;
+}

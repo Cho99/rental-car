@@ -29,7 +29,7 @@
                         @endauth
                         @guest
                             <li><a href="{{ route('login') }}" id="">Đăng nhập</a></li>
-                            <li><a href="" id="">Đăng ký</a></li>
+                            <li><a href="{{ route('register') }}" id="">Đăng ký</a></li>
                         @endguest
                         @auth
                             <li>

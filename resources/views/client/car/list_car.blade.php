@@ -163,7 +163,7 @@
 
 
                     <hr>
-         
+                    {{-- {{ $cars->withQueryString()->links() }} --}}
                     @if ($cars->lastPage() > 1)
                         <div class="text-center">
                             <ul class="pagination">
