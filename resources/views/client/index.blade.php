@@ -10,14 +10,14 @@
             </ul>
 
             <div class="tab-content">
-                <form action="">
+                <form action="{{ route('list-car') }}" method="GET">
                     <div class="tab-pane active" id="transfers">
                         <h3>Thuê xe tự lái</h3>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="select-label">Địa điểm</label>
-                                    <input class="form-control" type="text" value="Hà nội"
+                                    <input class="form-control" type="text" value="Hà nội" name="address"
                                         placeholder="Nhập thành phố quân địa chỉ...">
                                 </div>
                             </div>

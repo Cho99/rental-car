@@ -150,6 +150,12 @@
                             <span>{{ trans('rule.rule_manager') }}</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{route('admin.reports.index')}}">
+                            <i class="fa fa-file"></i>
+                            <span>{{ trans('report.report_manager') }}</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
         </aside>
