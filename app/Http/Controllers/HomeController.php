@@ -47,10 +47,14 @@ class HomeController extends Controller
         return view('client.index', compact('cars', 'carDiscounts', 'numberCar', 'addresses'));
     }
 
-    public function getCars()
+    public function getCars(Request $request)
     {
-        $cars = $this->carRepo->getCars();
+        $dataSearch = $request->only([
+            'address'
+        ]);
 
+        $cars = $this->carRepo->getCars($dataSearch);
+   
         return view('client.car.list_car', compact('cars'));
     }
 

@@ -1,5 +1,9 @@
 @extends('layouts.client.layout')
 
+@section('css')
+    <link href="{{ asset('bower_components/car-client-lte') }}/css/skins/square/grey.css" rel="stylesheet">
+@endsection
+
 @section('content')
     <section id="hero_2">
         <div class="intro_title animated fadeInDown">

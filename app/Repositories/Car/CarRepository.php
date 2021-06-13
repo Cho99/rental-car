@@ -56,14 +56,20 @@ class CarRepository extends BaseRepository implements CarRepositoryInterface
         return $car->load('user'); 
     }
     
-    public function getCars()
+    public function getCars($dataSearch)
     {
         return $this->model
-        ->withCount('comments')
-        ->with('image', 'comments')
-        ->where('status', config('define.car.status.accept'))
-        ->orderBy('discount', 'DESC')
-        ->paginate(6);
+            ->withCount('comments')
+            ->with('image', 'comments')
+            ->join('addresses', 'cars.address_id', 'addresses.id')
+            ->where('status', config('define.car.status.accept'))
+            ->where(function ($query) use ($dataSearch) {
+                if (isset($dataSearch['address'])) {
+                    $query->where('addresses.name', 'LIKE', '%' . $dataSearch['address'] . '%');    
+                }
+            })
+            ->orderBy('discount', 'DESC')
+            ->paginate(6);
     }
 
     public function getCarRegisterChart()
