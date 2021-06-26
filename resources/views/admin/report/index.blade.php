@@ -125,7 +125,10 @@
                 'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': true
+                'autoWidth': true,
+                "columnDefs": [
+                    { "orderable": false, "targets": 5 }
+                ]
             })
         })
     </script>
