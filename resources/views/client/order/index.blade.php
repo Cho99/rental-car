@@ -5,8 +5,7 @@
         data-natural-height="470">
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
-            <h1>Order Request</h1>
-            <p>Danh sách yêu cầu thuê xe</p>
+            <h1>Danh sách yêu cầu thuê xe</h1>
         </div>
     </div>
 </section>
@@ -16,11 +15,11 @@
     <div id="position">
         <div class="container">
             <ul>
-                <li><a href="#">Home</a>
+                <li><a href="{{ route('home') }}">Trang chủ</a>
                 </li>
-                <li><a href="#">Orders</a>
+                <li><a href="#">Yêu cầu thuê xe</a>
                 </li>
-                <li>Manager Order</li>
+                <li>Danh sách quản lý yêu cầu thuê xe</li>
             </ul>
         </div>
     </div>

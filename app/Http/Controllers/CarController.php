@@ -230,7 +230,7 @@ class CarController extends Controller
                 'category_id' => $sessionCar['step1']['vehicle'],
                 'price' => $sessionCar['step2']['price'],
                 'discount' => $sessionCar['step2']['discount'],
-                'limited_km' => $sessionCar['step2']['discount'],
+                'limited_km' => $sessionCar['step2']['limited_km'],
                 'limit_pass_fee' => $sessionCar['step2']['limit_pass_fee'],
                 'description' => $sessionCar['step2']['description'],
                 'address_id' => 1,
@@ -249,7 +249,7 @@ class CarController extends Controller
                 'image_list' => json_encode($dataImage),
             ]);
 
-            $users = $this->userRepo->getUserHaveRoleAdmins(2);
+            $users = $this->userRepo->getUserHaveRoleAdmins(0);
             $userId = $users->pluck('id');
          
             $data = [

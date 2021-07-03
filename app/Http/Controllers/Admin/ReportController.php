@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\ReportRequest;
 use App\Models\Report;
 use App\Jobs\ReplyJob;
 
@@ -21,7 +22,7 @@ class ReportController extends Controller
         return view('admin.report.index', compact('reports'));
     }
 
-    public function reply(Request $request, $id)
+    public function reply(ReportRequest $request, $id)
     {
         $report = Report::with('user')->findOrFail($id);
         $report->update([

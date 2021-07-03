@@ -108,3 +108,8 @@ ul.dropdown-menu.notification-data.show {
 .dropdown-mini .dropdown-menu {
     min-width: 150px;
 }
+
+img.img-responsive {
+    max-height: 300px;
+    height: 245px;
+}

@@ -58,9 +58,10 @@ if (!empty($car->image)) {
                             @php    
                                 $totalPrice = $car->price*(100-$car->discount)/100;
                             @endphp
-                            <sup style="text-decoration: line-through;">{{ currency_format($car->price) }} VNĐ</sup><span>{{ currency_format($totalPrice) }}VNĐ</span> / Ngày
+                            <sup style="text-decoration: line-through;">{{ currency_format($car->price) }} VNĐ</sup>
+                            <h1>{{ currency_format($totalPrice) }} VNĐ</h1> 
                         @else
-                            <span>{{ currency_format($car->price) }}VNĐ</span> / Ngày
+                            <span>{{ currency_format($car->price) }}VNĐ</span>
                         @endif
                       
                     </div>
@@ -386,9 +387,6 @@ if (!empty($car->image)) {
             <!--End  single_tour_desc-->
 
             <aside class="col-md-4">
-                {{-- <p class="hidden-sm hidden-xs">
-                    <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
-                </p> --}}
                 <div class="box_style_1 expose">
                     <h3 class="inner">- Booking -</h3>
                     <form action="{{ route('cars.store') }}" method="POST">
@@ -429,7 +427,7 @@ if (!empty($car->image)) {
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Phường: </label>
-                                    @if (empty($car->address->name))
+                                    @if (isset($car->address->name))
                                         <span class="label label-info">{{ $car->address->name }}</span>
                                     @else
                                         <span class="label label-info">Chưa rõ</span>
@@ -533,24 +531,24 @@ if (!empty($car->image)) {
                     <a href="tel://09001000" class="phone">+84 090 010 00</a>
                     <small>Làm việc 8.00am - 4.30pm - <span>Từ thứ 7 đến chủ nhật</span></small>
                 </div>
-
-                <div class="box_style_1 expose">
-                    <h3 class="inner">- Khiếu nại -</h3>
-                    <form action="{{ route('reports') }}">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label for="report">Nội dung</label>
-                                    <input type="hidden" name="car_id" value="{{ $car->id }}">
-                                    <textarea rows="5" id="report" name="description" class="form-control" placeholder="Write your message" style="height:200px;"></textarea>
+                @if ($car->user->id !== Auth::id())
+                    <div class="box_style_1 expose">
+                        <h3 class="inner">- Khiếu nại -</h3>
+                        <form action="{{ route('reports') }}">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="report">Nội dung</label>
+                                        <input type="hidden" name="car_id" value="{{ $car->id }}">
+                                        <textarea rows="5" id="report" name="description" class="form-control" placeholder="Nội dung khiếu nại" style="height:200px;"></textarea>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <p class="error description"></p>
-                        <button class="btn_full js-btn-send">Gửi</button>
-                    </form>
-                </div>
-
+                            <p class="error description"></p>
+                            <button class="btn_full js-btn-send">Gửi</button>
+                        </form>
+                    </div>
+                @endif
             </aside>
         </div>
         <!--End row -->
