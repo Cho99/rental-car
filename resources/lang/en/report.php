@@ -8,5 +8,6 @@ return [
     'user_name' => 'User Name',
     'car' => 'Car',
     'description' => 'Description',
-    'report_manager' => 'Report Manager'
+    'report_manager' => 'Report Manager',
+    'reply' => 'Reply'
 ];

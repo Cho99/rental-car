@@ -30,9 +30,6 @@ class CarRequest extends FormRequest
                 'max:20',
                 'unique:cars',
             ],
-            'trademark' => [
-                'required',
-            ],
             'vehicle' => [
                 'required',
             ],

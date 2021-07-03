@@ -41,6 +41,11 @@
 
             <div class="row">
                 @foreach ($carDiscounts as $carDiscount)
+                    @if ($carDiscount->discount)
+                        @php    
+                            $totalPrice = $carDiscount->price*(100-$carDiscount->discount)/100;
+                        @endphp
+                    @endif
                     <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
                         <div class="ribbon_3 popular"><span>Giảm giá</span></div>
                         <div class="tour_container">
@@ -59,9 +64,15 @@
                                     @endif
                                     <div class="badge_save">Giảm giá<strong>{{ $carDiscount->discount }}%</strong></div>
                                     <div class="short_info">
-                                        <i class="icon_set_1_icon-29"></i>{{ $carDiscount->seats }} Seats<span
-                                            class="price">{{ currency_format($carDiscount->price) }}<sup>VNĐ</sup></span>
+                                        <i class="icon_set_1_icon-29"></i>{{ $carDiscount->seats }} Seats
+                                        @if (isset($totalPrice))
+                                            <span class="price">{{ currency_format($totalPrice) }}<sup>VNĐ</sup></span>
+                                        @else
+                                        <span class="price">{{ currency_format($carDiscount->price) }}<sup>VNĐ</sup></span>
+
+                                        @endif
                                     </div>
+                                </td>
                                 </a>
                             </div>
                             <div class="tour_title">
@@ -105,7 +116,6 @@
             <div class="row">
                 @foreach ($cars as $car)
                     <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
-                        <div class="ribbon_3 popular"><span>Popular</span></div>
                         <div class="tour_container">
                             <div class="img_container">
                                 <a href="single_tour.html">
@@ -142,8 +152,7 @@
                                 <!-- end rating -->
                                 <div class="wishlist">
                                     <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span
-                                            class="tooltip-content-flip"><span class="tooltip-back">Add to
-                                                wishlist</span></span></a>
+                                            class="tooltip-content-flip"><span class="tooltip-back">Thuê ngay</span></span></a>
                                 </div>
                                 <!-- End wish list-->
                             </div>

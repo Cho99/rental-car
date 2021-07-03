@@ -79,14 +79,14 @@
                                                                                 <span aria-hidden="true">&times;</span></button>
                                                                             <h4 class="modal-title">{{ trans('report.reply') }}</h4>
                                                                         </div>
-                                                                        <form role="form" action="{{ route('admin.reports.reply', $report->id) }}">
+                                                                        <form role="form" action="{{ route('admin.reports.reply', $report->id) }}" id="form">
                                                                             <div class="modal-body">
                                                                                 <div class="box-body">
                                                                                     <div class="form-group">
-                                                                                        {{-- <label for="namecategory">@lang('report.description')</label> --}}
-                                                                                        <textarea class="form-control" rows="3" name="content"></textarea>
+                                                                                        <label for="namecategory">@lang('report.description')</label>
+                                                                                        <textarea class="form-control" id="namecategory" rows="3" name="description"></textarea>
                                                                                     </div>
-                                                                                    <p class="error"></p>
+                                                                                    <p class="error description"></p>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -131,8 +131,7 @@
                 ]
             })
         })
-    </script>
-    <script>    
+ 
         $('.btn-primary').click(function (e) { 
             e.preventDefault();
 

@@ -268,11 +268,9 @@
                     }
                     var html = ''
                     response.map(function(item) {
-                        return html += `
-                                    <option value="${item.id}">${item.name}</option>
-                                `
+                        return html += `<option value="${item.id}">${item.name}</option>`
                     });
-                    $('#vehicle').append(html);
+                    $('#vehicle').html(html);
                 }
             });
         });

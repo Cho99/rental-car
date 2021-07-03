@@ -49,7 +49,6 @@ function getNotification(number) {
     Echo.channel('my-channel')
         .listen('RegisterCarEvent', (e) => {
             number++;
-            console.log(e);
             $.ajax({
                 url: url + '/admin/notification-for-admin',
                 type: 'GET',
