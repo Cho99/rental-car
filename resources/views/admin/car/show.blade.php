@@ -78,7 +78,7 @@
                                             <h4>
                                                 {{ trans('car.status') }}: <b>
                                                 @switch ($car->status)
-                                                    @case (config('define.car.status.pending'))
+                                                    @case (config('define.car.status.accept'))
                                                         <span class="label label-warning">Được phép lưu hành</span>
                                                     @break
                                                     @case (config('define.car.status.renting'))
@@ -215,8 +215,8 @@
             var id = $('#id').val();
             swal({
                 title:"Bạn có chắc chắn",
-                text: "Block xe này",
-                icon: "danger",
+                text: "Cấm xe này hoạt động",
+                icon: "warning",
                 buttons: true,
                 dangerMode: true,
             })

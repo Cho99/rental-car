@@ -57,6 +57,39 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="dropdown messages-menu open">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                              <i class="fa fa-language"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li><!-- start message -->
+                                    <a href="{{ route('admin.change-language', ['language' => 'vi']) }}">
+                                      <h4>
+                                        {{ trans('admin.vi') }}
+                                      </h4>
+                                    </a>
+                                  </li>
+                                  <!-- end message -->  
+                                </ul>
+                              </li>
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li><!-- start message -->
+                                    <a href="{{ route('admin.change-language', ['language' => 'en']) }}">
+                                      <h4>
+                                        {{ trans('admin.en') }}
+                                      </h4>
+                                    </a>
+                                  </li>
+                                  <!-- end message -->  
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
                         <li class="dropdown user user-menu" id="user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{ asset('bower_components/admin-lte/dist/img/iconUser.png') }}"

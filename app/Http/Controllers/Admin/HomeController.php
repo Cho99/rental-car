@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Car\CarRepositoryInterface;
 use App\Repositories\Address\AddressRepositoryInterface;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -58,5 +59,17 @@ class HomeController extends Controller
         return response()->json([
             'list' => $list,
         ]);
+    }
+
+    public function changeLanguage(Request $request)
+    {
+        $lang = $request->language;
+        if ($lang != 'en' && $lang != 'vi') {
+            $lang = config('app.locale');
+        }
+
+        Session::put('language', $lang);
+
+        return redirect()->back();
     }
 }

@@ -164,6 +164,12 @@
                                         <h2>{{ trans('car.list_image') }}</h2>
                                     </span>
                                     <br>
+                                    @php
+                                        $images = null;
+                                        if (!empty($car->image)) {
+                                            $images = json_decode($car->image->image_list);
+                                        }
+                                    @endphp
                                     @if (isset($images))
                                     <div class="row margin-bottom">
                                         <div class="col-sm-6">
