@@ -113,3 +113,7 @@ img.img-responsive {
     max-height: 300px;
     height: 245px;
 }
+
+textarea#namecategory {
+    width: 400px;
+}

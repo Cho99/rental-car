@@ -51,8 +51,8 @@ class UserController extends Controller
             $request->image->move('upload/car', $request->image->getClientOriginalName());
             $nameImage = $request->image->getClientOriginalName();
         }
-        
-        $request['gplx'] = $nameImage;
+
+        $request['avatar'] = $nameImage;
         $this->userRepo->update($id, $request->all());
 
         return redirect()->route('users.index');

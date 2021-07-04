@@ -84,7 +84,10 @@
                                                                                 <div class="box-body">
                                                                                     <div class="form-group">
                                                                                         <label for="namecategory">@lang('report.description')</label>
-                                                                                        <textarea class="form-control" id="namecategory" rows="3" name="description"></textarea>
+                                                                                        <div>
+                                                                                            <textarea class="form-control" id="namecategory" rows="3" name="description"></textarea>
+                                                                                        </div>
+                                                                                        
                                                                                     </div>
                                                                                     <p class="error description"></p>
                                                                                 </div>

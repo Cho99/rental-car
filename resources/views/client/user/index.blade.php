@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             @if (Auth::user()->avatar)
-                                <img src="" alt="" class="img-circle">
+                                <img src="{{ asset('upload/car/'. Auth::user()->avatar) }}" alt="" class="img-circle" width="68px" height="68px">
                             @else 
                                 <img src="{{ asset('bower_components/car-client-lte/' . '/img/avatar3.jpg') }}" alt="" class="img-circle">
                             @endif 

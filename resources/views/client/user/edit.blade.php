@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             @if (Auth::user()->avatar)
-                                <img src="" alt="" class="img-circle">
+                                <img src="{{ asset('upload/car/'. Auth::user()->avatar) }}" alt="" class="img-circle" width="68px" height="68px">
                             @else 
                                 <img src="{{ asset('bower_components/car-client-lte/' . '/img/avatar3.jpg') }}" alt="" class="img-circle">
                             @endif 
@@ -42,18 +42,14 @@
                             <div class="col-md-6  col-sm-6">
                                 <Label>Ngày sinh:</Label>
                                 <div class="form-group">
-                                    @if (Auth::user()->date_of_birth)
-                                        <input type="date" class="form-group" name="date_of_birth" value="{{ Auth::user()->date_of_birth }}">
-                                    @else
-                                        <input type="date"  class="form-group" name="date_of_birth">
-                                    @endif
+                                    <input type="date" class="form-group" name="date_of_birth" value="{{ Auth::user()->date_of_birth }}">
                                 </div>
                             </div>
                             <div class="col-md-6  col-sm-6">
                                 <label>Giới tính</label>
                                 <div class="form-group">
-                                    <input type="radio" value="1" name="sex" class="form-group"> Nam
-                                    <input type="radio" value="2" name="sex" class="form-group"> Nữ
+                                    <input type="radio" value="1" name="sex" class="form-group" {{ Auth::user()->sex === 1 ? 'checked' : '' }}> Nam
+                                    <input type="radio" value="2" name="sex" class="form-group"  {{ Auth::user()->sex === 2  ? 'checked' : '' }}> Nữ
                                 </div> 
                             </div>
                         </div>
@@ -61,7 +57,7 @@
                             <div class="col-md-6  col-sm-6">
                                 <label>Số điện thoại</label>
                                 <div class="form-group">
-                                    <input type="text" name="phone" class="form-group">
+                                    <input type="text" name="phone" class="form-group" value="{{ Auth::user()->phone }}">
                                 </div> 
                             </div>
                             <div class="col-md-6  col-sm-6">
