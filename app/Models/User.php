@@ -10,6 +10,7 @@ use App\Models\Report;
 use App\Models\Role;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\PasswordReset;
 
 class User extends Authenticatable
 {
@@ -77,5 +78,10 @@ class User extends Authenticatable
     public function notification()
     {
         return $this->hasMany(Notification::class, 'id', 'notifiable_id');   
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordReset($token));
     }
 }
