@@ -18,9 +18,9 @@
                                             </li>
                                             <li><a href="{{ route('cars.index') }}">Quản lý xe</a>
                                             </li>
-                                            <li><a href="{{ route('my_orders.index') }}">Quản lý yêu cầu xe đang cho thuê</a>
+                                            <li><a href="{{ route('my_orders.index') }}">Quản lý yêu cầu thuê xe</a>
                                             </li>
-                                            <li><a href="{{ route('orders.index') }}">Quản lý yêu cầu thuê xe</a>
+                                            <li><a href="{{ route('orders.index') }}">Quản lý yêu cầu cho thuê xe</a>
                                             </li>
                                         </ul>
                                     </div>

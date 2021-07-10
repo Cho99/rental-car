@@ -25,9 +25,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function getRequestOrderPending()
     {
-        return $this->model->with(['cars.orders.user','cars.orders' => function($query) {
-            return $query->where('status', config('define.order.status.pending'));
-        }])->where('id', Auth::id())->first();
+        return $this->model->with(['cars.orders.user','cars.orders'])->where('id', Auth::id())->first();
     }
 
     public function getUserHaveRoleAdmins($roles)

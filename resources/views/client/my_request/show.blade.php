@@ -7,8 +7,7 @@
         data-natural-height="470">
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
-            <h1>Order Request</h1>
-            <p>Danh sách yêu cầu thuê xe - Đơn: {{ $order->id }}</p>
+            <h1>Mã đơn: {{ $order->id }}</h1>
         </div>
     </div>
 </section>
@@ -27,12 +26,6 @@
                             @endif 
                         </div>
                         <div class="col-md-9 col-sm-9">
-                            @if ($order->status === config('define.order.status.pending'))
-                                <label>{{ $order->user->name }}</label>
-                                <div>
-                                    <label>Hãy chấp thuận để có thể thấy thông tin liên lạc với người thuê</label>
-                                </div>
-                            @else
                                 <div class="form-group">
                                     <label>{{ $order->user->name }}</label>
                                     <div class="order-user--info">
@@ -44,7 +37,6 @@
                                         <span>{{ $order->user->email }}</span>
                                     </div>
                                 </div>
-                            @endif
                         </div>
                     </div>
                     <br>
@@ -157,7 +149,7 @@
                         @elseif ($order->status === config('define.order.status.close'))
                             <h4 style="text-align: center"><span class="label label-info">Đơn đã hoàn thành</span></h4>  
                         @elseif ($order->status === config('define.order.status.pending'))
-                            <a href="{{ route('my_orders.cancel', $order->id) }}" class="btn btn-danger">Hủy đơn</a>
+                            <a href="{{ route('my_orders.cancel', $order->id) }}"  class="btn_full_outline btn-danger">Hủy đơn</a>
                         @endif
                     @endif
                 </div>
@@ -257,15 +249,6 @@
                                         <div class="review_strip_single">
                                             <small> - {{ \Carbon\Carbon::parse($comment->created_at)->format('m/d/Y') }} -</small>
                                             <label>{{ $comment->user->name }}</label>
-                                            {{-- @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i === $comment->rate)
-                                                    <input type="radio" id="star{{ $i }}" name="rate" value="{{ $i }}" checked />
-                                                    <label for="star{{ $i }}" title="text">{{ $i }} stars</label>
-                                                @else
-                                                    <input type="radio" id="star{{ $i }}" name="rate" value="{{ $i }}" />
-                                                    <label for="star{{ $i }}" title="text">{{ $i }} stars</label>
-                                                @endif
-                                            @endfor --}}
                                             <div class="rating">
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     @if ($i < $comment->rate)
@@ -281,7 +264,7 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <label>Chưa có bình luận nào</label>
+                                    <label class="no-comment">Chưa có bình luận nào</label>
                                     <br>
                                     <br>
                                 @endif
@@ -301,12 +284,11 @@
                                     <input type="radio" id="star1" name="rate" value="1" checked />
                                     <label for="star1" title="text">1 star</label>
                                 </div>
-
                                  <div class="form-group">
                                     <label for="comment">Bình luận</label>
-                                    <textarea name="comment" id="review_text" class="form-control" style="height:100px" placeholder="Write your review"></textarea>
+                                    <textarea name="comment" id="review_text" class="form-control" style="height:100px" placeholder="Hay viết bình luận"></textarea>
                                 </div>
-                                <button class="btn_full">Comment</button>
+                                <button class="btn_full">Bình luận</button>
                             </form>
                         </div>
                     </div>
@@ -315,8 +297,4 @@
         </div>
     </div>
 </main>
-@endsection
-
-@section('script')
-    
 @endsection

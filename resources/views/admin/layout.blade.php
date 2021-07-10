@@ -148,6 +148,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('admin.users.index') }}">
+                            <i class="fa fa-users"></i>
+                            <span>{{ trans('user.users') }}</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('admin.cars.list_register') }}">
                             <i class="fa fa-desktop"></i>
                             <span>{{ trans('car.car_register') }}</span>

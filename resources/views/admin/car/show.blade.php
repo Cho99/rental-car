@@ -234,7 +234,7 @@
                     dataType: "json",
                     success: function (response) {
                         if(response.message === 'success') {
-                            swal("Block xe thành coong", {
+                            swal("Block xe thành công", {
                                 icon: "success",
                             })
                             .then(() => {

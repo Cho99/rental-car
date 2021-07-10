@@ -11,4 +11,8 @@ return [
     'active' => 'Active',
     'block' => 'Block',
     'unknow' => 'Unknow',
+    'users' => 'Manager User',
+    'date' => 'Created At',
+    'user_list' => 'List user',
+    'user_manager' => 'Manager User'
 ];

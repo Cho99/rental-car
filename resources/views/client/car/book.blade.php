@@ -88,6 +88,14 @@ if (!empty($car->image)) {
         <div id="map" class="map"></div>
     </div>
     <!-- End Map -->
+    
+    @if (session()->has('mess'))
+        <div class="notification-client">
+            <div class="content-message">
+                {{ session()->get('mess') }}
+            </div>
+        </div>
+    @endif
 
     <div class="container margin_60">
         <div class="row">
@@ -596,6 +604,7 @@ if (!empty($car->image)) {
 	<script src="{{ asset('bower_components/car-client-lte') }}/js/bootstrap-timepicker.js"></script>
     <script>
 		$('input.date-pick').datepicker('setDate', 'today');
+        $('.content-message').delay(2500).slideUp();
 	</script>
     <script>
          $('#date_start, #date_return').change(function (e) { 
@@ -702,6 +711,4 @@ if (!empty($car->image)) {
         });
   
     </script>
-	{{-- <!--Review modal validation -->
-	<script src="assets/validate.js"></script> --}}
 @endsection

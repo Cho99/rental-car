@@ -38,6 +38,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('detail-notification/{notification}', 'NotificationController@detailNotification')->name('detail-notification');
         Route::get('notification-for-admin', 'NotificationController@apiGetUser')->name('notification-for-user');
         Route::get('change-language/{language}', 'HomeController@changeLanguage')->name('change-language');
+        Route::get('/users', 'UserController@index')->name('users.index');
     });
 
     Route::group(['middleware' => 'auth'], function () {

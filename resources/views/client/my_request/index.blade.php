@@ -19,7 +19,7 @@
                 </li>
                 <li><a href="#">Yêu cầu</a>
                 </li>
-                <li>Danh sách thuê xe</li>
+                <li>Danh sách yêu cầu thêu xe</li>
             </ul>
         </div>
     </div>
@@ -30,9 +30,12 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Danh sách thuê xe</strong></h3>
+                        <h3 class="panel-title"><strong>Danh sách yêu câu thuê xe</strong></h3>
                     </div>
                     <div class="panel-body">
+                        @if ($user->orders->isEmpty())
+                            <span><h3 class="no-data">Chưa có yêu cầu nào</h3></span>
+                        @else
                         <div class="table-responsive">
                             <table class="table table-condensed">
                                 <thead>
@@ -50,7 +53,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($user->orders as $order)
+                                    @forelse ($user->orders as $order)
                                     @php
                                         $borrowedDate = Carbon\Carbon::parse($order->borrowed_date);
                                         $returnDate = Carbon\Carbon::parse($order->return_date);
@@ -122,6 +125,8 @@
                                 </tbody>
                             </table>
                         </div>
+                        @endif
+
                     </div>
                 </div>
             </div>

@@ -117,3 +117,21 @@ img.img-responsive {
 textarea#namecategory {
     width: 400px;
 }
+
+.notification-client .content-message {
+    position: fixed;
+    background: hsl(0deg 56% 49% / 85%);
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    border-radius: 5px;
+    right: 10px;
+    top: 100px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+h3.no-data {
+    text-align: center;
+}

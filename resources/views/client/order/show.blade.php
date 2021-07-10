@@ -5,8 +5,7 @@
         data-natural-height="470">
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
-            <h1>Order Request</h1>
-            <p>Danh sách yêu cầu thuê xe - Đơn: {{ $order->id }}</p>
+            <h1>Mã đơn: {{ $order->id }}</h1>
         </div>
     </div>
 </section>

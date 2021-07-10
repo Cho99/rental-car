@@ -43,8 +43,7 @@ class PasswordReset extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line(trans('client.header')) 
-            ->action(trans('client.reset_password'), url('password/reset', $this->token))
-            ->line(trans('client.footer'));
+            ->line('Đây là email quên mật khẩu') 
+            ->action('Thay đổi mật khẩu', url('password/reset', $this->token));
     }
 }

@@ -5,7 +5,7 @@
         data-natural-height="470">
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
-            <h1>Danh sách yêu cầu thuê xe</h1>
+            <h1>Danh sách cho thuê xe</h1>
         </div>
     </div>
 </section>
@@ -17,9 +17,9 @@
             <ul>
                 <li><a href="{{ route('home') }}">Trang chủ</a>
                 </li>
-                <li><a href="#">Yêu cầu thuê xe</a>
+                <li><a href="#">Yêu cầu cho thuê xe</a>
                 </li>
-                <li>Danh sách quản lý yêu cầu thuê xe</li>
+                <li>Danh sách quản lý yêu cầu cho thuê xe</li>
             </ul>
         </div>
     </div>
@@ -33,6 +33,9 @@
                         <h3 class="panel-title"><strong>Danh sách yêu cầu thuê xe</strong></h3>
                     </div>
                     <div class="panel-body">
+                        @if ($user->cars->isEmpty())
+                            <span><h3 class="no-data">Chưa có xe nào được thuê</h3></span>
+                        @else
                         <div class="table-responsive">
                             <table class="table table-condensed">
                                 <thead>
@@ -48,7 +51,7 @@
                                         <th>Hành động</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>              
                                     @foreach ($user->cars as $car)
                                     @foreach ($car->orders as $order)
                                     @php
@@ -85,12 +88,18 @@
                                         <td>
                                             @if ($order->status === 0)
                                                 <span class="label label-danger">Khi nào xác nhận sẽ xuất hiện số điện thoại người thuê</span>
+                                            @else 
+                                                <span class="label label-info">{{ $order->user->phone }}</span>
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('orders.show', $order->id) }}" class="btn btn-info">Chi tiết</a>
-                                            <a href="{{ route('orders.accept', $order->id) }}" class="btn btn-success">Xác nhận</a>
-                                            <a href="{{ route('orders.reject', $order->id) }}" class="btn btn-danger">Từ chối</a>
+                                            @if ($order->status === 0)
+                                                <a href="{{ route('orders.show', $order->id) }}" class="btn btn-info">Chi tiết</a>
+                                                <a href="{{ route('orders.accept', $order->id) }}" class="btn btn-success">Xác nhận</a>
+                                                <a href="{{ route('orders.reject', $order->id) }}" class="btn btn-danger">Từ chối</a>
+                                            @else
+                                                <a href="{{ route('orders.show', $order->id) }}" class="btn btn-info">Chi tiết</a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -98,6 +107,8 @@
                                 </tbody>
                             </table>
                         </div>
+                        @endif
+                       
                     </div>
                 </div>
             </div>

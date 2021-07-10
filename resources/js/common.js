@@ -35,8 +35,8 @@ $(document).ready(function() {
                     </p>
                 </div>
                 `;
-                $('.comment').prepend(comment)
-                console.log(response.data);
+                $('.no-comment').hide();
+                $('.comment').prepend(comment);
             }
         });
     });

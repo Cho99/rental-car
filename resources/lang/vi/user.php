@@ -11,4 +11,8 @@ return [
     'active' => 'Hoạt động',
     'block' => 'Tạm dừng',
     'unknow' => 'Không biết',
+    'users' => 'Quản lý người dùng',
+    'date' => 'Ngày tham gia',
+    'user_list' => 'Danh sách người dùng',
+    'user_manager' => 'Quản lý người dùng'
 ];
