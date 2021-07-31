@@ -43,9 +43,16 @@ class CarController extends Controller
 
     public function listRegister()
     {
-        $cars = Car::where('status', 0)->get();
+        $cars = Car::where('status', config('define.car.status.pending'))->get();
 
         return view('admin.car.list_register', compact('cars'));
+    }
+
+    public function listBlock()
+    {
+        $cars = Car::where('status', config('define.car.status.block'))->get();
+
+        return view('admin.car.list_block', compact('cars'));
     }
 
     public function register($id)

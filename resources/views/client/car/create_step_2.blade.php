@@ -47,13 +47,14 @@
                             Đơn giá áp dụng cho tất cả các ngày. Bạn có thuể tuỳ chỉnh giá khác cho các ngày đặc biệt (cuối
                             tuần, lễ, tết...) trong mục quản lý xe sau khi đăng kí.
                         </p>
-                        <strong>Giá đề xuất: 2800K</strong>
+                        <strong>Giá đề xuất: 280.000VNĐ</strong>
                     </div>
                     <div class="step">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="number" class="form-control" id="price" name="price" autofocus required>
+                                    <input type="number" class="form-control" id="price" name="price"
+                                        value="{{ old('price') ? old('price') : '' }}" autofocus required>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +73,9 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="number" class="form-control" id="discount" name="discount">
+                                    <input type="number" class="form-control"
+                                        value="{{ old('discount') ? old('discount') : '' }}" id="discount"
+                                        name="discount">
                                 </div>
                             </div>
                             @if ($errors->has('discount'))
@@ -92,7 +95,9 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="limited_km">Số km giới hạn trong một ngày</label>
-                                    <input type="number" class="form-control" id="limited_km" name="limited_km" required>
+                                    <input type="number" class="form-control"
+                                        value="{{ old('limited_km') ? old('limited_km') : '' }}" id="limited_km"
+                                        name="limited_km" required>
                                 </div>
                                 @if ($errors->has('limited_km'))
                                     <div class="error">{{ $errors->first('limited_km') }}</div>
@@ -101,8 +106,9 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="limit_pass_fee">Phí vượt giới hạn(tính mỗi km)</label>
-                                    <input type="number" class="form-control" id="limit_pass_fee" name="limit_pass_fee"
-                                        required>
+                                    <input type="number" class="form-control" id="limit_pass_fee"
+                                        value="{{ old('limit_pass_fee') ? old('limit_pass_fee') : '' }}"
+                                        name="limit_pass_fee" required>
                                 </div>
                                 @if ($errors->has('limit_pass_fee'))
                                     <div class="error">{{ $errors->first('limit_pass_fee') }}</div>
@@ -120,7 +126,7 @@
                                 <div class="form-group">
                                     <label for="description"> Ghi rõ các yêu cầu để khách có thể thuê xe.</label>
                                     <textarea name="description" class="form-control" id="description" cols="30"
-                                        rows="10"></textarea>
+                                        rows="10">{{ old('description') ? old('description') : '' }}</textarea>
                                 </div>
                                 @if ($errors->has('description'))
                                     <div class="error">{{ $errors->first('description') }}</div>

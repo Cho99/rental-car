@@ -13,12 +13,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return User::class;
     }
 
-    public function getOrderByUserId($userId, $carId)
+    public function getOrderByUserId($userId)
     {
         $user = $this->model->find($userId);
 
-        return $user->load(['orders' => function($query) use ($carId) {
-            return $query->where('car_id', $carId)->whereIn('status', [config('define.order.status.pending'), config('define.order.status.accept'), config('define.order.status.borrowed')]);
+        return $user->load(['orders' => function($query) {
+            return $query->whereIn('status', [config('define.order.status.pending'), config('define.order.status.accept'), config('define.order.status.borrowed')]);
         }]);
     }
 

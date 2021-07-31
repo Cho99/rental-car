@@ -59,61 +59,71 @@
                                         </thead>
                                         <tbody>
                                             @php($index = 1)
-                                                @foreach ($reports as $report)
-                                                    <tr role="row" class="odd">
-                                                        <td class="sorting_1">{{ $index++ }}</td>
-                                                        <td>{{ $report->user->name }}</td>
-                                                        <td>{{ $report->car->license_plates }}</td>
-                                                        <td>{{ $report->description }}</td>
-                                                        <td><span class="label label-{{ $report->status_class }}">{{ $report->status_name }}</span></td>
-                                                        <td class="td general">
-                                                            @if ($report->status == App\Models\Report::UNREAD)
-                                                                <a href="" data-toggle="modal" data-target="#modal-default-{{ $report->id }}"><i
+                                            @foreach ($reports as $report)
+                                                <tr role="row" class="odd">
+                                                    <td class="sorting_1">{{ $index++ }}</td>
+                                                    <td>{{ $report->user->name }}</td>
+                                                    <td>{{ $report->car->license_plates }}</td>
+                                                    <td>{{ $report->description }}</td>
+                                                    <td><span
+                                                            class="label label-{{ $report->status_class }}">{{ $report->status_name }}</span>
+                                                    </td>
+                                                    <td class="td general">
+                                                        @if ($report->status == App\Models\Report::UNREAD)
+                                                            <a href="" data-toggle="modal"
+                                                                data-target="#modal-default-{{ $report->id }}"><i
                                                                     class="fa fa-reply"></i></a>
-                                                            @endif
-                                                            <div class="modal fade" id="modal-default-{{ $report->id }}">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span></button>
-                                                                            <h4 class="modal-title">{{ trans('report.reply') }}</h4>
-                                                                        </div>
-                                                                        <form role="form" action="{{ route('admin.reports.reply', $report->id) }}" id="form">
-                                                                            <div class="modal-body">
-                                                                                <div class="box-body">
-                                                                                    <div class="form-group">
-                                                                                        <label for="namecategory">@lang('report.description')</label>
-                                                                                        <div>
-                                                                                            <textarea class="form-control" id="namecategory" rows="3" name="description"></textarea>
-                                                                                        </div>
-                                                                                        
-                                                                                    </div>
-                                                                                    <p class="error description"></p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button class="btn btn-primary">Submit</button>
-                                                                            </div>
-                                                                        </form>
+                                                        @endif
+                                                        <div class="modal fade" id="modal-default-{{ $report->id }}">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title">
+                                                                            {{ trans('report.reply') }}</h4>
                                                                     </div>
-                                                                    <!-- /.modal-content -->
+                                                                    <form role="form"
+                                                                        action="{{ route('admin.reports.reply', $report->id) }}"
+                                                                        id="form">
+                                                                        <div class="modal-body">
+                                                                            <div class="box-body">
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="namecategory">@lang('report.description')</label>
+                                                                                    <div>
+                                                                                        <textarea class="form-control"
+                                                                                            id="namecategory" rows="3"
+                                                                                            name="content"></textarea>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <p class="error description"></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-primary">Submit</button>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
-                                                                <!-- /.modal-dialog -->
+                                                                <!-- /.modal-content -->
                                                             </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                            <!-- /.modal-dialog -->
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.box-body -->
                     </div>
+                    <!-- /.box-body -->
                 </div>
-        </section>
+            </div>
+    </section>
 @endsection
 
 @section('script')
@@ -129,18 +139,19 @@
                 'ordering': true,
                 'info': true,
                 'autoWidth': true,
-                "columnDefs": [
-                    { "orderable": false, "targets": 5 }
-                ]
+                "columnDefs": [{
+                    "orderable": false,
+                    "targets": [4, 5]
+                }]
             })
         })
- 
-        $('.btn-primary').click(function (e) { 
+
+        $('.btn-primary').click(function(e) {
             e.preventDefault();
 
             let form = $(this).parents('form');
             let formData = form.serializeArray();
-        
+
             form.find('.error').text('');
 
             $.ajax({
@@ -151,25 +162,24 @@
                 },
                 data: formData,
                 dataType: "json",
-                success: function () {
+                success: function() {
                     $('.modal').hide();
-                    swal("Phản hồi thành côngs", {
-                    icon: "success",
-                    })
-                    .then(() => {
-                        return location.reload();
-                    });
+                    swal("Phản hồi thành công", {
+                            icon: "success",
+                        })
+                        .then(() => {
+                            return location.reload();
+                        });
                 },
-                error: function (error) {
+                error: function(error) {
                     if (error.responseJSON) {
-                        $.each(error.responseJSON.errors, function (indexInArray, valueOfElement) { 
+                        $.each(error.responseJSON.errors, function(indexInArray, valueOfElement) {
                             form.find('.' + indexInArray).text(valueOfElement)
                         });
                     }
-                    
+
                 }
             });
         });
-           
     </script>
 @endsection

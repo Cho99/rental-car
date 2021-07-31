@@ -4,6 +4,7 @@ return [
     'car_register' => 'Quản lý xe đăng ký',
     'car_manager' => 'Quản lý xe',
     'car_list' => 'Danh sách xe đăng ký',
+    'car_block' => 'Danh sách xe bị khóa',
     'car_search' => 'Car Search',
     'car' => 'Xe ô tô',
     'created' => 'Ngày đăng ký',
@@ -22,4 +23,5 @@ return [
     'price' => 'Giá',
     'discount' => 'Giảm giá',
     'list_image' => 'Ảnh xe',
+    'description' => 'Mô tả'
 ];

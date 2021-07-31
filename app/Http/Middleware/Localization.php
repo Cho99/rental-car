@@ -18,6 +18,10 @@ class Localization
     public function handle($request, Closure $next)
     {
         $language = Session::get('language');
+        if (!$language) {
+            $language = 'vi';
+        }
+        
         Lang::setLocale($language);
 
         return $next($request);

@@ -31,8 +31,8 @@ $(function() {
                 labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
 
                 datasets: [{
-                    label: 'Từ chối',
-                    backgroundColor: 'rgb(255, 99, 71)',
+                    label: 'Xe ô tô',
+                    backgroundColor: 'rgb(153, 204, 255)',
                     borderColor: 'rgba(60,141,188,0.8)',
                     pointRadius: true,
                     pointColor: '#3b8bba',
@@ -40,7 +40,7 @@ $(function() {
                     pointHighlightFill: '#fff',
                     pointHighlightStroke: 'rgba(60,141,188,1)',
                     barPercentage: 0.5,
-                    data: data
+                    data: data,
                 }]
             }
 
@@ -62,20 +62,32 @@ $(function() {
                         ticks: {
                             beginAtZero: true,
                             min: 0,
-                            stepSize: 1,
+                            stepSize: 2,
                         },
                         scaleLabel: {
                             display: true,
                             labelString: 'Xe ô tô'
                         }
+                    }],
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: false
+                          },
+                        ticks: {
+                            beginAtZero: true,
+                            min: 0,
+                            stepSize: 1,
+                        },
                     }]
                 },
+               
             }
 
             new Chart(barChartCanvas, {
                 type: 'bar',
                 data: barChartData,
-                options: barChartOptions
+                options: barChartOptions,
             })
         }
     });

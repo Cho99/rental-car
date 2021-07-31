@@ -9,9 +9,9 @@
     $borrowDate = \Carbon\Carbon::parse($data['borrowed_date']);
     $returnDate = \Carbon\Carbon::parse($data['return_date']);
     $totalDate = $returnDate->diffinDays($borrowDate);
-    $totalPrice = $data['price'];
+    $totalPrice = (int) $data['price'] * (int) $totalDate;
     if ($data['discount']) {
-        $totalPrice = (int)$data['price'] * (100 - (int)$data['discount']) / 100;
+        $totalPrice = (((int)$data['price'] * (100 - (int)$data['discount']) / 100) * (int) $totalDate);
     }
 @endphp
 <br>

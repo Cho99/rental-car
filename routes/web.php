@@ -22,6 +22,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/addresses/create-district', 'AddressController@createDistrict')->name('create-district');
         Route::get('/addresses/create-ward', 'AddressController@createWard')->name('create-ward');
         Route::get('/cars/list_register', 'CarController@listRegister')->name('cars.list_register');
+        Route::get('/cars/list_block', 'CarController@listBlock')->name('cars.list_block');
         Route::get('/cars/register/{id}', 'CarController@register')->name('cars.register');
         Route::post('/cars/register/accept/{id}', 'CarController@accept');
         Route::post('/cars/register/reject/{id}', 'CarController@reject');

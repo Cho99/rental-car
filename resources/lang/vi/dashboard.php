@@ -2,5 +2,5 @@
 
 return [
     'dashboard' => 'Trang quản lý',
-    'name' => 'Thống kê xem bị từ chối trong 12 tháng',
+    'name' => 'Biểu đồ thống kê số lượng xe được đặt theo từng tháng',
 ];

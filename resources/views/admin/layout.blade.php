@@ -34,8 +34,7 @@
     <div class="wrapper">
         <header class="main-header">
             <a href="" class="logo">
-                <span class="logo-mini"><img src="{{ asset('/images/logo.png') }}"
-                        alt=""></span>
+                <span class="logo-mini"><img src="{{ asset('/images/logo.png') }}" alt=""></span>
                 <span class="logo-lg"><img src="{{ asset('bower_components/admin-lte/dist/img/logo.png') }}"
                         alt=""></span>
             </a>
@@ -43,6 +42,25 @@
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
+                <div class="col-md-3 toast none">
+                    <div class="box box-success box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Thông báo</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                        class="fa fa-times"></i></button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            Bạn có 1 thông báo đăng ký thuê xe mới ^^!
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="dropdown notifications-menu">
@@ -57,39 +75,41 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown messages-menu open">
+                        <li class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                              <i class="fa fa-language"></i>
+                                <i class="fa fa-language"></i>
                             </a>
                             <ul class="dropdown-menu">
-                              <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                  <li><!-- start message -->
-                                    <a href="{{ route('admin.change-language', ['language' => 'vi']) }}">
-                                      <h4>
-                                        {{ trans('admin.vi') }}
-                                      </h4>
-                                    </a>
-                                  </li>
-                                  <!-- end message -->  
-                                </ul>
-                              </li>
-                              <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                  <li><!-- start message -->
-                                    <a href="{{ route('admin.change-language', ['language' => 'en']) }}">
-                                      <h4>
-                                        {{ trans('admin.en') }}
-                                      </h4>
-                                    </a>
-                                  </li>
-                                  <!-- end message -->  
-                                </ul>
-                              </li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- start message -->
+                                            <a href="{{ route('admin.change-language', ['language' => 'vi']) }}">
+                                                <h4>
+                                                    {{ trans('admin.vi') }}
+                                                </h4>
+                                            </a>
+                                        </li>
+                                        <!-- end message -->
+                                    </ul>
+                                </li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- start message -->
+                                            <a href="{{ route('admin.change-language', ['language' => 'en']) }}">
+                                                <h4>
+                                                    {{ trans('admin.en') }}
+                                                </h4>
+                                            </a>
+                                        </li>
+                                        <!-- end message -->
+                                    </ul>
+                                </li>
                             </ul>
-                          </li>
+                        </li>
                         <li class="dropdown user user-menu" id="user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{ asset('bower_components/admin-lte/dist/img/iconUser.png') }}"
@@ -129,8 +149,8 @@
             <section class="sidebar">
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{ asset('bower_components/admin-lte/dist/img/iconUser.png') }}" class="img-circle"
-                            alt="User Image">
+                        <img src="{{ asset('bower_components/admin-lte/dist/img/iconUser.png') }}"
+                            class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>
@@ -166,31 +186,37 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.addresses.index')}}">
+                        <a href="{{ route('admin.cars.list_block') }}">
+                            <i class="fa fa-ban"></i>
+                            <span>{{ trans('car.car_block') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.addresses.index') }}">
                             <i class="fa fa-map"></i>
                             <span>{{ trans('address.address_manager') }}</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.features.index')}}">
+                        <a href="{{ route('admin.features.index') }}">
                             <i class="fa fa-cogs"></i>
                             <span>{{ trans('feature.feature_manager') }}</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.categories.index')}}">
+                        <a href="{{ route('admin.categories.index') }}">
                             <i class="fa fa-bookmark"></i>
                             <span>{{ trans('category.category_manager') }}</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.rules.index')}}">
+                        <a href="{{ route('admin.rules.index') }}">
                             <i class="fa fa-balance-scale"></i>
                             <span>{{ trans('rule.rule_manager') }}</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.reports.index')}}">
+                        <a href="{{ route('admin.reports.index') }}">
                             <i class="fa fa-file"></i>
                             <span>{{ trans('report.report_manager') }}</span>
                         </a>
@@ -221,14 +247,12 @@
     <script src="{{ asset('bower_components/admin-lte/dist/js/component/general.js') }}">
     </script>
     <script src="{{ asset('bower_components/admin-lte/bower_components/ckeditor/ckeditor.js') }}"></script>
-    <script
-        src="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}">
+    <script src="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}">
     </script>
-  
+
     <script src="{{ asset('bower_components/admin-lte/bower_components/select2/dist/js/select2.full.min.js') }}">
     </script>
-    <script
-        src="{{ asset('bower_components/admin-lte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}">
+    <script src="{{ asset('bower_components/admin-lte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}">
     </script>
     <script src="{{ asset('bower_components/admin-lte/bower_components/fastclick/lib/fastclick.js') }}"></script>
     <script src="{{ asset('bower_components/admin-lte/dist/js/adminlte.min.js') }}"></script>

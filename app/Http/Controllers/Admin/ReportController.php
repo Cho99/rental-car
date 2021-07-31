@@ -24,6 +24,7 @@ class ReportController extends Controller
 
     public function reply(ReportRequest $request, $id)
     {
+        $request->input('content');
         $report = Report::with('user')->findOrFail($id);
         $report->update([
             'status' => Report::READ,

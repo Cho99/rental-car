@@ -82,17 +82,17 @@ class CarController extends Controller
             $input['user'] = $carOfUser->user;
             $input['phone'] = Auth::user()->phone;
 
-            $user = $this->userRepo->getOrderByUserId(Auth::id(), $input['car_id']);
-
+            $user = $this->userRepo->getOrderByUserId(Auth::id());
+    
             if (!$user->orders->isEmpty()) {
-                Session::flash('mess', 'Bạn chỉ được yêu câu thuê xe một lần');
+                Session::flash('mess_error', 'Bạn chỉ được yêu câu thuê xe một lần');
 
                 return redirect()->back();
             }
 
             $this->orderRepo->create($input) ? 
-                Session::flash('mess', 'Bạn đã yêu cầu đặt xe thành công, vui lòng đợi chủ xe liên lạc với bạn'):
-                Session::flash('mess', 'Hệ thống lỗi');
+                Session::flash('mess_success', 'Bạn đã yêu cầu đặt xe thành công, vui lòng đợi chủ xe liên lạc với bạn'):
+                Session::flash('mess_error', 'Hệ thống lỗi');
  
             OrderJob::dispatch($email, $input);
             DB::commit();

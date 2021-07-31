@@ -1,7 +1,8 @@
 @extends('layouts.client.layout')
 
 @section('content')
-    <section class="parallax-window" data-parallax="scroll" data-image-src="{{ asset('bower_components/car-client-lte/') }}/img/transfer_1.jpg" data-natural-width="1400"
+    <section class="parallax-window" data-parallax="scroll"
+        data-image-src="{{ asset('bower_components/car-client-lte/') }}/img/transfer_1.jpg" data-natural-width="1400"
         data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
@@ -37,7 +38,8 @@
                 <aside class="col-lg-3 col-md-3">
                     <div class="box_style_cat">
                         <ul id="cat_nav">
-                            <li><a href="{{ route('create-step-one') }}" id="active"><i class="icon-plus-circled-1"></i>Đăng ký xe</a>
+                            <li><a href="{{ route('create-step-one') }}" id="active"><i
+                                        class="icon-plus-circled-1"></i>Đăng ký xe</a>
                             </li>
                         </ul>
                     </div>
@@ -47,7 +49,7 @@
                         <i class="icon_set_1_icon-57"></i>
                         <h4>Liên hệ</h4>
                         <a href="tel://004542344599" class="phone">+84 423 445 99</a>
-                        <small>Monday to Friday 9.00am - 7.30pm</small>
+                        <small>Thứ hai đến thứ Sáu 9.00 sáng - 7.30 tối</small>
                     </div>
                 </aside>
                 <!--End aside -->
@@ -55,73 +57,66 @@
 
                     <div id="tools">
 
-                        {{-- <div class="row">
-                            <div class="col-md-3 col-sm-3 col-xs-6">
-                                <div class="styled-select-filters">
-                                    <select name="sort_price" id="sort_price">
-                                        <option value="" selected>Trạng thái</option>
-                                        <option value="">Đang chờ xác thực</option>
-                                        <option value="lower">Đang chờ</option>
-                                        <option value="higher">Đang thuê</option>
-                                        <option value="higher">Từ chối</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                     <!--/tools -->
-                    
-                    @foreach ($cars as $car)
-                    <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                @switch($car->status)
-                                    @case(0)
-                                        <div class="ribbon_3 info">
-                                            <span>Đang chờ</span>
-                                        </div>
+
+                    @forelse  ($cars as $car)
+                        <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    @switch($car->status)
+                                        @case(0)
+                                            <div class="ribbon_3 info">
+                                                <span>Đang chờ</span>
+                                            </div>
                                         @break
-                                    @case(1)
-                                        <div class="ribbon_3">
-                                            <span>Từ chối</span>
-                                        </div>
+                                        @case(1)
+                                            <div class="ribbon_3">
+                                                <span>Từ chối</span>
+                                            </div>
                                         @break
-                                    @case(2)
-                                        <div class="ribbon_3 success">
-                                            <span>Được lưu hành</span>
-                                        </div>
+                                        @case(2)
+                                            <div class="ribbon_3 success">
+                                                <span>Được lưu hành</span>
+                                            </div>
                                         @break
-                                    @case(3)
-                                        <div class="ribbon_3 warning">
-                                            <span>Đang thuê</span>
-                                        </div>
-                                    @case(4)
-                                        <div class="ribbon_3 danger">
-                                            <span>Bị khóa</span>
-                                        </div>
+                                        @case(3)
+                                            <div class="ribbon_3 warning">
+                                                <span>Đang thuê</span>
+                                            </div>
+                                        @case(4)
+                                            <div class="ribbon_3 danger">
+                                                <span>Bị khóa</span>
+                                            </div>
                                         @break
-                                    @default
-                                        
-                                @endswitch
-                               
-                               
-                                <div class="img_list">
-                                    @php
-                                        $image = null;
-                                        if (!empty($car->image)) {
-                                            $image = json_decode($car->image->image_list);
-                                        }
-                                    @endphp
-                                    @if (isset($image))
-                                        <a href="{{ route('cars.show', $car->id) }}"><img src="{{ asset('upload/car') . '/' . $image[0] }}" alt="Image">
-                                            <div class="short_info"><i class="icon_set_1_icon-29"></i> <span>{{ $car->seats }}</span> Seats</div>
-                                        </a>
-                                    @else
-                                        <a href="{{ route('cars.show', $car->id) }}"><img src="{{ asset('images/car.jpg') }}" alt="Image">
-                                            <div class="short_info"><i class="icon_set_1_icon-29"></i> <span>{{ $car->seats }}</span> Seats</div>
-                                        </a>  
-                                    @endif
-                                </div>
+                                        @default
+
+                                    @endswitch
+
+
+                                    <div class="img_list">
+                                        @php
+                                            $image = null;
+                                            if (!empty($car->image)) {
+                                                $image = json_decode($car->image->image_list);
+                                            }
+                                        @endphp
+                                        @if (isset($image))
+                                            <a href="{{ route('cars.show', $car->id) }}"><img
+                                                    src="{{ asset('upload/car') . '/' . $image[0] }}" alt="Image">
+                                                <div class="short_info"><i class="icon_set_1_icon-29"></i>
+                                                    <span>{{ $car->seats }}</span> Seats
+                                                </div>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('cars.show', $car->id) }}"><img
+                                                    src="{{ asset('images/car.jpg') }}" alt="Image">
+                                                <div class="short_info"><i class="icon_set_1_icon-29"></i>
+                                                    <span>{{ $car->seats }}</span> Seats
+                                                </div>
+                                            </a>
+                                        @endif
+                                    </div>
                             </div>
                             <div class="clearfix visible-xs-block"></div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -136,7 +131,8 @@
                                         @endfor
                                         <small>({{ $car->comments_count }}) Đánh giá</small>
                                     </div>
-                                    <h3><strong>{{ $car->category->name }}</strong> Đời: {{ date('Y', strtotime($car->year_of_product)) }}</h3>
+                                    <h3><strong>{{ $car->category->name }}</strong> Đời:
+                                        {{ date('Y', strtotime($car->year_of_product)) }}</h3>
                                     <p>Biển số xe: {{ $car->license_plates }}</p>
                                     <p>Điều khoản: {{ $car->description }}</p>
                                     <ul class="add_info">
@@ -144,7 +140,9 @@
                                             <li>
                                                 <div class="tooltip_styled tooltip-effect-4">
                                                     <span class="tooltip-item">
-                                                        <img src="{{ asset('upload/feature/'. $feature->image) }}" alt="" style="max-width: 35px; height: 35px; object-fit: cover;">
+                                                        <img src="{{ asset('upload/feature/' . $feature->image) }}"
+                                                            alt=""
+                                                            style="max-width: 35px; height: 35px; object-fit: cover;">
                                                     </span>
                                                     <div class="tooltip-content">
                                                         <h4>{{ $feature->name }}</h4>
@@ -168,32 +166,38 @@
                                     @endif
                                     <br>
                                     <div>
-                                        <a href="{{ route('cars.show', $car->id) }}" class="btn_1">Chi Tiết</a>
+                                        <a href="{{ route('cars.show', $car->id) }}" class="btn_1">Chi
+                                            Tiết</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endforeach
-                
+                    <hr>
+                    @empty
+                        <hr>
+                        <h2>Chưa có xe nào quản lý</h2>
+
+                    @endforelse
+
                     <!--End strip -->
 
 
-                    <hr>
+
 
                     @if ($cars->lastPage() > 1)
                         <div class="text-center">
                             <ul class="pagination">
-                                <li class="{{ ($cars->currentPage() == 1) ? ' disabled' : '' }}">
+                                <li class="{{ $cars->currentPage() == 1 ? ' disabled' : '' }}">
                                     <a href="{{ $cars->url(1) }}">Trang trước</a>
                                 </li>
                                 @for ($i = 1; $i <= $cars->lastPage(); $i++)
-                                    <li class="{{ ($cars->currentPage() == $i) ? ' active' : '' }}">
+                                    <li class="{{ $cars->currentPage() == $i ? ' active' : '' }}">
                                         <a href="{{ $cars->url($i) }}">{{ $i }}</a>
                                     </li>
                                 @endfor
-                                <li class="{{ ($cars->currentPage() == $cars->lastPage()) ? ' disabled' : '' }}">
-                                    <a href="{{ $cars->url($cars->currentPage()+1) }}" >Trang tiếp</a>
+                                <li class="{{ $cars->currentPage() == $cars->lastPage() ? ' disabled' : '' }}">
+                                    <a href="{{ $cars->url($cars->currentPage() + 1) }}">Trang tiếp</a>
                                 </li>
                             </ul>
                         </div>

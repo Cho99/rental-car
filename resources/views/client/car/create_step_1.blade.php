@@ -68,7 +68,8 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label for="license_plates">Biển số xe</label>
-                                        <input type="text" class="form-control" id="license_plates" name="license_plates" required>
+                                        <input type="text" class="form-control" id="license_plates" name="license_plates"
+                                            value="{{ old('license_plates') ? old('license_plates') : '' }}" required>
                                     </div>
                                     @if ($errors->has('license_plates'))
                                         <div class="error">{{ $errors->first('license_plates') }}</div>
@@ -116,7 +117,8 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>Số ghế</label>
-                                        <input type="number" id="seats" name="seats" class="form-control">
+                                        <input type="number" id="seats" name="seats" class="form-control"
+                                            value="{{ old('seats') ? old('seats') : '' }}">
                                     </div>
                                     @if ($errors->has('vehicle'))
                                         <div class="error">{{ $errors->first('seats') }}</div>
@@ -126,6 +128,7 @@
                                     <div class="form-group">
                                         <label>Năm sẩn xuất</label>
                                         <input type="number" id="year_of_product" name="year_of_product"
+                                            value="{{ old('year_of_product') ? old('year_of_product') : '' }}"
                                             class="form-control">
                                     </div>
                                     @if ($errors->has('year_of_product'))
@@ -172,7 +175,8 @@
                         <div class="step">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
-                                    <input type="text" id="fuel_consumption" name="fuel_consumption" class="form-control">
+                                    <input type="text" id="fuel_consumption" name="fuel_consumption" class="form-control"
+                                        value="{{ old('fuel_consumption') ? old('fuel_consumption') : '' }}">
                                 </div>
                             </div>
                             @if ($errors->has('fuel_consumption'))
@@ -184,7 +188,8 @@
                         <div class="form_title">
                             <h3><strong>4</strong>Địa chỉ</h3>
                             <p>
-                                Địa điểm trong vùng Hà Nội mà xe bạn đang ở, nó chưa phải là điểm cụ thể nhưng hãy chọn đúng với nơi bạn gần nhất để mà người dùng có thể tìm kiếm tới bạn
+                                Địa điểm trong vùng Hà Nội mà xe bạn đang ở, nó chưa phải là điểm cụ thể nhưng hãy chọn đúng
+                                với nơi bạn gần nhất để mà người dùng có thể tìm kiếm tới bạn
                             </p>
                         </div>
                         <div class="step">
@@ -274,6 +279,5 @@
                 }
             });
         });
-
     </script>
 @endsection

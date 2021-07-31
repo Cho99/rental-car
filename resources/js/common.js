@@ -35,6 +35,7 @@ $(document).ready(function() {
                     </p>
                 </div>
                 `;
+                $('#review_text').val('');
                 $('.no-comment').hide();
                 $('.comment').prepend(comment);
             }

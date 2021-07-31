@@ -8,4 +8,6 @@ interface OrderRepositoryInterface extends RepositoryInterface
    public function where($carId);
 
    public function getOrderByIdWithComment($id);
+
+   public function getCarOrderSuccess();
 }

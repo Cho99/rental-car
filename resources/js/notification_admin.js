@@ -63,6 +63,9 @@ function getNotification(number) {
                             checkPusher = true;
                         }
                     })
+                    $('.toast').addClass('show');
+                    $('.toast').delay(3500).slideUp();
+                    setTimeout(function(){ $('.toast').removeClass('show'); }, 3500);
 
                     if (checkPusher) {
                         $('.noti-data').empty();

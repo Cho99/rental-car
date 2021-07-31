@@ -24,7 +24,12 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "date_of_birth" => [
+                'date'
+            ],
+            "phone" => [
+                'integer'
+            ],
         ];
     }
 }

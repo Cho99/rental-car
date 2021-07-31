@@ -32,7 +32,9 @@ class ClientController extends Controller
 
     public function getOrderRequest()
     {
-        $user = User::with('orders.car.user')->where('id', Auth::id())->first();
+        $user = User::with(['orders.car.user', 'orders' => function($query) {
+            $query->orderBy('id', 'DESC');
+        }])->where('id', Auth::id())->first();
 
         return view('client.my_request.index', compact('user'));
     }

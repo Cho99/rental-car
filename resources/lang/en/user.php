@@ -14,5 +14,7 @@ return [
     'users' => 'Manager User',
     'date' => 'Created At',
     'user_list' => 'List user',
-    'user_manager' => 'Manager User'
+    'user_manager' => 'Manager User',
+    'user' => 'Manager user',
+    'name' => 'User name'
 ];

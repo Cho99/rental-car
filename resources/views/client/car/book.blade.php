@@ -7,18 +7,21 @@
 
 @section('content')
 
-@php
-$images = null;
-if (!empty($car->image)) {
-    $images = json_decode($car->image->image_list);
-}
-@endphp
+    @php
+    $images = null;
+    if (!empty($car->image)) {
+        $images = json_decode($car->image->image_list);
+    }
+    @endphp
 
-@if (isset($images))
-    <section class="parallax-window" data-parallax="scroll" data-image-src="{{ asset('upload/car') . '/' . $images[0] }}" data-natural-width="1400" data-natural-height="470" style="object-fit: cover;">
-@else
-    <section class="parallax-window" data-parallax="scroll" data-image-src="{{ asset('images/car.jpg') }}" data-natural-width="1400" data-natural-height="470" style="object-fit: cover;">
-@endif
+    @if (isset($images))
+        <section class="parallax-window" data-parallax="scroll"
+            data-image-src="{{ asset('upload/car') . '/' . $images[0] }}" data-natural-width="1400"
+            data-natural-height="470" style="object-fit: cover;">
+        @else
+            <section class="parallax-window" data-parallax="scroll" data-image-src="{{ asset('images/car.jpg') }}"
+                data-natural-width="1400" data-natural-height="470" style="object-fit: cover;">
+    @endif
     <div class="parallax-content-2">
         <div class="container">
             <div class="row">
@@ -38,7 +41,7 @@ if (!empty($car->image)) {
                         @if ($car->orders->isEmpty())
                             <span>Chưa có chuyến nào</span>
                         @else
-                            <span>{{ $car->orders->count() }}</span>
+                            <span>{{ $car->orders->count() }} Chuyến</span>
                         @endif
                     </span>
                     <div>
@@ -48,223 +51,242 @@ if (!empty($car->image)) {
                             <span class="label label-warning">Số sàn</span>
                         @endif
                         @if ($car->discount)
-                           <span class="label label-info">Giảm giá: {{ $car->discount }} %</span>
+                            <span class="label label-info">Giảm giá: {{ $car->discount }} %</span>
                         @endif
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4">
                     <div id="price_single_main">
                         @if ($car->discount)
-                            @php    
-                                $totalPrice = $car->price*(100-$car->discount)/100;
+                            @php
+                                $totalPrice = ($car->price * (100 - $car->discount)) / 100;
                             @endphp
                             <sup style="text-decoration: line-through;">{{ currency_format($car->price) }} VNĐ</sup>
-                            <h1>{{ currency_format($totalPrice) }} VNĐ</h1> 
+                            <h1>{{ currency_format($totalPrice) }} VNĐ</h1>
                         @else
                             <span>{{ currency_format($car->price) }}VNĐ</span>
                         @endif
-                      
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-<main style="margin-bottom: 353px;">
-    <div id="position">
-        <div class="container">
-            <ul>
-                <li><a href="#">Trang chủ</a>
-                </li>
-                <li><a href="#">Đạt xe</a>
-                </li>
-                <li>{{ $car->category->name }}</li>
-            </ul>
-        </div>
-    </div>
-    <!-- End Position -->
-
-    <div class="collapse" id="collapseMap">
-        <div id="map" class="map"></div>
-    </div>
-    <!-- End Map -->
-    
-    @if (session()->has('mess'))
-        <div class="notification-client">
-            <div class="content-message">
-                {{ session()->get('mess') }}
+    </section>
+    <main style="margin-bottom: 353px;">
+        <div id="position">
+            <div class="container">
+                <ul>
+                    <li><a href="#">Trang chủ</a>
+                    </li>
+                    <li><a href="#">Đạt xe</a>
+                    </li>
+                    <li>{{ $car->category->name }}</li>
+                </ul>
             </div>
         </div>
-    @endif
+        <!-- End Position -->
 
-    <div class="container margin_60">
-        <div class="row">
-            <div class="col-md-8" id="single_tour_desc">
+        <div class="collapse" id="collapseMap">
+            <div id="map" class="map"></div>
+        </div>
+        <!-- End Map -->
 
-                <div id="single_tour_feat">
-                    <ul>
-                        @foreach ($car->features as $feature)
-                            <li>
-                                <img src="{{ asset('upload/feature') . '/' . $feature->image }}" alt="{{ $feature->name }}" title="{{ $feature->name }}" style="width: 36px; height: 36px">
-                                <br>
-                                {{ $feature->name }}
-                            </li>
-                        @endforeach
-                    </ul>
+        @if (session()->has('mess_error'))
+            <div class="notification-client">
+                <div class="content-message">
+                    {{ session()->get('mess_error') }}
                 </div>
+            </div>
+        @endif
 
-                <p class="visible-sm visible-xs"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
-                </p>
 
-                <!-- Map button for tablets/mobiles -->
+        @if (session()->has('mess_success'))
+            <div class="notification-client ">
+                <div class="content-message success">
+                    {{ session()->get('mess_success') }}
+                </div>
+            </div>
+        @endif
 
-                <div id="Img_carousel" class="slider-pro">
-                    @if (isset($images))
-                        <div class="sp-slides">
-                            @foreach ($images as $image)
-                            <div class="sp-slide">
-                                <img alt="Image" class="sp-image" src="{{ asset('bower_components/car-client-lte') }}/css/images/blank.gif" data-src="{{ asset('upload/car') . '/' . $image }}">
-                            </div>
+        <div class="container margin_60">
+            <div class="row">
+                <div class="col-md-8" id="single_tour_desc">
+
+                    <div id="single_tour_feat">
+                        <ul>
+                            @foreach ($car->features as $feature)
+                                <li>
+                                    <img src="{{ asset('upload/feature') . '/' . $feature->image }}"
+                                        alt="{{ $feature->name }}" title="{{ $feature->name }}"
+                                        style="width: 36px; height: 36px">
+                                    <br>
+                                    {{ $feature->name }}
+                                </li>
                             @endforeach
-                        </div>
-                        @if (count($images) > 4) 
-                            <div class="sp-thumbnails">
+                        </ul>
+                    </div>
+
+                    <p class="visible-sm visible-xs"><a class="btn_map" data-toggle="collapse" href="#collapseMap"
+                            aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map"
+                            data-text-original="View on map">View on map</a>
+                    </p>
+
+                    <!-- Map button for tablets/mobiles -->
+
+                    <div id="Img_carousel" class="slider-pro">
+                        @if (isset($images))
+                            <div class="sp-slides">
                                 @foreach ($images as $image)
-                                    <img alt="Image" class="sp-thumbnail" src="{{ asset('upload/car') . '/' . $image }}">
+                                    <div class="sp-slide">
+                                        <img alt="Image" class="sp-image"
+                                            src="{{ asset('bower_components/car-client-lte') }}/css/images/blank.gif"
+                                            data-src="{{ asset('upload/car') . '/' . $image }}">
+                                    </div>
                                 @endforeach
                             </div>
+                            @if (count($images) > 4)
+                                <div class="sp-thumbnails">
+                                    @foreach ($images as $image)
+                                        <img alt="Image" class="sp-thumbnail"
+                                            src="{{ asset('upload/car') . '/' . $image }}">
+                                    @endforeach
+                                </div>
+                            @endif
+                        @else
+                            <div class="sp-slides">
+                                <div class="sp-slide">
+                                    <img alt="Image" class="sp-image"
+                                        src="{{ asset('bower_components/car-client-lte') }}/css/images/blank.gif"
+                                        data-src="{{ asset('images/car.jpg') }}">
+                                </div>
+                            </div>
                         @endif
-                    @else
-                        <div class="sp-slides">
-                            <div class="sp-slide">
-                                <img alt="Image" class="sp-image" src="{{ asset('bower_components/car-client-lte') }}/css/images/blank.gif" data-src="{{ asset('images/car.jpg') }}">
-                            </div>
-                        </div> 
-                    @endif
-                   
-                </div>
-
-                <hr>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Đặc điểm</h3>
                     </div>
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div>
-                                    <img src="" alt=""> Số ghế: {{ $car->seats }}
-                                </div>
-                                <div>
-                                    <img src="" alt=""> Nhiên liệu: 
-                                    @if ($car->type_of_fuel === 1)
-                                        Xăng 
-                                    @else
-                                        Dầu
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div>
-                                    <img src="" alt=""> Truyền động: 
-                                    @if ($car->actions === 1)
-                                        Số sàn 
-                                    @else
-                                        Số tự động
-                                    @endif
-                                </div>
-                                <div>
-                                    <img src="" alt=""> Mức tiêu thụ nhiên liệu: {{ $car->fuel_consumption }} lít/100km
-                                </div>
-                            </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>Đặc điểm</h3>
                         </div>
-                        <!-- End row  -->
-                    </div>
-                </div>
-
-                <hr>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Mô tả</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                {{ $car->description }}
-                            </div>
-                        </div>
-                        <!-- End row  -->
-                    </div>
-                </div>
-
-                <hr>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Tính năng</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="row">
-                            @foreach ( $car->features as $feature)
-                            <div class="col-md-6 col-sm-6">
-                                <div>
-                                    <img src="" alt=""> {{ $feature->name }}
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div>
+                                        <img src="" alt=""> Số ghế: {{ $car->seats }}
+                                    </div>
+                                    <div>
+                                        <img src="" alt=""> Nhiên liệu:
+                                        @if ($car->type_of_fuel === 1)
+                                            Xăng
+                                        @else
+                                            Dầu
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div>
+                                        <img src="" alt=""> Truyền động:
+                                        @if ($car->actions === 1)
+                                            Số sàn
+                                        @else
+                                            Số tự động
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <img src="" alt=""> Mức tiêu thụ nhiên liệu: {{ $car->fuel_consumption }}
+                                        lít/100km
+                                    </div>
                                 </div>
                             </div>
-                            @endforeach
+                            <!-- End row  -->
                         </div>
-                        <!-- End row  -->
                     </div>
-                </div>
 
-                <hr>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Giấy tờ thuê xe (bản gốc)</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div>
-                                    <img src="" alt=""> CMND và GPLX (đối chiếu)
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>Mô tả</h3>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    {{ $car->description }}
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div>
-                                    <img src="" alt=""> Hộ Khẩu hoặc KT3 hoặc Passport (giữ lại)
+                            <!-- End row  -->
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>Tính năng</h3>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                @foreach ($car->features as $feature)
+                                    <div class="col-md-6 col-sm-6">
+                                        <div>
+                                            <img src="" alt=""> {{ $feature->name }}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <!-- End row  -->
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>Giấy tờ thuê xe (bản gốc)</h3>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div>
+                                        <img src="" alt=""> CMND và GPLX (đối chiếu)
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div>
+                                        <img src="" alt=""> Hộ Khẩu hoặc KT3 hoặc Passport (giữ lại)
+                                    </div>
                                 </div>
                             </div>
+                            <!-- End row  -->
                         </div>
-                        <!-- End row  -->
                     </div>
-                </div>
 
-                <hr>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Tài sản thế chấp</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="row">
-                            15 triệu (tiền mặt/chuyển khoản cho chủ xe khi nhận xe)
-                            hoặc Xe máy (kèm cà vẹt gốc) giá trị 15 triệu
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>Tài sản thế chấp</h3>
                         </div>
-                        <!-- End row  -->
+                        <div class="col-md-9">
+                            <div class="row">
+                                15 triệu (tiền mặt/chuyển khoản cho chủ xe khi nhận xe)
+                                hoặc Xe máy (kèm cà vẹt gốc) giá trị 15 triệu
+                            </div>
+                            <!-- End row  -->
+                        </div>
                     </div>
-                </div>
 
-                <hr>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Điều khoản</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="row">
-                            <p>
-                                1. Chấp nhận Hộ khẩu Thành phố/KT3 Thành phố/Hộ khẩu tỉnh/Passport (Bản gốc) (Giữ lại khi nhận xe)
-                                CMND và GPLX đối chiếu
-                            </p>
-                            <p>
-                                2. Tài sản đặt cọc (1 trong 2 hình thức)
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>Điều khoản</h3>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <p>
+                                    1. Chấp nhận Hộ khẩu Thành phố/KT3 Thành phố/Hộ khẩu tỉnh/Passport (Bản gốc) (Giữ lại
+                                    khi nhận xe)
+                                    CMND và GPLX đối chiếu
+                                </p>
+                                <p>
+                                    2. Tài sản đặt cọc (1 trong 2 hình thức)
                                 <p>
                                     <span>
                                         - Xe máy (giá trị >15triệu) + Cà vẹt (bản gốc)
@@ -273,368 +295,360 @@ if (!empty($car->image)) {
                                 <p>
                                     - Hoặc cọc tiền mặt 15 triệu.
                                 </p>
-                            </p>
-                            <span>
-                                * Quý khách lưu ý một số qui định sau:
-                                Không sử dụng xe thuê vào mục đích phi pháp, trái pháp luật
-                                Không được sử dụng xe thuê để cầm cố hay thế chấp, sử dụng đúng mục đích
-                                Không hút thuốc,ăn kẹo cao su xả rác trong xe
-                                Không chở hàng quốc cấm dễ cháy nổ,hoa quả thưc phẩm lưu mùi trong xe.
-                                Khi trả xe, khách hàng vui lòng vệ sinh sạch sẽ hoặc gửi phụ thu thêm phí rửa xe, hút bụi nếu xe dơ. (sẽ thu nhiều hơn tuỳ theo mức độ dơ) 
-                                <p>
-                                    Trân trọng cảm ơn, chúc quý khách có những chuyến đi tuyệt vời!
-                                </p> 
-                            </span>
-                            </span>
-                        </div>
-                        <!-- End row  -->
-                    </div>
-                </div>
-
-                <hr>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Chủ xe</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-2">
-                                @if ($car->user->avatar)
-                                    <img src="" alt="" class="img-circle">
-                                @else 
-                                    <img src="{{ asset('bower_components/car-client-lte/' . '/img/avatar3.jpg') }}" alt="" class="img-circle">
-                                @endif 
-                            </div>
-                            <div class="col-md-10 col-sm-10">
-                                {{ $car->user->name }}
-                                <p>
-                                    <strong>Lưu ý:</strong> Người thuê xe gọi cho bạn nếu họ đồng ý đơn đặt xe của bạn
                                 </p>
-                            </div>
-                        </div>
-                        <!-- End row  -->
-                    </div>
-                </div>
-                <br>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Đánh giá </h3>
-                        <p><strong>Chú ý:</strong> Chi khi thuê xe xong bạn mới được đánh giá</p>
-                    </div>
-                    @if (!$car->comments->isEmpty())
-                    <div class="col-md-9">
-                        <div id="general_rating">11 Reviews
-                            <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-                            </div>
-                        </div>
-                        <!-- End general_rating -->
-                      
-                            <div class="row" id="rating_summary">
-                                <div class="col-md-6"> 
-                                    <ul>
-                                        <li>Position
-                                            <div class="rating">
-                                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-                                            </div>
-                                        </li>
-                                        <li>Tourist guide
-                                            <div class="rating">
-                                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <ul>
-                                        <li>Price
-                                            <div class="rating">
-                                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-                                            </div>
-                                        </li>
-                                        <li>Quality
-                                            <div class="rating">
-                                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        <!-- End row -->
-                        <hr>
-                        <div class="comments">
-                            @if (!$car->comments->isEmpty())
-                            @foreach ($car->comments as $comment)
-                                <div class="rating">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i == $comment->rate)
-                                            <input type="radio" checked>
-                                        @else
-                                            <input type="radio" >
-                                        @endif
-                                    @endfor
-                                </div>
-                                <div class="review_strip_single">
-                                    <small> - {{ \Carbon\Carbon::parse($comment->created_at)->format('m/d/Y') }} -</small>
-                                    <label>{{ $comment->user->name }}</label>
+                                <span>
+                                    * Quý khách lưu ý một số qui định sau:
+                                    Không sử dụng xe thuê vào mục đích phi pháp, trái pháp luật
+                                    Không được sử dụng xe thuê để cầm cố hay thế chấp, sử dụng đúng mục đích
+                                    Không hút thuốc,ăn kẹo cao su xả rác trong xe
+                                    Không chở hàng quốc cấm dễ cháy nổ,hoa quả thưc phẩm lưu mùi trong xe.
+                                    Khi trả xe, khách hàng vui lòng vệ sinh sạch sẽ hoặc gửi phụ thu thêm phí rửa xe, hút
+                                    bụi nếu xe dơ. (sẽ thu nhiều hơn tuỳ theo mức độ dơ)
                                     <p>
-                                        {{ $comment->comment }}
+                                        Trân trọng cảm ơn, chúc quý khách có những chuyến đi tuyệt vời!
+                                    </p>
+                                </span>
+                                </span>
+                            </div>
+                            <!-- End row  -->
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>Chủ xe</h3>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2">
+                                    @if ($car->user->avatar)
+                                        <img src="" alt="" class="img-circle">
+                                    @else
+                                        <img src="{{ asset('bower_components/car-client-lte/' . '/img/avatar3.jpg') }}"
+                                            alt="" class="img-circle">
+                                    @endif
+                                </div>
+                                <div class="col-md-10 col-sm-10">
+                                    {{ $car->user->name }}
+                                    <p>
+                                        <strong>Lưu ý:</strong> Người thuê xe gọi cho bạn nếu họ đồng ý đơn đặt xe của bạn
                                     </p>
                                 </div>
-                                @endforeach
-                             @endif
+                            </div>
+                            <!-- End row  -->
                         </div>
-                        <!-- End review strip -->
                     </div>
-                    @else
-                        <label>Chưa có đánh giá nào</label>
-                    @endif
-                </div>
-            </div>
-            <!--End  single_tour_desc-->
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>Đánh giá </h3>
+                            <p><strong>Chú ý:</strong> Chi khi thuê xe xong bạn mới được đánh giá</p>
+                        </div>
+                        @if (!$car->comments->isEmpty())
+                            <div class="col-md-9">
+                                <div id="general_rating">{{ $car->comments_count }} Đánh giá
+                                    <div class="rating">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i < $car->comments()->avg('rate'))
+                                                <i class="icon-smile voted"></i>
+                                            @else
+                                                <i class="icon-smile"></i>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                </div>
+                                <!-- End general_rating -->
 
-            <aside class="col-md-4">
-                <div class="box_style_1 expose">
-                    <h3 class="inner">- Booking -</h3>
-                    <form action="{{ route('cars.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" value="{{ $car->discount }}" name="discount">
-                        <input type="hidden" value="{{ $car->price }}" name="price">
-                        <input type="hidden" value="{{ $car->id }}" name="car_id">
-                        <div class="row">
-                            <h4>Ngày bắt đầu</h4>
-                            <div class="col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label><i class="icon-calendar-7"></i> Ngày </label>
-                                    <input class="form-control" type="date" name="borrowed_date" id="date_start" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" max="{{ \Carbon\Carbon::now()->addDays(10)->format('Y-m-d') }}">
+                                <div class="row" id="rating_summary">
+
+
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>Ngày kết thúc</h4>
-                            <div class="col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label><i class="icon-calendar-7"></i> Ngày </label>
-                                    <input class="form-control" type="date" name="return_date" id="date_return" value="{{ \Carbon\Carbon::now()->addDays(1)->format('Y-m-d') }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" min="{{ \Carbon\Carbon::now()->addDays(1)->format('Y-m-d') }}" max="{{ \Carbon\Carbon::now()->addDays(11)->format('Y-m-d') }}" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>Địa điểm của xe</h4>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Quận: </label>
-                                    @if (isset($car->address->parent->name))
-                                        <span class="label label-info">{{ $car->address->parent->name }}</span>
-                                    @else 
-                                        <span class="label label-info">Hà Nội</span>
+                                <!-- End row -->
+                                <hr>
+                                <div class="comments">
+                                    @if (!$car->comments->isEmpty())
+                                        @foreach ($car->comments->reverse()->values() as $comment)
+                                            <div class="rating">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i == $comment->rate)
+                                                        <input type="radio" checked>
+                                                    @else
+                                                        <input type="radio">
+                                                    @endif
+                                                @endfor
+                                            </div>
+                                            <div class="review_strip_single">
+                                                <small> -
+                                                    {{ \Carbon\Carbon::parse($comment->created_at)->format('m/d/Y') }}
+                                                    -</small>
+                                                <label>{{ $comment->user->name }}</label>
+                                                <p>
+                                                    {{ $comment->comment }}
+                                                </p>
+                                            </div>
+                                        @endforeach
                                     @endif
                                 </div>
+                                <!-- End review strip -->
                             </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Phường: </label>
-                                    @if (isset($car->address->name))
-                                        <span class="label label-info">{{ $car->address->name }}</span>
-                                    @else
-                                        <span class="label label-info">Chưa rõ</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <span>Điểm điểm cụ thể giao xe sẽ được biết khi được chủ xe liên lạc</span>
-                        </div>
-                        <div class="row">
-                            <h4>Giới hạn km</h4>
-                            <div class="col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <span>Tối đa: </span>
-                                    <strong>{{ $car->limited_km }} km.</strong>
-                                    <span>Phí: </span>
-                                    <strong>{{ $car->limit_pass_fee }}K/km vượt quá giới hạn</strong>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>Bảo hiểm</h4>
-                            <div class="col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label><i class="fa icon-shield"></i></label>
-                                    <strong>Xe được hỗ trợ bảo hiểm</strong>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>Chi tiết giá</h4>
-                            <table class="table table_summary">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Đơn giá thuê
-                                        </td>
-                                        @if (isset($totalPrice))
-                                            <input type="hidden" value="{{ $totalPrice }}" id="money">
-                                        @else
-                                            <input type="hidden" value="{{ $car->price }}" id="money">
-                                        @endif
-    
-                                        <td class="text-right">
-                                            @if (isset($totalPrice))
-                                                {{ currency_format($totalPrice) }}VNĐ / ngày
-                                            @else
-                                                {{ currency_format($car->price) }}VNĐ / ngày
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Tổng phí thuê xe 
-                                        </td>
-                                        <td class="text-right">
-                                            @if (isset($totalPrice))
-                                                {{ currency_format($totalPrice) }}VNĐ 
-                                            @else
-                                                {{ currency_format($car->price) }}VNĐ
-                                            @endif
-                                            x 
-                                            <strong id="days">1</strong><strong>Ngày</strong>
-                                        </td>
-                                    </tr>
-                                    <tr class="total">
-                                        <td>
-                                            Tổng tiền
-                                        </td>
-                                        <td class="text-right">
-                                            <span id="total-money">  
-                                                @if (isset($totalPrice))
-                                                    {{ currency_format($totalPrice) }}
-                                                @else
-                                                    {{ currency_format($car->price) }}
-                                                @endif
-                                            </span> 
-                                            <span>VNĐ</span> 
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        @auth
-                            @if ($car->user->id !== Auth::id())
-                                <button class="btn_full" type="submit">Book now</button>
-                            @else
-                                <span class="error">Bạn không thể thuê xe của mình.</span>
-                            @endif
-                        @endauth
-                            
-                        @guest
-                            <button class="btn_full" type="submit">Book now</button>
-                        @endguest
-                    </form>
+                        @else
+                            <label>Chưa có đánh giá nào</label>
+                        @endif
+                    </div>
                 </div>
-                <!--/box_style_1 -->
+                <!--End  single_tour_desc-->
 
-                <div class="box_style_4">
-                    <i class="icon_set_1_icon-90"></i>
-                    <h4><span>Hỗ trợ</span></h4>
-                    <a href="tel://09001000" class="phone">+84 090 010 00</a>
-                    <small>Làm việc 8.00am - 4.30pm - <span>Từ thứ 7 đến chủ nhật</span></small>
-                </div>
-                @if ($car->user->id !== Auth::id())
+                <aside class="col-md-4">
                     <div class="box_style_1 expose">
-                        <h3 class="inner">- Khiếu nại -</h3>
-                        <form action="{{ route('reports') }}">
+                        <h3 class="inner">- Booking -</h3>
+                        <form action="{{ route('cars.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{ $car->discount }}" name="discount">
+                            <input type="hidden" value="{{ $car->price }}" name="price">
+                            <input type="hidden" value="{{ $car->id }}" name="car_id">
                             <div class="row">
+                                <h4>Ngày bắt đầu</h4>
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="report">Nội dung</label>
-                                        <input type="hidden" name="car_id" value="{{ $car->id }}">
-                                        <textarea rows="5" id="report" name="description" class="form-control" placeholder="Nội dung khiếu nại" style="height:200px;"></textarea>
+                                        <label><i class="icon-calendar-7"></i> Ngày </label>
+                                        <input class="form-control" type="date" name="borrowed_date" id="date_start"
+                                            value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                            min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                            max="{{ \Carbon\Carbon::now()->addDays(10)->format('Y-m-d') }}">
                                     </div>
                                 </div>
                             </div>
-                            <p class="error description"></p>
-                            <button class="btn_full js-btn-send">Gửi</button>
+                            <div class="row">
+                                <h4>Ngày kết thúc</h4>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label><i class="icon-calendar-7"></i> Ngày </label>
+                                        <input class="form-control" type="date" name="return_date" id="date_return"
+                                            value="{{ \Carbon\Carbon::now()->addDays(1)->format('Y-m-d') }}"
+                                            min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                            min="{{ \Carbon\Carbon::now()->addDays(1)->format('Y-m-d') }}"
+                                            max="{{ \Carbon\Carbon::now()->addDays(11)->format('Y-m-d') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h4>Địa điểm của xe</h4>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Quận: </label>
+                                        @if (isset($car->address->parent->name))
+                                            <span class="label label-info">{{ $car->address->parent->name }}</span>
+                                        @else
+                                            <span class="label label-info">Hà Nội</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Phường: </label>
+                                        @if (isset($car->address->name))
+                                            <span class="label label-info">{{ $car->address->name }}</span>
+                                        @else
+                                            <span class="label label-info">Chưa rõ</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <span>Điểm điểm cụ thể giao xe sẽ được biết khi được chủ xe liên lạc</span>
+                            </div>
+                            <div class="row">
+                                <h4>Giới hạn km</h4>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <span>Tối đa: </span>
+                                        <strong>{{ $car->limited_km }} km.</strong>
+                                        <span>Phí: </span>
+                                        <strong>{{ currency_format($car->limit_pass_fee) }}VNĐ/km vượt quá giới
+                                            hạn</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h4>Bảo hiểm</h4>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label><i class="fa icon-shield"></i></label>
+                                        <strong>Xe được hỗ trợ bảo hiểm</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h4>Chi tiết giá</h4>
+                                <table class="table table_summary">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Đơn giá thuê
+                                            </td>
+                                            @if (isset($totalPrice))
+                                                <input type="hidden" value="{{ $totalPrice }}" id="money">
+                                            @else
+                                                <input type="hidden" value="{{ $car->price }}" id="money">
+                                            @endif
+
+                                            <td class="text-right">
+                                                @if (isset($totalPrice))
+                                                    {{ currency_format($totalPrice) }}VNĐ / ngày
+                                                @else
+                                                    {{ currency_format($car->price) }}VNĐ / ngày
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Tổng phí thuê xe
+                                            </td>
+                                            <td class="text-right">
+                                                @if (isset($totalPrice))
+                                                    {{ currency_format($totalPrice) }}VNĐ
+                                                @else
+                                                    {{ currency_format($car->price) }}VNĐ
+                                                @endif
+                                                x
+                                                <strong id="days">1</strong><strong>Ngày</strong>
+                                            </td>
+                                        </tr>
+                                        <tr class="total">
+                                            <td>
+                                                Tổng tiền
+                                            </td>
+                                            <td class="text-right">
+                                                <span id="total-money">
+                                                    @if (isset($totalPrice))
+                                                        {{ currency_format($totalPrice) }}
+                                                    @else
+                                                        {{ currency_format($car->price) }}
+                                                    @endif
+                                                </span>
+                                                <span>VNĐ</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            @auth
+                                @if ($car->user->id !== Auth::id() && $car->status !== config('define.car.status.renting'))
+                                    <button class="btn_full" type="submit">Book now</button>
+                                @elseif ($car->status === config('define.car.status.renting'))
+                                    <span class="error">Xe này đang được thuê.</span>
+                                @else
+                                    <span class="error">Bạn không thể thuê xe của mình.</span>
+                                @endif
+                            @endauth
+
+                            @guest
+                                <button class="btn_full" type="submit">Book now</button>
+                            @endguest
                         </form>
                     </div>
-                @endif
-            </aside>
+                    <!--/box_style_1 -->
+
+                    <div class="box_style_4">
+                        <i class="icon_set_1_icon-90"></i>
+                        <h4><span>Hỗ trợ</span></h4>
+                        <a href="tel://09001000" class="phone">+84 090 010 00</a>
+                        <small>Làm việc 8.00am - 4.30pm - <span>Từ thứ 7 đến chủ nhật</span></small>
+                    </div>
+                    @if ($car->user->id !== Auth::id())
+                        <div class="box_style_1 expose">
+                            <h3 class="inner">- Khiếu nại -</h3>
+                            <form action="{{ route('reports') }}">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="report">Nội dung</label>
+                                            <input type="hidden" name="car_id" value="{{ $car->id }}">
+                                            <textarea rows="5" id="report" name="description" class="form-control"
+                                                placeholder="Nội dung khiếu nại" style="height:200px;"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="error description"></p>
+                                <button class="btn_full js-btn-send">Gửi</button>
+                            </form>
+                        </div>
+                    @endif
+                </aside>
+            </div>
+            <!--End row -->
         </div>
-        <!--End row -->
-    </div>
-    <!--End container -->
-    
-<div id="overlay"></div>
-<!-- Mask on input focus -->
-    
-</main>
+        <!--End container -->
+
+        <div id="overlay"></div>
+        <!-- Mask on input focus -->
+
+    </main>
 @endsection
 
 @section('script')
-	<!-- Specific scripts -->
-	<script src="{{ asset('bower_components/car-client-lte') }}/js/icheck.js"></script>
-	<script>
-		$('input').iCheck({
-			checkboxClass: 'icheckbox_square-grey',
-			radioClass: 'iradio_square-grey'
-		});
-	</script>
-	<!-- Date and time pickers -->
-	<script src="{{ asset('bower_components/car-client-lte') }}/js/jquery.sliderPro.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function (e) {
-			$('#Img_carousel').sliderPro({
-				width: 960,
-				height: 500,
-				fade: true,
-				arrows: true,
-				buttons: false,
-				fullScreen: false,
-				smallSize: 500,
-				startSlide: 0,
-				mediumSize: 1000,
-				largeSize: 3000,
-				thumbnailArrows: true,
-				autoplay: false
-			});
-		});
-	</script>
-     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
-	<!-- Date and time pickers -->
-	<script src="{{ asset('bower_components/car-client-lte') }}/js/bootstrap-datepicker.js"></script>
-	<script src="{{ asset('bower_components/car-client-lte') }}/js/bootstrap-timepicker.js"></script>
+    <!-- Specific scripts -->
+    <script src="{{ asset('bower_components/car-client-lte') }}/js/icheck.js"></script>
     <script>
-		$('input.date-pick').datepicker('setDate', 'today');
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-grey',
+            radioClass: 'iradio_square-grey'
+        });
+    </script>
+    <!-- Date and time pickers -->
+    <script src="{{ asset('bower_components/car-client-lte') }}/js/jquery.sliderPro.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(e) {
+            $('#Img_carousel').sliderPro({
+                width: 960,
+                height: 500,
+                fade: true,
+                arrows: true,
+                buttons: false,
+                fullScreen: false,
+                smallSize: 500,
+                startSlide: 0,
+                mediumSize: 1000,
+                largeSize: 3000,
+                thumbnailArrows: true,
+                autoplay: false
+            });
+        });
+    </script>
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <!-- Date and time pickers -->
+    <script src="{{ asset('bower_components/car-client-lte') }}/js/bootstrap-datepicker.js"></script>
+    <script src="{{ asset('bower_components/car-client-lte') }}/js/bootstrap-timepicker.js"></script>
+    <script>
+        $('input.date-pick').datepicker('setDate', 'today');
         $('.content-message').delay(2500).slideUp();
-	</script>
+    </script>
     <script>
-         $('#date_start, #date_return').change(function (e) { 
-            var dateStart = $('#date_start').val();
-            var dateReturn =$('#date_return').val();
-            var totalDate = datediff(parseDate(dateStart), parseDate(dateReturn));
-           
+        $('#date_start, #date_return').change(function(e) {
+            var dateStart = Date.parse($('#date_start').val());
+            var dateReturn = Date.parse($('#date_return').val());
+            var totalDate = datediff(dateStart, dateReturn);
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
 
-            today =  yyyy + '-' + mm + '-' + dd;
+            today = yyyy + '-' + mm + '-' + dd;
             if (totalDate > 12 || today > dateStart || today > dateReturn || dateReturn < dateStart) {
-                swal("Hệ thống lỗi", {
-                    icon: "error",
-                })
-                .then(() => {
-                    location.reload();
-                }); 
-            }
-            
-            var money = parseInt($('#money').val());
-            if (today == dateReturn)
-            {
-               return $('#total-money').text(money);
+                swal("Hãy chọn ngày về lớn hơn ngày bắt đầu thuê", {
+                        icon: "error",
+                    })
+                    .then(() => {
+                        return location.reload();
+                    });
             }
 
-            if (today <= dateStart && today < dateReturn || dateStart === dateReturn)
-            {
+            var money = parseInt($('#money').val());
+            if (today == dateReturn) {
+                return $('#total-money').text(money);
+            }
+
+            if ((today <= dateStart && today < dateReturn) || dateStart < dateReturn) {
                 var days = parseInt(totalDate);
                 if (days === 0 || days < 0) {
                     days = 1;
@@ -643,15 +657,15 @@ if (!empty($car->image)) {
                 let price = money * days;
                 if (price < 0) {
                     swal("Hãy chọn ngày về lớn hơn ngày bắt đầu thuê", {
-                    icon: "error",
-                    })
-                    .then(() => {
-                        console.log($('#date_start').prevAll("input[type=date]").val());
-                    }); 
+                            icon: "error",
+                        })
+                        .then(() => {
+                            location.reload();
+                        });
                     return false;
-                } 
+                }
                 let resultPrice = formatCash(price.toString());
-                
+
                 $('#total-money').text(resultPrice);
             } else {
                 $('#days').text(1);
@@ -663,20 +677,21 @@ if (!empty($car->image)) {
                 return ((index % 3) ? next : (next + '.')) + prev
             });
         }
+
         function parseDate(str) {
             var mdy = str.split('-');
-            return new Date(mdy[1], mdy[0]-1, mdy[2]);
+            return new Date(mdy[1], mdy[0] - 1, mdy[2]);
         }
 
         function datediff(first, second) {
             // Take the difference between the dates and divide by milliseconds per day.
             // Round to nearest whole number to deal with DST.
-            return Math.round((second-first)/(1000*60*60*24));
+            return Math.floor((second - first) / 86400000);
         }
     </script>
 
     <script>
-        $('.js-btn-send').click(function (e) { 
+        $('.js-btn-send').click(function(e) {
             e.preventDefault();
             let form = $(this).parents('form');
             let formData = form.serializeArray();
@@ -691,24 +706,23 @@ if (!empty($car->image)) {
                 },
                 data: formData,
                 dataType: "json",
-                success: function () {
+                success: function() {
                     swal("Gửi khiếu nại thành công", {
-                    icon: "success",
-                    })
-                    .then(() => {
-                        return location.reload();
-                    });
+                            icon: "success",
+                        })
+                        .then(() => {
+                            return location.reload();
+                        });
                 },
-                error: function (error) {
+                error: function(error) {
                     if (error.responseJSON) {
-                        $.each(error.responseJSON.errors, function (indexInArray, valueOfElement) { 
+                        $.each(error.responseJSON.errors, function(indexInArray, valueOfElement) {
                             form.find('.' + indexInArray).text(valueOfElement)
                         });
                     }
-                    
+
                 }
             });
         });
-  
     </script>
 @endsection

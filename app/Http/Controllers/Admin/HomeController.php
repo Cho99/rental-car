@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Car\CarRepositoryInterface;
 use App\Repositories\Address\AddressRepositoryInterface;
+use App\Repositories\Order\OrderRepositoryInterface;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -14,6 +15,8 @@ class HomeController extends Controller
 
     protected $addressRepo;
 
+    protected $orderRepo;
+
     /**
      * Create a new controller instance.
      *
@@ -21,11 +24,13 @@ class HomeController extends Controller
      */
     public function __construct(
         CarRepositoryInterface $carRepo,
-        AddressRepositoryInterface $addressRepo
+        AddressRepositoryInterface $addressRepo,
+        OrderRepositoryInterface $orderRepo
     ) {
         $this->middleware('auth')->only('review');
         $this->carRepo = $carRepo;
         $this->addressRepo = $addressRepo;
+        $this->orderRepo = $orderRepo;
     }
 
     /**
@@ -41,10 +46,10 @@ class HomeController extends Controller
     
     public function chart()
     {
-        $carRegister = $this->carRepo->getCarRegisterChart();
+        $orderCarSuccess = $this->orderRepo->getCarOrderSuccess();
         $data = [];
         $list = [];
-        foreach ($carRegister as $car) {
+        foreach ($orderCarSuccess as $car) {
             array_push($data, $car);
         }
         
@@ -55,7 +60,7 @@ class HomeController extends Controller
             ];
             array_push($list, $val);
         }
-
+       
         return response()->json([
             'list' => $list,
         ]);

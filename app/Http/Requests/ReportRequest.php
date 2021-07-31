@@ -24,7 +24,7 @@ class ReportRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => [
+            'content' => [
                 'bail',
                 'required',
                 'max: 255',

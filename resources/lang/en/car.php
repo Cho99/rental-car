@@ -22,4 +22,5 @@ return [
     'price' => 'Price',
     'discount' => 'Discount',
     'list_image' => 'Car Image',
+    'car_block' => 'Car Block',
 ];

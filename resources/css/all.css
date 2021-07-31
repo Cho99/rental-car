@@ -135,3 +135,38 @@ textarea#namecategory {
 h3.no-data {
     text-align: center;
 }
+
+.image-car {
+    display: flex;
+}
+
+.image-car-info {
+    width: 350px;
+}
+
+.sp-slide {
+    margin-right: 5px;
+}
+
+.my_order_price {
+    width: 150px;
+}
+
+.success {
+    background: #28a745!important;
+}
+
+.toast {
+    position: absolute;
+    top: 55px;
+    left: 960px;
+    right: auto;
+}
+
+.show {
+    display: block;
+}
+
+.none {
+    display: none;
+}
